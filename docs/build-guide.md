@@ -1,22 +1,14 @@
-# Jan 2021 update
-The "original" branch of this repository matches the main metafetish/mk312-bt repo at the point it was deleted (which was on or 
-about 27th Dec 2020), with zero changes. This represents the mk312-bt that many (myself included) have successfully built.
+# MK-312BT build guide
 
-## v1.4
-This master branch includes v1.4 files which were never in the original repo, but were kindly DM'd to me shortly after the original 
-repo was deleted. These v1.4 files do not include updated eagle source files, etc., only output gerbers/schematics/notes. I'm 
-somewhat hazy about the provenance of the v1.4 files, but I understand it has been successfully built by a few people already, and 
-implements various improvements over v1.3 (see the v1.4 [notes](https://github.com/CrashOverride85/mk312-bt/blob/master/gerbers/MK-312BT%20V1.4%2005-19-2019%20Notes.txt) 
-file for details and before ordering parts).
+Comprehensive end-to-end walkthrough — board ordering, parts, assembly, firmware, and HC-05 bluetooth configuration. For the at-a-glance journey, see the [root README](../README.md).
 
-# MK-312BT V1.3
+## Provenance
 
-Documentation at : http://tinyurl.com/mk312bt-info
+The "original" content here came from the `metafetish/mk312-bt` repo at the point it was deleted (~27 Dec 2020), preserved by [CrashOverride85](https://github.com/CrashOverride85/mk312-bt). v1.4 files (gerbers, schematics, notes — no Eagle source) were DM'd to that maintainer shortly after the original was deleted; provenance of v1.4 itself is hazy but the design has been successfully built by several people. See the [v1.4 release notes](../1-order-boards/v1.4-release-notes.txt) for changes vs v1.3 before ordering parts.
 
-~~Forum - now archived/read-only, but with a lot of potentially useful information: https://metafetish.club ([Estim Specific Category Here](https://metafetish.club/c/estim), but may not include all estim messages)~~
-Now offline. See a few posts in the [docs](docs/) folder that may help or be of interest.
+The metafetish.club forum is now offline — surviving posts are archived in [`troubleshooting/`](troubleshooting/).
 
-There are many people familiar / knowledgable on the MK312-BT in the #boxes-pulse-based-diy and #312-chat channels of [Joanne's E-Stim Community](https://discord.gg/rY8C27S) discord server.
+The active community lives in the `#boxes-pulse-based-diy` and `#312-chat` channels on [Joanne's E-Stim Community Discord](https://discord.gg/rY8C27S).
 
 
 ## Parts ordering information
@@ -33,10 +25,10 @@ elsewhere as listed in the spreadsheet.
 
 Preferred board house is https://jlcpcb.com
 
-You'll need 2 gerber zip files from the gerbers directory (click links below to download):
+You'll need 2 gerber zip files (click links to download):
 
-- [MK-312 V1.2 Front Panel](https://github.com/CrashOverride85/mk312-bt/blob/master/gerbers/ZIP%20FILES/MK-312BT%20Front%20Panel%20V1.2%20Gerber.zip?raw=true)
-- [MK-312 V1.3 Main Board](https://github.com/CrashOverride85/mk312-bt/blob/master/gerbers/ZIP%20FILES/MK-312BT%20Main%20Boards%20V1.3%20Gerber.zip?raw=true)
+- [v1.2 Front Panel](../1-order-boards/gerbers/v1.2-front-panel.zip) — the front panel design hasn't changed since v1.2
+- [v1.4 Main Board](../1-order-boards/gerbers/v1.4-main-board.zip) — current main board revision
 
 **NOTE:** Order Front Panel and Main Board as seperate items (but they
 can be in the same cart), due to difference in "Different Design"
@@ -107,7 +99,7 @@ setting. See below.
 14. If Error 20 is encountered on first boot:
    - Check that all FETs and Transformers are turned in the correct direction
    - Check that resistors R35 and R46 are the correct 200k values
-   - [See this thread on the message board](https://metafetish.club/t/mk-312bt-failure-20/)
+   - See the archived thread: [`troubleshooting/MK-312BT Failure 20 - Estim - Metafetish.pdf`](troubleshooting/MK-312BT%20Failure%2020%20-%20Estim%20-%20Metafetish.pdf)
 
 ## MK312-BT Firmware
 
@@ -196,7 +188,7 @@ AT+IPSCAN=1024,1,1024,1
 ```
 
 To do this automatically:
-1. Solder Pin32 of the HC05 module (See [bluetooth/HC05PINOUT.PNG](https://github.com/CrashOverride85/mk312-bt/blob/master/bluetooth_conf/HC05PINOUT.png) for reference)
+1. Solder Pin32 of the HC05 module (see [HC05PINOUT.png](../4-wireless/bluetooth/HC05PINOUT.png) for reference)
 2. Flash the included bin file onto the ATMEGA16
 3. Plug the HC-05 bluetooth radio into the board (ensure pin 32 is
    soldered to the carrier board)
@@ -212,8 +204,7 @@ To do this automatically:
 
 ## 3D Printable Case
 
-STL files for a 3D printable case for the MK312 are available in the
-case/ directory. For hardware, this case requires:
+STL files for a 3D printable case are in [`../3-build-and-flash/case/`](../3-build-and-flash/case/). For hardware, this case requires:
 
 - 4 M2.5x20 screws
 - up to 3 M2.5x5 screws
