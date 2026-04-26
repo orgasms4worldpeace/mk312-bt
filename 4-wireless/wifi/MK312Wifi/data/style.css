@@ -1,0 +1,202 @@
+body {
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 10px;
+	margin: 0;
+	color: white;
+	background: black;
+	font-family: Arial;
+}
+
+a:link, a:visited {
+	color: #c0c0ff;
+}
+
+#interrog {
+	float: right;
+	padding-right: 10px;
+	font-weight: bold;
+	text-align: right;
+	color: black;
+}
+
+#help {
+	display: none;
+	background: #005b5b;
+	border-radius: 10px;
+	padding: 5px;
+	margin-bottom: 20px;
+}
+
+.underlined {
+	text-decoration: underline;
+	color: #c0c0ff;
+}
+
+.slidersContainer {
+	background: #5b5b5b;
+	border-radius: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.submenu {
+	background: #5b5b5b;
+	text-align: center;
+	padding: 5px;
+	overflow: visible;
+	border-radius: 10px;
+}
+
+.shower {
+	background: #ffff00;
+	color: white;
+	border-radius: 10px;
+	vertical-align: bottom;
+	line-height: normal;
+}
+
+#currentEffect, #titleDecoration {
+	color: black;
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	font-size: 20px;
+	margin: 0px;
+}
+
+.modeButton, .clickButton, .toggleButton {
+	display: inline-block;
+	width: 16%;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	padding: 10px;
+	font-size: 20px;
+	cursor: pointer;
+	border-radius: 10px;
+	background: rgba(0,0,0,0.4);
+	text-align: center;
+	color: #feffde;
+}
+
+@media only screen and (max-width: 700px) {
+	.modeButton {
+		font-size: 13px;
+		width: 13%;
+	}
+	.clickButton, .toggleButton {
+		font-size: 15px;
+	}
+}
+@media only screen and (min-width: 1100px) {
+	.modeButton {
+		font-size: 20px;
+		width: 17%;
+	}
+}
+
+@media only screen and (max-width: 1000px) {  /* for mobiles */
+	.rangeBlock {
+		margin-top: 10px;
+		width: 100%;
+	}
+
+	.toggleButton, .clickButton {
+		width: 25%;
+	}
+
+	.range {
+		margin-top: 0px;
+		margin-bottom: 0px;
+		width: 100%;
+		height: 50px;
+		margin-left: 0;
+		background: transparent;
+		color: transparent;
+	}
+}
+
+@media only screen and (min-width: 1000px) {  /* for PC */
+	#topButtons {
+		width: 40%;
+	}
+
+	.toggleButton, .clickButton {
+		width: 25%;
+		font-size: 12px;
+		margin: 0;
+	}
+
+	.slidersContainer {
+		display: flex;
+		border-radius: 10px;
+		flex-direction: row;
+		flex-basis: 100%;
+		margin-bottom: 20px;
+		padding: 20px;
+		font-size: 20px;
+		text-align: center;
+	}
+
+	.rangeBlock {
+		margin-bottom: auto;
+		width: 25%;
+		margin-left: 1em;
+	}
+
+	.range {
+		margin-top: 10px;
+		margin-bottom: 10px;
+		width: 100%;
+		margin-left: 0;
+		background: transparent;
+		color: transparent;
+	}
+
+	input[type=range]::-moz-range-thumb {
+		border: 1px solid #000000;
+		height: 26px;
+		width: 26px;
+		border-radius: 50%;
+		background: #ffffff;
+		cursor: pointer;
+		margin-top: -10px;
+	}
+
+	.range::-webkit-slider-runnable-track {
+		height: 20px;
+		width: 100%;
+		cursor: pointer;
+		background: #817d4b;
+		border-radius: 4px;
+		border: 1px solid #010101;
+	}
+
+	input[type=range]::-moz-range-track {
+		height: 6px;
+		cursor: pointer;
+		background: #817dff;
+		border-radius: 4px;
+		border: 1px solid #010101;
+	}
+
+	.rangeValue {
+		height: 20px; width:28px;
+		color: white;
+		margin-top: -50px;
+		background: #ff4b4b;
+		text-align: center;
+		line-height: 28px;
+		opacity: 0;
+	}
+
+	.rangeValue:after {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 20px;
+		border-top: 10px solid #4b4b4b;
+		border-left: 14px solid transparent;
+		border-right: 14px solid transparent;
+	}
+}

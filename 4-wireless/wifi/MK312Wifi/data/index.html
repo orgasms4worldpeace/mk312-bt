@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>MK312-BT</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<div id="help"><p>
+			This is the WebSocket interface. For more advanced control of the MK-312, you can use a GUI using direct connection like <a href="https://github.com/cLxJaguar/mk312-gui/">this one</a>. More information on the <a href="https://github.com/Rangarig/MK312WIFI/">MK312Wifi project page</a>. The WebSocket interface also can be used as a more standard way in third party softwares. Have fun! (<a class="underlined" onclick="closeHelp()">hide this</a>)</p>
+		</div>
+
+		<div class="shower">
+			<p id="titleDecoration">MK312 Remote Control<a id="interrog" onclick="displayHelp()">?</a></p>
+			<div id="Sliders" class="slidersContainer">
+				<div id="topButtons" class="submenu">
+					<span name="DisableADC" id="DisableADC" class="toggleButton">Override<br>Levels</span>
+					<span name="CutLevels" id="CutLevels" class="toggleButton">Cut<br>Levels</span>
+					<span name="startRamp" id="startRamp" class="clickButton">Start<br>Ramp</span>
+				</div>
+
+				<div class="rangeBlock">
+					Channel A Level<br><input type="range" id="LevelA" class="range" step="1" value="0" min="0" max="255" onchange="levels(this, this.value)">
+					<p id="rangeValue" class="rangeValue"></p>
+				</div>
+
+				<div class="rangeBlock">
+					Channel B Level<br><input type="range" id="LevelB" class="range" step="1" value="0" min="0" max="255" onchange="levels(this, this.value)">
+					<p id="rangeValue2" class="rangeValue"></p>
+				</div>
+
+				<div class="rangeBlock">
+					Multi Adjust<br><input type="range" id="MultiAdjust" class="range" step="1" value="50" min="0" max="100" onchange="levels(this, this.value)">
+					<p id="rangeValue3" class="rangeValue"></p>
+				</div>
+			</div>
+		</div>
+
+		<div class="shower">
+			<p id="currentEffect">Mode Selection</p>
+			<div class="submenu">
+				<span name="0x76" class="modeButton">Waves</span>
+				<span name="0x77" class="modeButton">Stroke</span>
+				<span name="0x78" class="modeButton">Climb</span>
+				<span name="0x79" class="modeButton">Combo</span>
+				<span name="0x82" class="modeButton">Toggle</span>
+				<br>
+				<span name="0x7a" class="modeButton">Intense</span>
+				<span name="0x7b" class="modeButton">Rythm</span>
+				<span name="0x7f" class="modeButton">Split</span>
+				<span name="0x83" class="modeButton">Orgasm</span>
+				<span name="0x84" class="modeButton">Torment</span>
+				<br>
+				<span name="0x80" class="modeButton">Random1</span>
+				<span name="0x81" class="modeButton">Random2</span>
+				<span name="0x85" class="modeButton">Phase1</span>
+				<span name="0x86" class="modeButton">Phase2</span>
+				<span name="0x87" class="modeButton">Phase3</span>
+				<br>
+				<span name="0x7c" class="modeButton">Audio1</span>
+				<span name="0x7d" class="modeButton">Audio2</span>
+				<span name="0x7e" class="modeButton">Audio3</span>
+				<span name="0x88" class="modeButton">User1</span>
+				<span name="0x89" class="modeButton">User2</span>
+				<br>
+				<span name="0x8a" class="modeButton">User3</span>
+				<span name="0x8b" class="modeButton">User4</span>
+				<span name="0x8c" class="modeButton">User5</span>
+				<span name="0x8d" class="modeButton">User6</span>
+				<span name="0x8e" class="modeButton">User7</span>
+			</div>
+		</div>
+	</body>
+	<script src="mk312.js"></script>
+</html>
