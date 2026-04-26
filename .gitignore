@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+._*
+
+# Eagle CAD lock files and backups
+*.lck
+*.b##
+*.s##
+
+# Editor temp
+*~
+.idea/
+.vscode/
