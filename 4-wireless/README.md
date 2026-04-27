@@ -19,9 +19,9 @@ The MK-312BT exposes a serial protocol on the same header used by the wireless m
 - Source: [Rangarig/MK312WIFI](https://github.com/Rangarig/MK312WIFI), pulled in as a git subtree
 - Includes the ESP firmware (Arduino), a custom KiCad PCB design, and a .NET example client
 
-### Ordering the adapter PCB — [`wifi-jlcpcb/`](wifi-jlcpcb/)
+### Ordering the adapter PCB — [`wifi/pcb/jlcpcb-package/`](wifi/pcb/jlcpcb-package/)
 
-Drop-in upload bundle for **JLCPCB SMT-only assembly**: gerbers + BOM + CPL prebuilt. JLC pre-mounts the only SMD part (U1, AMS1117-3.3 regulator); you hand-solder the 6 through-hole parts (caps, transistor, button, headers). ~$20-25 for 5 boards. See [`wifi-jlcpcb/README.md`](wifi-jlcpcb/README.md) for the upload walkthrough and the THT parts shopping list.
+Drop-in upload bundle for **JLCPCB SMT-only assembly**: gerbers + BOM + CPL prebuilt. JLC pre-mounts the only SMD part (U1, AMS1117-3.3 regulator); you hand-solder the 6 through-hole parts (caps, transistor, button, headers). ~$20-25 for 5 boards. See [`wifi/pcb/jlcpcb-package/README.md`](wifi/pcb/jlcpcb-package/README.md) for the upload walkthrough and the THT parts shopping list.
 
 ## Which should I use?
 
@@ -44,6 +44,6 @@ The [OSOYOO ESP8266 WiFi module](https://osoyoo.com/2020/12/20/osoyoo-esp8266-wi
 - Does it ship with a transparent UART-over-TCP/UDP bridge mode out of the box, or only AT-command operation? Their tutorials reference AiThinker firmware, which is AT-controlled — meaning the host expects to send AT commands rather than just reading/writing serial bytes.
 - Can the baud rate be set to **19200** (what the MK-312BT speaks)?
 
-Even if both answer "yes," the existing client software ([`5-software/mk312-gui`](../5-software/) and the bundled [.NET client](wifi/DotNetClient/)) speaks the MK312WIFI protocol (UDP `MK312-ICQ` discovery on port 8842, TCP control on 8843) — an OSOYOO module won't speak that without custom firmware. So you'd need to either fork the GUI's transport, write a small bridge, or flash MK312Wifi.ino onto the OSOYOO module (assuming GPIO0/1/2/3 are accessible — they may not be).
+Even if both answer "yes," the existing client software ([`5-software/mk312-gui`](../5-software/mk312-gui/) and the [.NET client](../5-software/dotnet-client/)) speaks the MK312WIFI protocol (UDP `MK312-ICQ` discovery on port 8842, TCP control on 8843) — an OSOYOO module won't speak that without custom firmware. So you'd need to either fork the GUI's transport, write a small bridge, or flash MK312Wifi.ino onto the OSOYOO module (assuming GPIO0/1/2/3 are accessible — they may not be).
 
 **TL;DR:** physically a candidate; protocol-wise unproven and probably needs work. Stick with [`wifi/`](wifi/) (build the small PCB) unless you're willing to do firmware/client experimentation.

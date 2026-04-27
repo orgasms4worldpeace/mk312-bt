@@ -10,7 +10,7 @@ The comprehensive build guide lives at **[`../docs/build-guide.md`](../docs/buil
 
 | | |
 |--|--|
-| [`firmware/`](firmware/) | Flash images (`.bin`), an EEPROM backup, and a custom boot message variant in [`firmware/f005/`](firmware/f005/). See [`firmware/README.md`](firmware/README.md) for fuse/flashing details |
+| [`firmware/`](firmware/) | Flash images (`.bin`), an EEPROM backup, and a custom boot message variant in [`firmware/custom-boot-messages/`](firmware/custom-boot-messages/). See [`firmware/README.md`](firmware/README.md) for fuse/flashing details |
 | [`case/`](case/) | 3D-printable case (`.stl`) plus the Fusion 360 source (`.f3d`). v1.26 |
 
 ## Hardware you'll also need

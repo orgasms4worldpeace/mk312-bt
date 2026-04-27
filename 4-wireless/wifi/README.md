@@ -3,11 +3,13 @@
 This Project is a replacement for the bluetooth module used on the MK312BT and is based on the ESP8266-01S. This was created at first because the bluetooth interface could not be accessed in a convenient way on a VR headset, but also because of a general lack of reliability of the link. As usual no guarantees can be given, and also if you use this to injure yourself, no responsibility can be taken. This project is a collaboration between Rangarig and cLx. Some code has been imported back from [timdev](https://github.com/timduru/MK312WIFI/commits/timdev/) branch.
 
 ## Contents
-| Directory      | Contains
-|----------------|-------------------------------------------------------------------------|
-| MK312Wifi      | Firmware that should be used to flash the ESP (ino source and bin file) |
-| MK312-wifi-pcb | Schematics and board KiCad files needed to produce the PCB              |
-| DotNetClient   | Example implementation in .net (visual studio code)                     |
+| Directory | Contains
+|-----------|-------------------------------------------------------------------------|
+| firmware/ | Firmware to flash onto the ESP (ino source + .bin files). Originally `MK312Wifi/` upstream |
+| pcb/      | KiCad schematics + board source, fab gerbers, and a JLCPCB upload bundle. Originally `MK312-wifi-pcb/` upstream |
+| media/    | Photos referenced by this README                                        |
+
+> The .NET reference client originally bundled here as `DotNetClient/` was relocated to [`../../5-software/dotnet-client/`](../../5-software/dotnet-client/) — it's a client, so it lives with the other clients in this monorepo.
 
 ## General
 This WiFi interface is pin to pin compatible to the bluetooth interface, and designed to be an easier way to make custom implementations of the communication with the MK312 powerbox.

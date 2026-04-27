@@ -1,8 +1,8 @@
 # JLCPCB-ready package — MK312 WiFi adapter
 
-A drop-in upload bundle for ordering the [MK312WIFI adapter PCB](../wifi/MK312-wifi-pcb/) from JLCPCB with **SMT-only assembly**: JLC pre-mounts the one SMD part (U1, the 3.3V regulator), you hand-solder the 6 through-hole parts.
+A drop-in upload bundle for ordering the [MK312WIFI adapter PCB](../) from JLCPCB with **SMT-only assembly**: JLC pre-mounts the one SMD part (U1, the 3.3V regulator), you hand-solder the 6 through-hole parts.
 
-This is the **most cost-effective path** for this board (~$20-25 for 5 boards). See the [cost comparison in `4-wireless/README.md`](../README.md#open-question--osoyoo-esp8266-module-as-a-third-option) — full PCBA-with-THT runs $65-100+ because of THT setup fees, and DIY-everything is $12-17 (you'd just be hand-soldering one extra SOT-223).
+This is the **most cost-effective path** for this board (~$20-25 for 5 boards). See the [cost comparison in `4-wireless/README.md`](../../../README.md) — full PCBA-with-THT runs $65-100+ because of THT setup fees, and DIY-everything is $12-17 (you'd just be hand-soldering one extra SOT-223).
 
 ## Files in this package
 
@@ -66,7 +66,7 @@ Total hand-soldering: ~5-10 minutes per board.
 
 Before plugging into the MK-312BT:
 
-1. Visual check J1 orientation — pin 1 should match the MK-312BT's HC-05 socket pin 1 (consult the [MK312WIFI README](../wifi/README.md) for the pinout table)
+1. Visual check J1 orientation — pin 1 should match the MK-312BT's HC-05 socket pin 1 (consult the [MK312WIFI README](../../README.md) for the pinout table)
 2. Multimeter continuity check from J1's VCC pin → U1 input → U1 output → ESP socket VCC pin (J2)
 3. Power check: apply 5V to J1's VCC/GND, measure 3.3V at J2's VCC pin — must be 3.3V before plugging the ESP in
 4. If 3.3V is good, plug in the ESP-01S, install in the MK-312BT, power on. The LCD should show `WifiAP` on first boot
@@ -80,13 +80,13 @@ Before plugging into the MK-312BT:
 
 ## If you want to regenerate from source
 
-The KiCad source is in [`../wifi/MK312-wifi-pcb/raw_files/`](../wifi/MK312-wifi-pcb/raw_files/). With KiCad 6+ installed:
+The KiCad source is at [`../kicad-source/`](../kicad-source/) (sibling of this package). With KiCad 6+ installed:
 
 ```bash
-cd ../wifi/MK312-wifi-pcb/raw_files
+cd ../kicad-source
 kicad-cli pcb export gerbers MK312-Wifi.kicad_pcb --output ../jlc-fresh-gerbers/
 kicad-cli pcb export pos MK312-Wifi.kicad_pcb --format csv --units mm \
   --use-drill-file-origin --output cpl-fresh.csv
 ```
 
-This package was hand-built from the upstream `MK312WIFI_PCB_v1.2_Fabrication_Files.zip` plus manual parsing of the `.kicad_pcb` source for placements.
+This package was hand-built from the upstream `fab-files.zip` (originally `MK312WIFI_PCB_v1.2_Fabrication_Files.zip`) plus manual parsing of the `.kicad_pcb` source for placements.

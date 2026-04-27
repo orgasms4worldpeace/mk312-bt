@@ -35,7 +35,7 @@ git subtree pull --prefix=5-software/mk312-gui https://github.com/clxjaguar/mk31
 | [Rubberfate/mk312com](https://github.com/Rubberfate/mk312com) | Python | Lower-level MK-312 communication wrapper library | Stale (2021) |
 | [Carumbad/HomeAssistant_ET312](https://github.com/Carumbad/HomeAssistant_ET312) | Python | Home Assistant integration (ET-312, mostly applicable to MK-312BT) | Active (2026-04) |
 | [Carumbad/et312_mqtt](https://github.com/Carumbad/et312_mqtt) | Python | MQTT bridge — control via any MQTT client | Stale (2020) |
-| [.NET client](../4-wireless/wifi/DotNetClient/) | C# | Reference C# implementation included with MK312WIFI — useful as a Unity/VR starting point | Stale (2020) |
+| [.NET client](dotnet-client/) | C# | Reference C# implementation, originally bundled with MK312WIFI — useful as a Unity/VR starting point | Stale (2020) |
 | [kinkytofu/buttshock-py](https://github.com/kinkytofu/buttshock-py) | Python | The original ET-312 protocol library — predecessor of all the above | Archived (2016) |
 
 ## Bluetooth clients?
