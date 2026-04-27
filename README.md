@@ -4,6 +4,7 @@ DIY clone of the ErosTek ET-312B e-stim power box, with bluetooth (HC-05) and op
 
 - [CrashOverride85/mk312-bt](https://github.com/CrashOverride85/mk312-bt) — the box itself (boards, BOM, firmware, case)
 - [Rangarig/MK312WIFI](https://github.com/Rangarig/MK312WIFI) — drop-in WiFi adapter, pulled into [`4-wireless/wifi/`](4-wireless/wifi/) as a git subtree
+- [clxjaguar/mk312-gui](https://github.com/clxjaguar/mk312-gui) — PyQt control GUI, pulled into [`5-software/mk312-gui/`](5-software/mk312-gui/) as a git subtree
 
 Original work credit goes to the upstream authors. Everything here is licensed under whatever the upstream repos shipped with.
 
@@ -17,6 +18,7 @@ The top-level layout follows the build path. Work through the numbered directori
 | 2 | [`2-order-parts/`](2-order-parts/) | Import the BOM into Mouser, source remaining parts |
 | 3 | [`3-build-and-flash/`](3-build-and-flash/) | Solder, print the case, flash the AVR |
 | 4 | [`4-wireless/`](4-wireless/) | Pick **bluetooth** (HC-05) or **wifi** (ESP8266) — both pin-compatible |
+| 5 | [`5-software/`](5-software/) | Install `mk312-gui` (PyQt) — or pick another client |
 
 For the comprehensive end-to-end walkthrough, see **[docs/build-guide.md](docs/build-guide.md)**.
 
