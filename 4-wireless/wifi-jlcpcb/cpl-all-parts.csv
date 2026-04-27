@@ -1,0 +1,8 @@
+Designator,Mid X,Mid Y,Layer,Rotation
+J1,2.500,14.850,Bottom,180
+J2,26.630,8.500,Bottom,270
+SW1,15.327,14.850,Top,0
+U1,15.937,4.690,Top,0
+C1,5.675,2.230,Top,90
+C2,9.485,2.230,Top,90
+Q1,7.435,14.828,Top,270

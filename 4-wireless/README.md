@@ -19,6 +19,10 @@ The MK-312BT exposes a serial protocol on the same header used by the wireless m
 - Source: [Rangarig/MK312WIFI](https://github.com/Rangarig/MK312WIFI), pulled in as a git subtree
 - Includes the ESP firmware (Arduino), a custom KiCad PCB design, and a .NET example client
 
+### Ordering the adapter PCB — [`wifi-jlcpcb/`](wifi-jlcpcb/)
+
+Drop-in upload bundle for **JLCPCB SMT-only assembly**: gerbers + BOM + CPL prebuilt. JLC pre-mounts the only SMD part (U1, AMS1117-3.3 regulator); you hand-solder the 6 through-hole parts (caps, transistor, button, headers). ~$20-25 for 5 boards. See [`wifi-jlcpcb/README.md`](wifi-jlcpcb/README.md) for the upload walkthrough and the THT parts shopping list.
+
 ## Which should I use?
 
 | Use case | Pick |
