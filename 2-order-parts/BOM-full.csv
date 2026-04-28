@@ -36,7 +36,9 @@ JP1,ISP 6 PIN,1,571-5-146254-3,5-146254-3,X,https://www.mouser.com/c/?q=571-5-14
 U14,LM2941,1,926-LM2941CT/NOPB,LM2941CT/NOPB,X,https://www.mouser.com/c/?q=926-LM2941CT%2FNOPB,https://www.amazon.com/s?k=LM2941CT%2FNOPB
 U2,LM324N,1,595-LM324N,LM324N,✓,https://www.mouser.com/c/?q=595-LM324N,https://www.amazon.com/s?k=LM324N
 "U10,U4",LM358N,2,512-LM358N,LM358N,✓,https://www.mouser.com/c/?q=512-LM358N,https://www.amazon.com/s?k=LM358N
-"LED1,LED2,LED3,LED4",5MM LED,4,606-4304H1,4304H1,X,https://www.mouser.com/c/?q=606-4304H1,https://www.amazon.com/s?k=4304H1
+"LED1,LED2",Kingbright 5mm Orange diffused (OUTPUT A & B) - Vf 2.0V typ - works as-is with existing 390R at R53/R54,2,604-WP7113OD,WP7113OD,X,https://www.mouser.com/c/?q=604-WP7113OD,https://www.amazon.com/s?k=WP7113OD
+LED3,Kingbright 5mm Red diffused (RADIO) - Vf 2.0V typ - works as-is with existing 390R at R59,1,604-WP7113ID,WP7113ID,X,https://www.mouser.com/c/?q=604-WP7113ID,https://www.amazon.com/s?k=WP7113ID
+LED4,Kingbright 5mm Green diffused (POWER) - GaP Vf 2.2V typ - works as-is with existing 390R at R60,1,604-WP7113GD,WP7113GD,X,https://www.mouser.com/c/?q=604-WP7113GD,https://www.amazon.com/s?k=WP7113GD
 U9,MAX232,1,700-MAX232CPE,MAX232CPE,X,https://www.mouser.com/c/?q=700-MAX232CPE,https://www.amazon.com/s?k=MAX232CPE
 "SOCKET FOR U2,U3",DIL 14 IC SOCKET,2,517-4814-3004-CP,4814-3004-CP,X,https://www.mouser.com/c/?q=517-4814-3004-CP,https://www.amazon.com/s?k=4814-3004-CP
 SOCKET FOR U9,DIL 16 IC SOCKET,1,517-4816-3004-CP,4816-3004-CP,X,https://www.mouser.com/c/?q=517-4816-3004-CP,https://www.amazon.com/s?k=4816-3004-CP
