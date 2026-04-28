@@ -99,9 +99,12 @@ J1 (WiFi PCB),1x6 male pin header RIGHT-ANGLE 2.54mm pitch — plugs into MK-312
 J2 (WiFi PCB),2x4 FEMALE socket header 2.54mm pitch — ESP-01S module plugs in here,1,200-PPPC042LFBN-RC,PPPC042LFBN-RC,https://www.mouser.com/c/?q=200-PPPC042LFBN-RC,https://www.amazon.com/s?k=PPPC042LFBN-RC
 ,ESP-01S WiFi module (NOT stocked at Mouser — buy from AliExpress / Amazon ~$2 each),1,,ESP-01S,,https://www.amazon.com/s?k=ESP-01S
 ,,,,,,
+- PC Link Cable (optional — required only for clients that talk to the LINK port instead of bluetooth/wifi adapter),,,,,,
+,DSD TECH USB to RS232 cable (FT232RL chip) — connects PC to MK-312 LINK port; works with mk312-gui / three-twelve-bee / ErosWeb on Win/Mac/Linux,1,https://www.amazon.com/dp/B07XXWVH69,,,https://www.amazon.com/dp/B07XXWVH69
+,,,,,,
 Firmware Flashing,,,,,,
 ,USBASP for ISP + 10Pin to 6Pin Adapter Board,1,https://www.amazon.com/dp/B0885RKVMC,,,https://www.amazon.com/dp/B0885RKVMC
-,USB to TTL 5PIN Serial Converter,1,https://www.amazon.com/dp/B07D6LLX19,,,https://www.amazon.com/dp/B07D6LLX19
+,USB to TTL 5PIN Serial Converter (for HC-05 AT-mode config flashing),1,https://www.amazon.com/dp/B07D6LLX19,,,https://www.amazon.com/dp/B07D6LLX19
 ,,,,,,
 ,,,,,,
 ,,,,,,
