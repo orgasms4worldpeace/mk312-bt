@@ -1,74 +1,96 @@
-MK-312BT Mouser BOM Updated 4/18/2026,,,,,,
+MK-312BT Mouser BOM Updated 4/28/2026,,,,,,
 Designator,Description,Quantity Per Unit,Supplier Part #,Part #,Mouser URL,Amazon URL
-R55,RES 47R,1,660-MF1/4DC47R0F,MF1/4DC47R0F,https://www.mouser.com/c/?q=660-MF1%2F4DC47R0F,
-"R53,R54,R59,R60",RES 390R,4,660-MF1/4DCT52R3900F,MF1/4DCT52R3900F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R3900F,
-"C10,C11,C12,C13,C14,C17,C18,C19,C2,C21,C22,C23,C24,C26,C28,C29,C3,C32,C37,C38,C39,C40,C41,C42,C43,C44,C9","CAP 0.1uF (0.1"" spacing) 50V",27,80-C320C104K5R,C320C104K5R5TA,https://www.mouser.com/c/?q=80-C320C104K5R,
-R30,RES 0.5R 1/2W,1,660-CF1/2CT52RR50J,CF1/2CT52RR50J,https://www.mouser.com/c/?q=660-CF1%2F2CT52RR50J,
-R2,RES 1.2K,1,660-MF1/4DCT52R1201F,MF1/4DCT52R1201F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R1201F,
-"R18, R56,R57",RES 1.5K,3,660-MF1/4DCT52R1501F,MF1/4DCT52R1501F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R1501F,
-"R10,R20,R21,R27,R28,R29,R3,R31,R32,R33,R34,R36,R37,R40,R42,R43,R44,R45,R47,R48,R51",RES 100K,21,660-MF1/4DC1003F,MF1/4DC1003F,https://www.mouser.com/c/?q=660-MF1%2F4DC1003F,
-"R38,R39,R41,R49,R5,R50,R52,R58",RES 10K,9,660-MF1/4DC1002F,MF1/4DC1002F,https://www.mouser.com/c/?q=660-MF1%2F4DC1002F,
-C1,CAP 10uF CER,1,810-FG11X7R1H106KRT6,FG11X7R1H106KRT06,https://www.mouser.com/c/?q=810-FG11X7R1H106KRT6,
-R1A,RES 12K,1,660-MF1/4DCT52R1202F,MF1/4DCT52R1202F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R1202F,
-"C15,C16",CAP 18pF,2,80-C315C180J1G,C315C180J1G5TA,https://www.mouser.com/c/?q=80-C315C180J1G,
-"R14,R15,R19,",RES 1K,3,660-MF1/4DC1001F,MF1/4DC1001F,https://www.mouser.com/c/?q=660-MF1%2F4DC1001F,
-"R12,R23,R25,R26",RES 1M,4,660-MF1/4DCT52R1004F,MF1/4DCT52R1004F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R1004F,
-D1,DIODE 1N4004,1,621-1N4004,1N4004-T,https://www.mouser.com/c/?q=621-1N4004,
-"D2,D3",DIODE 1N4148,2,512-1N4148,1N4148,https://www.mouser.com/c/?q=512-1N4148,
-"C25,C27","CAP 1nF (0.1"" spacing)",2,80-C315C102K1G,C315C102K1G5TA,https://www.mouser.com/c/?q=80-C315C102K1G,
-"C20,C30,C31,C33,C34,C35,C36","CAP 1uF (0.1"" spacing)",7,80-C315C105K3R,C315C105K3R5TA,https://www.mouser.com/c/?q=80-C315C105K3R,
-"R35,R46",RES 200K,2,660-MF1/4DCT52R2003F,MF1/4DCT52R2003F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R2003F,
-"R11,R16,R17,R22,R24,R4",RES 20K,6,660-MF1/4DCT52R2002F,MF1/4DCT52R2002F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R2002F,
-"J10,J11",PAK100/2500-24 - 2425-  3M WALL HEADER,2,517-N2524-6002RB,N2524-6002RB,https://www.mouser.com/c/?q=517-N2524-6002RB,
-"Q7,Q8",TRANS. 2N3904,2,512-2N3904BU,2N3904BU,https://www.mouser.com/c/?q=512-2N3904BU,
-R6,RES 3.3K,1,660-MF1/4DCT52R3301F,MF1/4DCT52R3301F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R3301F,
-"R7,R8,R9",RES 4.7K,3,660-MF1/4DC4701F,MF1/4DC4701F,https://www.mouser.com/c/?q=660-MF1%2F4DC4701F,
-U3,CD4066N,1,595-CD4066BE,CD4066BE,https://www.mouser.com/c/?q=595-CD4066BE,
-R13,RES 47K,1,660-MF1/4DCT52R4702F,MF1/4DCT52R4702F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R4702F,
-U13,Replaces 7805CV - Switching Regulator,1,495-TSR-1-2450,TSR 1-2450,https://www.mouser.com/c/?q=495-TSR-1-2450,
-"U11,U12",VREG 7809TV,2,511-L7809CV,L7809CV,https://www.mouser.com/c/?q=511-L7809CV,
-XTAL1,8MHZ XTAL HC-49S,1,717-9B-8.000MEEJ-B,815-ABL-8-B2,https://www.mouser.com/c/?q=717-9B-8.000MEEJ-B,
-U1,ATMEGA 16P,1,556-ATMEGA16A-PU,ATMEGA16A-PU,https://www.mouser.com/c/?q=556-ATMEGA16A-PU,
-LCD1,LCD HD44780LCD-1602,1,763-0216K1Z-NSW-BBW,NHD-0216K1Z-NSW-FBW-L,https://www.mouser.com/c/?q=763-0216K1Z-NSW-BBW,
-"Q3,Q6",MOSFET IRF9Z24,2,942-IRF9Z24NPBF,IRF9Z24NPBF,https://www.mouser.com/c/?q=942-IRF9Z24NPBF,
-"Q1,Q2,Q4,Q5",MOSFET IRL520N,4,942-IRL520NPBF,IRL520NPBF,https://www.mouser.com/c/?q=942-IRL520NPBF,
-JP1,ISP 6 PIN,1,571-5-146254-3,5-146254-3,https://www.mouser.com/c/?q=571-5-146254-3,
-U14,LM2941,1,926-LM2941CT/NOPB,LM2941CT/NOPB,https://www.mouser.com/c/?q=926-LM2941CT%2FNOPB,
-U2,LM324N,1,595-LM324N,LM324N,https://www.mouser.com/c/?q=595-LM324N,
-"U10,U4",LM358N,2,512-LM358N,LM358N,https://www.mouser.com/c/?q=512-LM358N,
-"LED1,LED2",5MM LED - Orange,2,604-WP7113ND,WP7113ND,https://www.mouser.com/ProductDetail/Kingbright/WP7113ND,
-LED3,5MM LED - Red,1,604-WP7113ID,WP7113ID,https://www.mouser.com/ProductDetail/Kingbright/WP7113ND,
-LED4,5MM LED - Yellow-Green,1,604-WP7113GD,WP7113GD,https://www.mouser.com/ProductDetail/Kingbright/WP7113GD,
-U9,MAX232,1,700-MAX232CPE,MAX232CPE,https://www.mouser.com/c/?q=700-MAX232CPE,
-"SOCKET FOR U2,U3",DIL 14 IC SOCKET,2,517-4814-3004-CP,4814-3004-CP,https://www.mouser.com/c/?q=517-4814-3004-CP,
-SOCKET FOR U9,DIL 16 IC SOCKET,1,517-4816-3004-CP,4816-3004-CP,https://www.mouser.com/c/?q=517-4816-3004-CP,
-SOCKET FOR U1,DIL 40 IC SOCKET,1,575-11041640410010,110-41-640-41-001000,https://www.mouser.com/c/?q=575-11041640410010,
-"SOCKET FOR U10,U4,U8(A/B)",DIL 8 IC SOCKET,4,571-1-2199298-2,1-2199298-2,https://www.mouser.com/c/?q=571-1-2199298-2,
-"JP6,JP7",2x1 SIP HEADER 0.1,2,571-5-146285-2,5-146285-2,https://www.mouser.com/c/?q=571-5-146285-2,
-"VR1, VR2",ALPS 9mm 10K Pot,2,688-RK09L1140A2U,RK09L1140A2U,https://www.mouser.com/c/?q=688-RK09L1140A2U,
-VR3,ALPS 9mm 10K Dual Gang Pot,1,688-RK09L1240A12,RK09L1240A12,https://www.mouser.com/c/?q=688-RK09L1240A12,
-VR4,Bourns 3362P 10K Pot,1,3362P-1-103LF,3362P-1-103LF,https://www.mouser.com/c/?q=3362P-1-103LF,
-"S1,S2,S3,S4",Buttons,4,611-D6C90F2LFS,D6C90 F2 LFS,https://www.mouser.com/c/?q=611-D6C90F2LFS,
-J8,2.1/5.5mm DC jack,1,490-PJ-002A,PJ-002A,https://www.mouser.com/c/?q=490-PJ-002A,
-S5,Toggle Switch with safety actuator,1,611-7101K2AV2BE,7101K2AV2BE,https://www.mouser.com/c/?q=611-7101K2AV2BE,
-J9,Radio Header,1,538-90147-1206,90147-1206,https://www.mouser.com/c/?q=538-90147-1206,
-Gray button covers,Button Cover,2,611-BTND610F,BTND610F,https://www.mouser.com/c/?q=611-BTND610F,
-White button covers,Button Cover,2,611-BTND600F,BTN D6 00 F,https://www.mouser.com/c/?q=611-BTND600F,
-LCD HEADER,LCD Header,1,710-61301611121,61301611121,https://www.mouser.com/c/?q=710-61301611121,
-Knob,Potentiometer Knob,3,450-BA761,BA761,https://www.mouser.com/c/?q=450-BA761,
-BAT1,Lead Acid Battery,1,547-PS-1220,PS-1220,https://www.mouser.com/c/?q=547-PS-1220,
-BAT1 Lugs,Crimp Lubs for BAT1,2,534-8291,534-8291,https://www.mouser.com/c/?q=534-8291,
-Power Supply,"18V, 1A .5.5mm OD plug",1,709-GST18U18-P1J,GST18U18-P1J,https://www.mouser.com/c/?q=709-GST18U18-P1J,
-20K Opt. Variant,RES 18K,2,660-MF1/4DCT52R1802F,MF1/4DCT52R1802F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R1802F,
-R30,RES 0.27R 1W,1,660-MOSX1CT528RR27J,MOSX1CT528RR27J,https://www.mouser.com/c/?q=660-MOSX1CT528RR27J,
-(LED Brightness Opt. 1),RES 100R,1,660-MF1/4DCT52R1000F,MF1/4DCT52R1000F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R1000F,
-(LED Brightness Opt. 2),RES 150R,1,660-MF1/4DCT52R1500F,MF1/4DCT52R1500F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R1500F,
-(LED Brightness Opt. 3),RES 220R,1,660-MF1/4DCT52R2200F,MF1/4DCT52R2200F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R2200F,
-"C4, C5, C6, C7",Aluminum Organic Polymer Capacitors 25Vo 1000uF RAD 2KHr ESR=14 mOhms,4,80-A750MV108M1EAAE14,A750MV108M1EAAE014,https://www.mouser.com/c/?q=80-A750MV108M1EAAE14,
-"J2,J3,J4,J5,J6,J7",Phone Connectors 3.5mm PCB STEREO BLK 5P W/SWITCH,6,806-STX-3100-5N,STX-3100-5N,https://www.mouser.com/c/?q=806-STX-3100-5N,
-"TR1,TR2",Audio Transformers / Signal Transformers XFMR OUT 200CT-8 3.2,2,42TU200-RC,42TU200-RC,https://www.mouser.com/c/?q=42TU200-RC,
-PACTEC Case,Case,1,616-63025-510-000,63025-510-000,https://www.mouser.com/c/?q=616-63025-510-000,
-U8A,Digital to Analog Converters - DAC uP 2x 10-B DAC in MS,1,584-LTC1661IN8#PBF,LTC1661IN8#PBF,https://www.mouser.com/c/?q=584-LTC1661IN8%23PBF,
-Ribbon Cable,Ribbon Cable,,200-IDSD12D0200,IDSD-12-D-02.00,https://www.mouser.com/c/?q=200-IDSD12D0200,
-Battery,12V 2.5AH Sealed Lead Acid Battery,1,547-PS-1220F1,PS-1220F1,https://www.mouser.com/c/?q=547-PS-1220F1,
-C8,10 uF 50V 77 mOhms ORganic aluminum Polymer Capacitor,1,581-RPF0508100M050K,RPF0508100M050K,https://www.mouser.com/c/?q=581-RPF0508100M050K,
+R55,RES 100R (LCD backlight series for Newhaven NHD-0216K1Z),1,660-MF1/4DCT52R1000F,MF1/4DCT52R1000F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R1000F,https://www.amazon.com/s?k=MF1%2F4DCT52R1000F
+"R53,R54,R59,R60",RES 390R,4,660-MF1/4DCT52R3900F,MF1/4DCT52R3900F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R3900F,https://www.amazon.com/s?k=MF1%2F4DCT52R3900F
+"C2,C3,C9,C10,C11,C12,C13,C14,C17,C18,C19,C21,C26,C28,C29,C32,C37,C38,C39,C40,C41,C42,C44","CAP 0.1uF (0.1"" spacing) 50V",23,80-C320C104K5R,C320C104K5R5TA,https://www.mouser.com/c/?q=80-C320C104K5R,https://www.amazon.com/s?k=C320C104K5R5TA
+F1,Polyfuse 1.1A hold / 2.2A trip radial 30V (battery in-line protection),1,652-MF-R110,MF-R110,https://www.mouser.com/c/?q=652-MF-R110,https://www.amazon.com/s?k=MF-R110
+R2,RES 1.2K,1,660-MF1/4DCT52R1201F,MF1/4DCT52R1201F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R1201F,https://www.amazon.com/s?k=MF1%2F4DCT52R1201F
+"R18, R56,R57",RES 1.5K,3,660-MF1/4DCT52R1501F,MF1/4DCT52R1501F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R1501F,https://www.amazon.com/s?k=MF1%2F4DCT52R1501F
+"R3,R10,R20,R21,R27,R28,R29,R31,R32,R33,R34,R36,R37,R40,R42,R43,R44,R45,R47,R48,R51,R61",RES 100K,22,660-MF1/4DC1003F,MF1/4DC1003F,https://www.mouser.com/c/?q=660-MF1%2F4DC1003F,https://www.amazon.com/s?k=MF1%2F4DC1003F
+"R5,R38,R39,R41,R49,R50,R52,R58,R63",RES 10K,9,660-MF1/4DC1002F,MF1/4DC1002F,https://www.mouser.com/c/?q=660-MF1%2F4DC1002F,https://www.amazon.com/s?k=MF1%2F4DC1002F
+C1,CAP 10uF CER,1,810-FG11X7R1H106KRT6,FG11X7R1H106KRT06,https://www.mouser.com/c/?q=810-FG11X7R1H106KRT6,https://www.amazon.com/s?k=FG11X7R1H106KRT06
+R1A,RES 12K,1,660-MF1/4DCT52R1202F,MF1/4DCT52R1202F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R1202F,https://www.amazon.com/s?k=MF1%2F4DCT52R1202F
+"C15,C16",CAP 18pF,2,80-C315C180J1G,C315C180J1G5TA,https://www.mouser.com/c/?q=80-C315C180J1G,https://www.amazon.com/s?k=C315C180J1G5TA
+"R14,R15,R19,R62",RES 1K,4,660-MF1/4DC1001F,MF1/4DC1001F,https://www.mouser.com/c/?q=660-MF1%2F4DC1001F,https://www.amazon.com/s?k=MF1%2F4DC1001F
+"R12,R23,R25,R26",RES 1M,4,660-MF1/4DCT52R1004F,MF1/4DCT52R1004F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R1004F,https://www.amazon.com/s?k=MF1%2F4DCT52R1004F
+"D1,D4",DIODE 1N4004,2,621-1N4004,1N4004-T,https://www.mouser.com/c/?q=621-1N4004,https://www.amazon.com/s?k=1N4004-T
+"D2,D3,D5",DIODE 1N4148,3,512-1N4148,1N4148,https://www.mouser.com/c/?q=512-1N4148,https://www.amazon.com/s?k=1N4148
+"C25,C27","CAP 1nF (0.1"" spacing)",2,80-C315C102K1G,C315C102K1G5TA,https://www.mouser.com/c/?q=80-C315C102K1G,https://www.amazon.com/s?k=C315C102K1G5TA
+"C20,C22,C23,C24,C30,C31,C33,C34,C35,C36,C43","CAP 1uF (0.1"" spacing)",11,80-C315C105K3R,C315C105K3R5TA,https://www.mouser.com/c/?q=80-C315C105K3R,https://www.amazon.com/s?k=C315C105K3R5TA
+"R35,R46",RES 200K,2,660-MF1/4DCT52R2003F,MF1/4DCT52R2003F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R2003F,https://www.amazon.com/s?k=MF1%2F4DCT52R2003F
+"R11,R16,R17,R22,R24,R4",RES 20K,6,660-MF1/4DCT52R2002F,MF1/4DCT52R2002F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R2002F,https://www.amazon.com/s?k=MF1%2F4DCT52R2002F
+"J10,J11",PAK100/2500-24 - 2425-  3M WALL HEADER,2,517-N2524-6002RB,N2524-6002RB,https://www.mouser.com/c/?q=517-N2524-6002RB,https://www.amazon.com/s?k=N2524-6002RB
+"Q7,Q8",TRANS. 2N3904,2,512-2N3904BU,2N3904BU,https://www.mouser.com/c/?q=512-2N3904BU,https://www.amazon.com/s?k=2N3904BU
+R6,RES 3.3K,1,660-MF1/4DCT52R3301F,MF1/4DCT52R3301F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R3301F,https://www.amazon.com/s?k=MF1%2F4DCT52R3301F
+"R7,R8",RES 2.2K,2,660-MF1/4DCT52R2201F,MF1/4DCT52R2201F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R2201F,https://www.amazon.com/s?k=MF1%2F4DCT52R2201F
+"R9,R13",RES 4.7K,2,660-MF1/4DC4701F,MF1/4DC4701F,https://www.mouser.com/c/?q=660-MF1%2F4DC4701F,https://www.amazon.com/s?k=MF1%2F4DC4701F
+U3,CD4066N,1,595-CD4066BE,CD4066BE,https://www.mouser.com/c/?q=595-CD4066BE,https://www.amazon.com/s?k=CD4066BE
+U13,Replaces 7805CV - Switching Regulator,1,495-TSR-1-2450,TSR 1-2450,https://www.mouser.com/c/?q=495-TSR-1-2450,https://www.amazon.com/s?k=TSR%201-2450
+"U11,U12",VREG 7809TV,2,511-L7809CV,L7809CV,https://www.mouser.com/c/?q=511-L7809CV,https://www.amazon.com/s?k=L7809CV
+XTAL1,8MHZ XTAL HC-49S,1,717-9B-8.000MEEJ-B,815-ABL-8-B2,https://www.mouser.com/c/?q=717-9B-8.000MEEJ-B,https://www.amazon.com/s?k=815-ABL-8-B2
+U1,ATMEGA 16P,1,556-ATMEGA16A-PU,ATMEGA16A-PU,https://www.mouser.com/c/?q=556-ATMEGA16A-PU,https://www.amazon.com/s?k=ATMEGA16A-PU
+LCD1,LCD HD44780LCD-1602,1,763-0216K1Z-NSW-BBW,NHD-0216K1Z-NSW-FBW-L,https://www.mouser.com/c/?q=763-0216K1Z-NSW-BBW,https://www.amazon.com/s?k=NHD-0216K1Z-NSW-FBW-L
+"Q3,Q6",MOSFET IRF9Z24,2,942-IRF9Z24NPBF,IRF9Z24NPBF,https://www.mouser.com/c/?q=942-IRF9Z24NPBF,https://www.amazon.com/s?k=IRF9Z24NPBF
+"Q1,Q2,Q4,Q5",MOSFET IRL520N,4,942-IRL520NPBF,IRL520NPBF,https://www.mouser.com/c/?q=942-IRL520NPBF,https://www.amazon.com/s?k=IRL520NPBF
+JP1,ISP 6 PIN,1,571-5-146254-3,5-146254-3,https://www.mouser.com/c/?q=571-5-146254-3,https://www.amazon.com/s?k=5-146254-3
+U14,LM2941,1,926-LM2941CT/NOPB,LM2941CT/NOPB,https://www.mouser.com/c/?q=926-LM2941CT%2FNOPB,https://www.amazon.com/s?k=LM2941CT%2FNOPB
+U2,LM324N,1,595-LM324N,LM324N,https://www.mouser.com/c/?q=595-LM324N,https://www.amazon.com/s?k=LM324N
+"U10,U4",LM358N,2,512-LM358N,LM358N,https://www.mouser.com/c/?q=512-LM358N,https://www.amazon.com/s?k=LM358N
+"LED1,LED2",Kingbright 5mm Orange diffused (OUTPUT A & B) - Vf 2.0V typ - works as-is with existing 390R at R53/R54,2,604-WP7113OD,WP7113OD,https://www.mouser.com/c/?q=604-WP7113OD,https://www.amazon.com/s?k=WP7113OD
+LED3,Kingbright 5mm Red diffused (RADIO) - Vf 2.0V typ - works as-is with existing 390R at R59,1,604-WP7113ID,WP7113ID,https://www.mouser.com/c/?q=604-WP7113ID,https://www.amazon.com/s?k=WP7113ID
+LED4,Kingbright 5mm Green diffused (POWER) - GaP Vf 2.2V typ - works as-is with existing 390R at R60,1,604-WP7113GD,WP7113GD,https://www.mouser.com/c/?q=604-WP7113GD,https://www.amazon.com/s?k=WP7113GD
+U9,MAX232,1,700-MAX232CPE,MAX232CPE,https://www.mouser.com/c/?q=700-MAX232CPE,https://www.amazon.com/s?k=MAX232CPE
+"SOCKET FOR U2,U3",DIL 14 IC SOCKET,2,517-4814-3004-CP,4814-3004-CP,https://www.mouser.com/c/?q=517-4814-3004-CP,https://www.amazon.com/s?k=4814-3004-CP
+SOCKET FOR U9,DIL 16 IC SOCKET,1,517-4816-3004-CP,4816-3004-CP,https://www.mouser.com/c/?q=517-4816-3004-CP,https://www.amazon.com/s?k=4816-3004-CP
+SOCKET FOR U1,DIL 40 IC SOCKET,1,575-11041640410010,110-41-640-41-001000,https://www.mouser.com/c/?q=575-11041640410010,https://www.amazon.com/s?k=110-41-640-41-001000
+"SOCKET FOR U10,U4,U8(A/B)",DIL 8 IC SOCKET,4,571-1-2199298-2,1-2199298-2,https://www.mouser.com/c/?q=571-1-2199298-2,https://www.amazon.com/s?k=1-2199298-2
+"JP6,JP7",2x1 SIP HEADER 0.1,2,571-5-146285-2,5-146285-2,https://www.mouser.com/c/?q=571-5-146285-2,https://www.amazon.com/s?k=5-146285-2
+"VR1, VR2",ALPS 9mm 10K Pot,2,688-RK09L1140A2U,RK09L1140A2U,https://www.mouser.com/c/?q=688-RK09L1140A2U,https://www.amazon.com/s?k=RK09L1140A2U
+VR3,ALPS 9mm 10K Dual Gang Pot,1,688-RK09L1240A12,RK09L1240A12,https://www.mouser.com/c/?q=688-RK09L1240A12,https://www.amazon.com/s?k=RK09L1240A12
+VR4,Bourns 3362P 10K Pot,1,3362P-1-103LF,3362P-1-103LF,https://www.mouser.com/c/?q=3362P-1-103LF,https://www.amazon.com/s?k=3362P-1-103LF
+"S1,S2,S3,S4",Buttons,4,611-D6C90F2LFS,D6C90 F2 LFS,https://www.mouser.com/c/?q=611-D6C90F2LFS,https://www.amazon.com/s?k=D6C90%20F2%20LFS
+J8,2.1/5.5mm DC jack,1,490-PJ-002A,PJ-002A,https://www.mouser.com/c/?q=490-PJ-002A,https://www.amazon.com/s?k=PJ-002A
+S5,Toggle Switch with safety actuator,1,611-7101K2AV2BE,7101K2AV2BE,https://www.mouser.com/c/?q=611-7101K2AV2BE,https://www.amazon.com/s?k=7101K2AV2BE
+J9,Radio Header,1,538-90147-1206,90147-1206,https://www.mouser.com/c/?q=538-90147-1206,https://www.amazon.com/s?k=90147-1206
+Gray button covers,Button Cover,2,611-BTND610F,BTND610F,https://www.mouser.com/c/?q=611-BTND610F,https://www.amazon.com/s?k=BTND610F
+White button covers,Button Cover,2,611-BTND600F,BTN D6 00 F,https://www.mouser.com/c/?q=611-BTND600F,https://www.amazon.com/s?k=BTN%20D6%2000%20F
+LCD HEADER,LCD Header,1,710-61301611121,61301611121,https://www.mouser.com/c/?q=710-61301611121,https://www.amazon.com/s?k=61301611121
+Knob,Potentiometer Knob,3,450-BA761,BA761,https://www.mouser.com/c/?q=450-BA761,https://www.amazon.com/s?k=BA761
+BAT1,Lead Acid Battery,1,547-PS-1220,PS-1220,https://www.mouser.com/c/?q=547-PS-1220,https://www.amazon.com/s?k=PS-1220
+BAT1 Lugs,Crimp Lubs for BAT1,2,534-8291,534-8291,https://www.mouser.com/c/?q=534-8291,https://www.amazon.com/s?k=534-8291
+Power Supply,"18V, 1A .5.5mm OD plug",1,709-GST18U18-P1J,GST18U18-P1J,https://www.mouser.com/c/?q=709-GST18U18-P1J,https://www.amazon.com/s?k=GST18U18-P1J
+20K Opt. Variant,RES 18K,2,660-MF1/4DCT52R1802F,MF1/4DCT52R1802F,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R1802F,https://www.amazon.com/s?k=MF1%2F4DCT52R1802F
+R30,RES 0.27R 1W,1,660-MOSX1CT528RR27J,MOSX1CT528RR27J,https://www.mouser.com/c/?q=660-MOSX1CT528RR27J,https://www.amazon.com/s?k=MOSX1CT528RR27J
+"C4,C5,C6,C7",Aluminum Organic Polymer Capacitors 25V 1000uF RAD Low ESR (14 mOhm) - upgraded from 470-820uF spec for use with 0.27R at R30,4,80-A750MV108M1EAAE14,A750MV108M1EAAE014,https://www.mouser.com/c/?q=80-A750MV108M1EAAE14,https://www.amazon.com/s?k=A750MV108M1EAAE014
+"J2,J3,J4,J5,J6,J7",Phone Connectors 3.5mm PCB STEREO BLK 5P W/SWITCH,6,806-STX-3100-5N,STX-3100-5N,https://www.mouser.com/c/?q=806-STX-3100-5N,https://www.amazon.com/s?k=STX-3100-5N
+"TR1,TR2",Audio Transformers / Signal Transformers XFMR OUT 200CT-8 3.2,2,42TU200-RC,42TU200-RC,https://www.mouser.com/c/?q=42TU200-RC,https://www.amazon.com/s?k=42TU200-RC
+PACTEC Case,Case,1,616-63025-510-000,63025-510-000,https://www.mouser.com/c/?q=616-63025-510-000,https://www.amazon.com/s?k=63025-510-000
+U8A,Digital to Analog Converters - DAC uP 2x 10-B DAC in MS,1,584-LTC1661IN8#PBF,LTC1661IN8#PBF,https://www.mouser.com/c/?q=584-LTC1661IN8%23PBF,https://www.amazon.com/s?k=LTC1661IN8%23PBF
+Ribbon Cable,Ribbon Cable,,200-IDSD12D0200,IDSD-12-D-02.00,https://www.mouser.com/c/?q=200-IDSD12D0200,https://www.amazon.com/s?k=IDSD-12-D-02.00
+Battery,12V 2.5AH Sealed Lead Acid Battery,1,547-PS-1220F1,PS-1220F1,https://www.mouser.com/c/?q=547-PS-1220F1,https://www.amazon.com/s?k=PS-1220F1
+C8,10 uF 50V 77 mOhms ORganic aluminum Polymer Capacitor,1,581-RPF0508100M050K,RPF0508100M050K,https://www.mouser.com/c/?q=581-RPF0508100M050K,https://www.amazon.com/s?k=RPF0508100M050K
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+Misc,,,,,,
+- Hardware,,,,,,
+,M2.5 x 20mm socket head screw (Front panel screws),4,,,,https://www.amazon.com/s?k=M2.5%20x%2020mm%20socket%20head%20screw%20%28Front%20panel%20screws%29
+,"#4 x 1/4"" sheet metal screw (Main board to case)",6,,,,https://www.amazon.com/s?k=%234%20x%201%2F4%22%20sheet%20metal%20screw%20%28Main%20board%20to%20case%29
+,M2.5 nut (Front panel nut),22,,,,https://www.amazon.com/s?k=M2.5%20nut%20%28Front%20panel%20nut%29
+,18 Gauge Wire Black,300mm,,,,https://www.amazon.com/s?k=18%20Gauge%20Wire%20Black
+,18 Gauge Wire Red,300mm,,,,https://www.amazon.com/s?k=18%20Gauge%20Wire%20Red
+- Misc Modules,,,,,,
+,Bluetooth Module HC-05,1,http://amzn.to/2l0UEo,,,http://amzn.to/2l0UEo
+,Wifi Module (see their parts list),1,https://github.com/Rangarig/MK312WIFI,,,
+Firmware Flashing,,,,,,
+,USBASP for ISP + 10Pin to 6Pin Adapter Board,1,https://www.amazon.com/dp/B0885RKVMC,,,https://www.amazon.com/dp/B0885RKVMC
+,USB to TTL 5PIN Serial Converter,1,https://www.amazon.com/dp/B07D6LLX19,,,https://www.amazon.com/dp/B07D6LLX19
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
