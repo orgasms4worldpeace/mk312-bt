@@ -1,8 +1,21 @@
-# Troubleshooting archive
+# Troubleshooting
 
-The metafetish.club forum (the canonical MK-312BT discussion venue) went offline. These PDFs are saved threads from before the shutdown — preserved here because they contain the highest-quality troubleshooting information that exists for this board.
+Two kinds of material here:
+1. **`debug-notes/`** — original, evidence-based debug documents written for this repo (preferred starting point for live builds).
+2. **`metafetish.club archive`** — saved forum threads from before the canonical MK-312BT discussion site went offline.
 
-## What's here
+## Active debug notes (read these first)
+
+| File | When to read |
+|------|--------------|
+| [`debug-notes/board-test-methodology.pdf`](debug-notes/board-test-methodology.pdf) | **Symptom: LCD shows solid blocks, no text.** Step-by-step bench procedure with annotated silkscreen + ATmega16/LCD pinout references. Power-rail, AVR-socket→LCD continuity, solder-bridge, and contrast/backlight tests with pass/fail decision tree. |
+| [`debug-notes/failure-21-analysis.md`](debug-notes/failure-21-analysis.md) | Disassembly-grade analysis of the v1.4 boot self-test. Refutes the forum lore that "Failure 21 = channel B mirror of Failure 20" — F21 is actually the wall-adapter voltage sanity check at PA2 (≥17.1 V trips it). Includes the Newhaven ST7066U power-on reset timing hypothesis for the all-blocks-no-text symptom. |
+
+## metafetish.club archive
+
+The metafetish.club forum (the canonical MK-312BT discussion venue) went offline. These PDFs are saved threads from before the shutdown — preserved here because they contain the highest-quality archived troubleshooting information that exists for this board.
+
+### What's here
 
 | File | When to read |
 |------|--------------|

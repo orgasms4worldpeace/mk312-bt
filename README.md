@@ -26,7 +26,7 @@ For the comprehensive end-to-end walkthrough, see **[docs/build-guide.md](docs/b
 ## Reference
 
 - [`docs/build-guide.md`](docs/build-guide.md) — full assembly + flashing walkthrough
-- [`docs/troubleshooting/`](docs/troubleshooting/) — Failure 20, transformer questions, parts substitution, oscillograms (archived posts from the now-offline metafetish.club forum)
+- [`docs/troubleshooting/`](docs/troubleshooting/) — original debug notes (annotated test-methodology PDF, F21 disassembly analysis) plus archived threads from the now-offline metafetish.club forum
 - [`historical/`](historical/) — v1.2 / v1.3 boards, original Eagle source, build photos. Kept for archaeology; **not what you want to build today**
 
 ## Getting help
