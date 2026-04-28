@@ -1,6 +1,6 @@
 MK-312BT Mouser BOM Updated 4/28/2026,,,,,,,
 Designator,Description,Quantity Per Unit,Supplier Part #,Part #,Sourced?,Mouser URL,Amazon URL
-R55,RES 47R,1,660-MF1/4DC47R0F,MF1/4DC47R0F,X,https://www.mouser.com/c/?q=660-MF1%2F4DC47R0F,https://www.amazon.com/s?k=MF1%2F4DC47R0F
+R55,RES 100R (LCD backlight series for Newhaven NHD-0216K1Z),1,660-MF1/4DCT52R1000F,MF1/4DCT52R1000F,X,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R1000F,https://www.amazon.com/s?k=MF1%2F4DCT52R1000F
 "R53,R54,R59,R60",RES 390R,4,660-MF1/4DCT52R3900F,MF1/4DCT52R3900F,X,https://www.mouser.com/c/?q=660-MF1%2F4DCT52R3900F,https://www.amazon.com/s?k=MF1%2F4DCT52R3900F
 "C2,C3,C9,C10,C11,C12,C13,C14,C17,C18,C19,C21,C26,C28,C29,C32,C37,C38,C39,C40,C41,C42,C44","CAP 0.1uF (0.1"" spacing) 50V",23,80-C320C104K5R,C320C104K5R5TA,✓,https://www.mouser.com/c/?q=80-C320C104K5R,https://www.amazon.com/s?k=C320C104K5R5TA
 R30,RES 0.5R 1/2W,1,660-CF1/2CT52RR50J,CF1/2CT52RR50J,X,https://www.mouser.com/c/?q=660-CF1%2F2CT52RR50J,https://www.amazon.com/s?k=CF1%2F2CT52RR50J
