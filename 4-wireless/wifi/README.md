@@ -9,7 +9,7 @@ This Project is a replacement for the bluetooth module used on the MK312BT and i
 | pcb/      | KiCad schematics + board source, fab gerbers, and a JLCPCB upload bundle. Originally `MK312-wifi-pcb/` upstream |
 | media/    | Photos referenced by this README                                        |
 
-> The .NET reference client originally bundled here as `DotNetClient/` was relocated to [`../../5-software/dotnet-client/`](../../5-software/dotnet-client/) — it's a client, so it lives with the other clients in this monorepo.
+| DotNetClient/ | Example C# implementation (Visual Studio Code) — useful as a Unity/VR starting point. Kept in its upstream-shipped location alongside the firmware + PCB it pairs with. |
 
 ## General
 This WiFi interface is pin to pin compatible to the bluetooth interface, and designed to be an easier way to make custom implementations of the communication with the MK312 powerbox.

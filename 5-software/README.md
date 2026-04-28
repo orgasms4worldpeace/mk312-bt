@@ -2,7 +2,9 @@
 
 Once the box is built, flashed, and you've added a wireless adapter (or you're using the LINK port directly with an RS-232 cable), you need a client to control it. **This directory is intentionally a links-only index** — no bundled forks. Use the upstream projects directly.
 
-Earlier versions of this repo bundled `clxjaguar/mk312-gui` and the .NET reference client as git subtrees. Removed in 2026-04 — the focus of this repo is on the hardware/PCB/firmware stack, not on maintaining forks of other people's clients. Pick whichever client below matches your transport and platform, and follow their install instructions.
+Earlier versions of this repo bundled `clxjaguar/mk312-gui` as a git subtree. Removed in 2026-04 — the focus of this repo is on the hardware/PCB/firmware stack, not on maintaining forks of someone else's control GUI. Pick whichever client below matches your transport and platform, and follow their install instructions.
+
+The MK312WIFI bundled .NET reference client at [`../4-wireless/wifi/DotNetClient/`](../4-wireless/wifi/DotNetClient/) stays in place — it's part of the upstream MK312WIFI package (shipped alongside the firmware + PCB) and useful as a Unity/VR starting point. Not an end-user GUI.
 
 ## Recommended
 
@@ -25,7 +27,7 @@ Earlier versions of this repo bundled `clxjaguar/mk312-gui` and the .NET referen
 
 ## What's in the MK312WIFI bundle (for completeness)
 
-The [`4-wireless/wifi/`](../4-wireless/wifi/) subtree includes the upstream MK312WIFI project's bundled .NET reference client at `application/`-adjacent paths. That code originated bundled with the WiFi adapter's repo and is preserved there as upstream-shipped reference for Unity/VR developers. It is **not** an end-user GUI.
+(See note above re: the .NET reference client at [`../4-wireless/wifi/DotNetClient/`](../4-wireless/wifi/DotNetClient/) — kept with the WiFi package as upstream shipped it.)
 
 ## Bluetooth (HC-05) clients?
 

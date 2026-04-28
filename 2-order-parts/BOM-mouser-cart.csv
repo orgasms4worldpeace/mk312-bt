@@ -69,47 +69,9 @@ U8A,Digital to Analog Converters - DAC uP 2x 10-B DAC in MS,1,584-LTC1661IN8#PBF
 Ribbon Cable,Ribbon Cable,,200-IDSD12D0200,IDSD-12-D-02.00,https://www.mouser.com/c/?q=200-IDSD12D0200,https://www.amazon.com/s?k=IDSD-12-D-02.00
 Battery,12V 2.5AH Sealed Lead Acid Battery,1,547-PS-1220F1,PS-1220F1,https://www.mouser.com/c/?q=547-PS-1220F1,https://www.amazon.com/s?k=PS-1220F1
 C8,10 uF 50V 77 mOhms ORganic aluminum Polymer Capacitor,1,581-RPF0508100M050K,RPF0508100M050K,https://www.mouser.com/c/?q=581-RPF0508100M050K,https://www.amazon.com/s?k=RPF0508100M050K
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-Misc,,,,,,
-- Hardware,,,,,,
-,M2.5 x 20mm socket head screw (Front panel screws),4,,,,https://www.amazon.com/s?k=M2.5%20x%2020mm%20socket%20head%20screw%20%28Front%20panel%20screws%29
-,"#4 x 1/4"" sheet metal screw (Main board to case)",6,,,,https://www.amazon.com/s?k=%234%20x%201%2F4%22%20sheet%20metal%20screw%20%28Main%20board%20to%20case%29
-,M2.5 nut (Front panel nut),22,,,,https://www.amazon.com/s?k=M2.5%20nut%20%28Front%20panel%20nut%29
-,18 Gauge Wire Black,300mm,,,,https://www.amazon.com/s?k=18%20Gauge%20Wire%20Black
-,18 Gauge Wire Red,300mm,,,,https://www.amazon.com/s?k=18%20Gauge%20Wire%20Red
-- Wireless Module (pick ONE — bluetooth OR wifi),,,,,,
-,Bluetooth Module HC-05 (works with bluetooth-classic clients on Win/Linux/Android — macOS support is poor due to deprecated SPP),1,http://amzn.to/2l0UEo,,,http://amzn.to/2l0UEo
-,(see WiFi Adapter section below for the wifi alternative),,,,,
-,,,,,,
-- WiFi Adapter (optional alternative to HC-05 — pin-compatible drop-in),,,,,,
-,Build path: send 4-wireless/wifi/pcb/jlcpcb-package/ to JLCPCB with SMT-only PCB Assembly enabled. JLC factory-assembles U1 (only SMD part); you hand-solder the 6 THT parts below after boards arrive (~5 min each).,,,,,
-,Total cost target: ~$20-25 for 5 boards delivered. Bare ESP-01S module is sourced separately (AliExpress; not stocked at Mouser).,,,,,
-,,,,,,
-,SMD (factory-soldered by JLCPCB SMT line — JLC sources from their library using LCSC C6186):,,,,,
 U1 (WiFi PCB),AMS1117-3.3 LDO 3.3V regulator SOT-223 — factory-assembled by JLC PCBA,1,750-AMS1117-3.3,AMS1117-3.3,https://www.mouser.com/c/?q=750-AMS1117-3.3,https://www.amazon.com/s?k=AMS1117-3.3
-,,,,,,
-,THT (you solder these by hand — leaded through-hole, fall-off-easy):,,,,,
 "C1,C2 (WiFi PCB)",100nF disc ceramic 50V (WiFi adapter — same part as main board cap group),2,80-C320C104K5R,C320C104K5R5TA,https://www.mouser.com/c/?q=80-C320C104K5R,https://www.amazon.com/s?k=C320C104K5R5TA
 Q1 (WiFi PCB),PN2222A NPN TO-92 (WiFi adapter — STATE-LED level shifter),1,512-PN2222ABU,PN2222ABU,https://www.mouser.com/c/?q=512-PN2222ABU,https://www.amazon.com/s?k=PN2222ABU
 SW1 (WiFi PCB),6mm tactile switch THT 4-pin (WiFi adapter — AP-mode reset button),1,653-B3F-1000,B3F-1000,https://www.mouser.com/c/?q=653-B3F-1000,https://www.amazon.com/s?k=B3F-1000
 J1 (WiFi PCB),1x6 male pin header RIGHT-ANGLE 2.54mm pitch — plugs into MK-312 HC-05 socket on mainboard,1,571-826629-6,826629-6,https://www.mouser.com/c/?q=571-826629-6,https://www.amazon.com/s?k=826629-6
 J2 (WiFi PCB),2x4 FEMALE socket header 2.54mm pitch — ESP-01S module plugs in here,1,200-PPPC042LFBN-RC,PPPC042LFBN-RC,https://www.mouser.com/c/?q=200-PPPC042LFBN-RC,https://www.amazon.com/s?k=PPPC042LFBN-RC
-,ESP-01S WiFi module (NOT stocked at Mouser — buy from AliExpress / Amazon ~$2 each),1,,ESP-01S,,https://www.amazon.com/s?k=ESP-01S
-,,,,,,
-- PC Link Cable (optional — required only for clients that talk to the LINK port instead of bluetooth/wifi adapter),,,,,,
-,DSD TECH USB to RS232 cable (FT232RL chip) — connects PC to MK-312 LINK port; works with mk312-gui / three-twelve-bee / ErosWeb on Win/Mac/Linux,1,https://www.amazon.com/dp/B07XXWVH69,,,https://www.amazon.com/dp/B07XXWVH69
-,,,,,,
-Firmware Flashing,,,,,,
-,USBASP for ISP + 10Pin to 6Pin Adapter Board,1,https://www.amazon.com/dp/B0885RKVMC,,,https://www.amazon.com/dp/B0885RKVMC
-,USB to TTL 5PIN Serial Converter (for HC-05 AT-mode config flashing),1,https://www.amazon.com/dp/B07D6LLX19,,,https://www.amazon.com/dp/B07D6LLX19
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
