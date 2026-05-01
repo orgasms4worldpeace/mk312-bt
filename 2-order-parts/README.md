@@ -1,19 +1,18 @@
 # Step 2 — Order parts
 
-Three BOM files, same data, different formats:
+Two BOM files, same parts, different jobs:
 
 | File | Use it for |
 |------|-----------|
-| [`BOM-mouser-cart.csv`](BOM-mouser-cart.csv) | **Direct import into Mouser's BOM Tool** — fastest path to a cart |
-| [`BOM-with-amazon.xlsx`](BOM-with-amazon.xlsx) | Human-readable spreadsheet with both Mouser **and Amazon** links per part |
-| [`BOM-full.csv`](BOM-full.csv) | Master copy — same as the xlsx plus a `Sourced?` column for tracking what you've already bought |
+| [`BOM_Mouser.csv`](BOM_Mouser.csv) | **Direct import into Mouser's BOM Tool** — strict 4-column format (`Mouser Part Number`, `Quantity`, `Manufacturer Part Number`, `Customer Part Number`). Headers in row 1, no title row, no extra columns — Mouser's importer needs it exactly this way or it silently fails to map columns. |
+| [`BOM_full.csv`](BOM_full.csv) | Human-readable master with designators, descriptions, both **Mouser** and **Amazon** search links per part. First row is a `Last modified:` date stamp. |
 
 ## How to use
 
 1. Sign in to [mouser.com](https://www.mouser.com/) and open their **BOM Tool**.
-2. Upload `BOM-mouser-cart.csv`.
-3. Review and add to cart. Some parts may need substitution if Mouser is out of stock — check `BOM-with-amazon.xlsx` for the part number and search alternatives.
-4. Anything Mouser doesn't carry (or that's cheaper elsewhere): cross-reference `BOM-with-amazon.xlsx` for Amazon links — useful for screws, standoffs, headers, the LCD, etc.
+2. Upload `BOM_Mouser.csv`.
+3. Review and add to cart. Some parts may need substitution if Mouser is out of stock — check `BOM_full.csv` for the part number and search alternatives.
+4. Anything Mouser doesn't carry (or that's cheaper elsewhere): cross-reference `BOM_full.csv` for Amazon links — useful for screws, standoffs, headers, the LCD, etc.
 
 ## Read this before ordering
 
