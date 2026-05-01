@@ -53,6 +53,26 @@ setting. See below.
    - Main Boards: V Score the Main Boards panel as indicated.
    - Front Panel: Place all Fab Markings (Serial Numbers/Date Codes) on the BOTTOM side of the front panel board.
    
+## Error 20: match the MOSFETs before you solder
+
+Error 20 is by far the most common first-boot failure. It almost always traces to mismatched MOSFETs — when the IRL520 quartet or the IRF9Z24 pair have meaningfully different gate threshold voltages (Vt), the output stage can't keep R32 and R43 balanced and the firmware throws Error 20. The DAC (LTC1661) can contribute too, but the MOSFETs are the dominant cause and the only one you can prevent with five minutes of measurement.
+
+**Before soldering**, measure the Vt of every IRL520 and every IRF9Z24 with a component tester (a cheap one that works fine: [amazon.com/dp/B0DDBPWYP8](https://www.amazon.com/dp/B0DDBPWYP8)). Group them by Vt and pick a tight set for each board:
+
+- Bad set — `Vt = 1.82 V, 1.91 V, 2.21 V, 2.34 V` — half a volt of spread, will probably throw Error 20
+- Good set — `Vt = 1.90 V, 1.91 V, 1.91 V, 1.92 V` — within ~20 mV, works reliably
+
+Use four closely-matched IRL520s for one board, and likewise pair up the two IRF9Z24s.
+
+**If the board is already built and Error 20 shows up**, measure the DC voltage across R32 and across R43 with the unit powered on:
+
+- Both should read between **4.0 V and 4.4 V**.
+- Far more important: **the two readings should be very close to each other**. A clear difference between R32 and R43 is the smoking gun for a MOSFET mismatch.
+
+If R32 and R43 are matched and in range, the FETs aren't the issue — check FET orientation, transformer orientation, and that R35/R46 are 200 kΩ. If R32 and R43 are mismatched, the practical fix is to desolder the MOSFETs and drop in a matched set.
+
+Background reading: [`troubleshooting/MK-312BT Failure 20 - Estim - Metafetish.pdf`](troubleshooting/MK-312BT%20Failure%2020%20-%20Estim%20-%20Metafetish.pdf).
+
 ## Board Assembly Instructions - IMPORTANT
 
 1. Trim Potentiometer knobs to correct length if desired
@@ -96,10 +116,7 @@ setting. See below.
     soldered leads of C43. When installing the display board ensure
     that this does not happen (shorten the capacitor leads and bend
     the offending metal tab out of the way if necessary
-14. If Error 20 is encountered on first boot:
-   - Check that all FETs and Transformers are turned in the correct direction
-   - Check that resistors R35 and R46 are the correct 200k values
-   - See the archived thread: [`troubleshooting/MK-312BT Failure 20 - Estim - Metafetish.pdf`](troubleshooting/MK-312BT%20Failure%2020%20-%20Estim%20-%20Metafetish.pdf)
+14. If Error 20 is encountered on first boot, see the **Error 20** section above — it covers MOSFET matching (the usual cause) and the R32/R43 voltage check that diagnoses it.
 
 ## MK312-BT Firmware
 
