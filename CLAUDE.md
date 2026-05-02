@@ -55,7 +55,7 @@ There's a global hook at `~/.claude/hooks/block-dangerous-git.py` that intercept
 
 ## Repo state
 
-- **Visibility: PRIVATE.** Switched from public on 2026-04-26 at the user's request. Don't expose anything assuming public visibility.
+- **Visibility: PUBLIC.** Was switched private on 2026-04-26, then back to public on 2026-05-01 at the user's request. The repo has flipped before and may flip again — don't assume long-term visibility either way; check `gh repo view --json visibility` if it matters for what you're doing.
 - The user is non-technical with respect to PCB design but has hardware-savvy intuition. Translate technical findings into concrete cost / build-time tradeoffs when proposing options (e.g., "$25 vs $80 for 5 boards" rather than just "PCBA setup fees").
 - The user prefers concise responses. Don't restate what you just did at the end of every message.
 
