@@ -179,23 +179,6 @@ sudo usermod -aG plugdev $USER   # log out and back in for this to take effect
 3. Install [Zadig](https://zadig.akeo.ie/), select **USBasp** in the device dropdown, set the driver target to **libusb-win32**, click **Replace Driver**.
 4. avrdude can now talk to the USBasp.
 
-### Back up first (optional but recommended for second-hand chips)
-
-If the ATmega16 has anything on it already (you bought it used, you're re-flashing your only working unit, etc.), pull a backup before overwriting:
-
-```sh
-# Read flash to backup_flash.bin
-avrdude -c usbasp -p m16 -U flash:r:my_backup_flash.bin:r
-
-# Read EEPROM to backup_eeprom.bin (calibration data, user settings)
-avrdude -c usbasp -p m16 -U eeprom:r:my_backup_eeprom.bin:r
-
-# Read fuses (can't write back without an HV programmer if they're wrong, but useful for diagnosis)
-avrdude -c usbasp -p m16 -U lfuse:r:lfuse.hex:h -U hfuse:r:hfuse.hex:h
-```
-
-(For reference, `3-build-and-flash/firmware/backup_flash.bin` and `backup_eeprom.bin` in this repo are dumps from a known-working unit.)
-
 ### Flash with USBasp
 
 Same commands on macOS, Linux, and Windows. Run them from the directory containing the .bin file (or use a full path).
