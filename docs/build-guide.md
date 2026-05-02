@@ -179,6 +179,23 @@ sudo usermod -aG plugdev $USER   # log out and back in for this to take effect
 3. Install [Zadig](https://zadig.akeo.ie/), select **USBasp** in the device dropdown, set the driver target to **libusb-win32**, click **Replace Driver**.
 4. avrdude can now talk to the USBasp.
 
+### Back up first (optional but recommended for second-hand chips)
+
+If the ATmega16 has anything on it already (you bought it used, you're re-flashing your only working unit, etc.), pull a backup before overwriting:
+
+```sh
+# Read flash to backup_flash.bin
+avrdude -c usbasp -p m16 -U flash:r:my_backup_flash.bin:r
+
+# Read EEPROM to backup_eeprom.bin (calibration data, user settings)
+avrdude -c usbasp -p m16 -U eeprom:r:my_backup_eeprom.bin:r
+
+# Read fuses (can't write back without an HV programmer if they're wrong, but useful for diagnosis)
+avrdude -c usbasp -p m16 -U lfuse:r:lfuse.hex:h -U hfuse:r:hfuse.hex:h
+```
+
+(For reference, `3-build-and-flash/firmware/backup_flash.bin` and `backup_eeprom.bin` in this repo are dumps from a known-working unit.)
+
 ### Flash with USBasp
 
 Same commands on macOS, Linux, and Windows. Run them from the directory containing the .bin file (or use a full path).
@@ -315,6 +332,27 @@ avrdude -v -c avrisp -P \\.\COM7 -b 19200 -p m16 -U "flash:w:f005-HelloFriend.bi
 
 **Don't fat-finger these.** Wrong fuse bytes can lock out ISP — recovery requires an HV (parallel) programmer. Copy/paste the commands above; don't retype.
 
+### Build from source (advanced)
+
+The `.bin` files in this repo are pre-built. To rebuild from scratch:
+
+1. **Get the toolchain.** macOS: `brew install avr-gcc`. Linux: `sudo apt install gcc-avr binutils-avr avr-libc`. Windows: install [WinAVR](https://sourceforge.net/projects/winavr/) (it bundles avr-gcc).
+2. **Get the source.** The project is **buttshock-et312-frankenbutt-f005**. Clone it from GitHub if it's still there, or grab a copy from the e-stim community Discord (`#312-chat`).
+3. **Get the original ET-312 firmware blob.** ErosTek ships their firmware encrypted/scrambled. The `buttshock-et312-firmware` toolchain has a script that downloads and unscrambles it:
+   ```sh
+   git clone https://github.com/buttshock/buttshock-et312-firmware
+   cd buttshock-et312-firmware
+   scripts/fw-utils.py --downloadfw
+   ```
+   Per [cLx's notes](http://clx.freeshell.org/mk312bt.html), this download path may not work anymore — if it fails, the unscrambled blob is also floating around the same Discord / Telegram channels.
+4. **Build the patched version:**
+   ```sh
+   cd ../buttshock-et312-frankenbutt/m005
+   make
+   ```
+   This produces `m005.bin` ready for `avrdude -U flash:w:m005.bin`.
+5. The MK-312BT-specific patches (left/right arrows for the LCD character map) are already applied in the bundled `f005-*.bin` files in this repo. If you build from clean upstream you'll need to re-apply those, or you'll see garbled arrows on screen.
+
 ### Internal oscillator fallback (don't)
 
 If you really don't want to install the external 8 MHz crystal, you have to set the calibration byte for the internal oscillator. Read the chip's calibration byte first (`avrdude -t` then `dump calibration` — the fourth byte is the 8 MHz calibration value, or use Atmel Studio to read the oscillator calibration byte). Then program that byte into address `0x3fff` in your firmware. Calibration bytes differ per chip even within the same batch. The firmware reads that byte at startup to set `OSCCAL`. If it's wrong, expect timing, interrupt, and serial-communication failures.
@@ -353,48 +391,76 @@ history sake. Ordering instructions above cover most of this.)
 9. IPC-A-610 - Class2 (If possible - otherwise ignore)
 10. Front Panel Board Dimensions :  (196.85mm x 58.72mm) or (7.750inches x 2.312inches) 
 
-## Bluetooth Serial Configuration
+## Bluetooth (HC-05) configuration
 
-Refer to
-[https://www.itead.cc/wiki/Serial_Port_Bluetooth_Module_(Master/Slave)_:_HC-05](https://www.itead.cc/wiki/Serial_Port_Bluetooth_Module_(Master/Slave)_:_HC-05)
-for more information.
+The HC-05 module ships with default settings (name "HC-05", PIN 1234, baud 9600) — it needs to be reconfigured before it'll talk to the MK-312BT. Skip this entire section if you're using the WiFi adapter instead — see [`4-wireless/wifi/`](../4-wireless/wifi/).
 
-```
-// Test command to check if we are communicating (expect to receive OK)
-AT
+> **macOS users:** HC-05 / Bluetooth Classic SPP is unreliable on macOS Monterey+ (Apple deprecated SPP support). Pairing works but data drops out. Use the [WiFi adapter](../4-wireless/wifi/) instead.
 
-//Name the module
-AT+NAME=MK-312BT 
+### Two ways to configure it
 
-//Set baud rate to be same as the ATMEGA16
-AT+UART=19200,0,0
+| Method | Effort | When to pick |
+|--------|--------|--------------|
+| **Manual via USB-TTL serial adapter** ⭐ | Plug HC-05 into laptop, send AT commands. ~5 minutes. | Recommended. You already need a USB-TTL adapter for the LINK port anyway (BOM lists `amazon.com/dp/B07D6LLX19`). |
+| **Auto-config via one-shot AVR firmware** | Flash a special firmware that AT-configures the HC-05 in-place from the AVR side, then flash the real firmware back. | Only useful if you're building several boards or have no USB-TTL adapter. Firmware: [`4-wireless/bluetooth/MK-312BT V1.2 HC-05 Initialization ATMEGA16.bin`](../4-wireless/bluetooth/) (BASIC source `.bas` also included). |
 
-//Set the pairing password
-AT+PSWD=1234
+### Manual config (recommended path)
 
-//Set the LED Indicator polarity (1 = High Drive 0 = Low Drive)
-AT+POLAR=1,1
+**👉 See [`4-wireless/bluetooth/hc05-setup.md`](../4-wireless/bluetooth/hc05-setup.md) for the complete walkthrough** — it covers the three quirks that quietly break first-time setups (no local echo, CR+LF requirement, fixed 38400 baud in command mode), per-platform terminal setup (picocom on macOS/Linux, Arduino IDE Serial Monitor or Termite on Windows), the IPSCAN power-vs-responsiveness tradeoff with a comparison table, and the macOS "Disconnected" cosmetic quirk.
 
-// Reduce power consumption by increasing the scan interval. Without
-// this it consumes ~43mA when not connected and causes the 5v regulator
-// to get toasty (but still within operational temp range)
-AT+IPSCAN=1024,1,1024,1 
-```
+Quick summary of what you'll do:
 
-To do this automatically:
-1. Solder Pin32 of the HC05 module (see [HC05PINOUT.png](../4-wireless/bluetooth/HC05PINOUT.png) for reference)
-2. Flash the included bin file onto the ATMEGA16
-3. Plug the HC-05 bluetooth radio into the board (ensure pin 32 is
-   soldered to the carrier board)
-4. Place HC-05 in command mode by holding down the button on the HC-05
-   module, power up MK-312BT and release button after 2 seconds. LEDs
-   on HC-05 will blink slowly (0.5 Hz) to indicate command mode.
-5. Watch GUI until it says the HC-05 configuration is finished and
-   flash normal firmware back on to the ATMEGA16
-6. If program stops on "Communicating with HC-05" make sure OSCCAL
-   value for 8 MHz R/C position is copied to &H3FFF of bin location or
-   use external 8 MHz crystal with appropriate fuse bits set (FFS use
-   the external crystal)
+1. **Wire** USB-TTL adapter to HC-05: VCC↔VCC, GND↔GND, **TX↔RXD**, **RX↔TXD** (the cross is the most common mistake — each board labels pins from its own perspective). If your HC-05 breakout has no button, also wire 3.3 V to the HC-05's `EN` pin.
+2. **Enter AT mode**: hold the button on the HC-05 breakout (or pull `EN` high) while connecting power. LED should blink slowly (~once every 2 s). Fast blink = data mode, retry.
+3. **Find the serial device**: `ls /dev/cu.usbserial-*` (macOS), `ls /dev/ttyUSB*` (Linux), Device Manager (Windows).
+4. **Open a terminal at 38400 baud with CR+LF and local echo enabled** (AT mode is hardcoded to 38400 regardless of what you set with `AT+UART`):
+   ```sh
+   picocom -b 38400 --omap crcrlf --echo /dev/cu.usbserial-XXXXXXXX
+   ```
+5. **Test**: type `AT` + Enter → expect `OK`. If nothing comes back, see the troubleshooting in `hc05-setup.md`.
+6. **Configure** (each command should reply `OK`):
+   ```
+   AT+NAME=MK-312BT
+   AT+UART=19200,0,0
+   AT+PSWD=1234
+   AT+POLAR=1,1
+   AT+IPSCAN=1024,1,1024,512
+   ```
+7. **Verify** by reading values back: `AT+NAME?`, `AT+UART?`, `AT+PSWD?`, `AT+IPSCAN?`.
+8. **Solder pin 32** of the HC-05 inner module to the breakout board (it's the STATE pin — drives the front-panel "Radio" LED). See [`HC05PINOUT.png`](../4-wireless/bluetooth/HC05PINOUT.png).
+9. **Plug into the MK-312BT** at the J9 "Radio Header" socket. Pair from your host with PIN `1234`.
+
+#### A note on IPSCAN
+
+The community-default `AT+IPSCAN=1024,1,1024,1` makes the HC-05 nearly invisible (~5 mA idle) but slow to reconnect (~30 s after every power-on). The more practical `1024,1,1024,512` gives ~15–20 mA idle and <2 s reconnect by keeping page-scan at full duty cycle while killing the inquiry-scan that dominates idle current. Use `1024,512,1024,512` (HC-05 default) only if you've replaced the 7805 with a switching regulator (see cLx's page for the mEZD71201A-G drop-in mod, currently silicon for ~$15).
+
+`hc05-setup.md` has the full table comparing all three settings against the stock 7805 thermal limits.
+
+### Auto-config alternative
+
+If you'd rather not buy a USB-TTL adapter, the repo includes a one-shot AVR firmware that configures the HC-05 in-place:
+
+1. Solder pin 32 of the HC-05 inner module first (it's required for the auto-config to know the HC-05 is present).
+2. Flash [`4-wireless/bluetooth/MK-312BT V1.2 HC-05 Initialization ATMEGA16.bin`](../4-wireless/bluetooth/) onto the ATmega16 using the same avrdude commands from the [Firmware section](#firmware-flashing-the-avr) above.
+3. Plug the HC-05 into the board's J9 socket.
+4. Hold the button on the HC-05 breakout, power up the MK-312BT, release after 2 seconds. HC-05's LED should blink slowly (~0.5 Hz) — that's command mode.
+5. Watch the LCD: it'll display progress and finally "HC-05 OK" (or similar).
+6. Power off, flash the real firmware (e.g. `f005-HelloFriend.bin`) back onto the AVR.
+7. If it stops on "Communicating with HC-05," your fuses are wrong — make sure the external 8 MHz crystal fuses are set per the [Firmware section](#firmware-flashing-the-avr). Don't try to make this work with the internal RC oscillator.
+
+### Pairing
+
+After config, pair from your host with PIN `1234`:
+
+| Platform | How |
+|----------|-----|
+| **macOS** | System Settings → Bluetooth → "MK-312BT" → 1234. After ~30 s the panel will show "Disconnected" — this is cosmetic; the bond is permanent. Verify with `ls /dev/cu.MK-312BT*`. **SPP support is poor on Monterey+; consider the WiFi adapter.** |
+| **Linux** | `bluetoothctl` → `pair XX:XX:XX:XX:XX:XX` → 1234. To get a serial port: `sudo rfcomm bind 0 XX:XX:XX:XX:XX:XX` → use `/dev/rfcomm0`. |
+| **Windows** | Settings → Devices → Bluetooth → "MK-312BT" → 1234. A virtual COM port appears in Device Manager. |
+| **Android** | Settings → Bluetooth → "MK-312BT" → 1234. App connects to the bonded device. |
+| **iOS** | Doesn't speak Bluetooth Classic SPP at all. Use the WiFi adapter. |
+
+Then point your control client (e.g., [`mk312-gui`](https://github.com/clxjaguar/mk312-gui)) at the assigned serial port at 19200 baud.
 
 ## 3D Printable Case
 
