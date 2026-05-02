@@ -1,4 +1,4 @@
-Last modified: 2026-05-01,,,,,,,
+Last modified: 2026-05-02,,,,,,,
 Designator,Description,Quantity,Mouser Part #,Manufacturer Part #,Sourced?,Mouser URL,Amazon URL
 R55,RES 100R (LCD backlight series for Newhaven NHD-0216K1Z),1,660-MF1/4DCT52R1000F,MF1/4DCT52R1000F,X,mouser.com/c/?q=660-MF1%2F4DCT52R1000F,amazon.com/s?k=MF1%2F4DCT52R1000F
 "R53,R54,R59,R60",RES 390R,4,660-MF1/4DCT52R3900F,MF1/4DCT52R3900F,X,mouser.com/c/?q=660-MF1%2F4DCT52R3900F,amazon.com/s?k=MF1%2F4DCT52R3900F
@@ -106,5 +106,5 @@ Build Tools,,,,,,,
 ,"Component tester (multi-function — measures MOSFET threshold voltage Vt for matching IRL520 / IRF9Z24 to prevent Error 20; also tests resistors, caps, diodes, transistors)",1,,,,,amazon.com/dp/B0DDBPWYP8
 ,,,,,,,
 Firmware Flashing,,,,,,,
-,USBASP for ISP + 10Pin to 6Pin Adapter Board,1,,,,,amazon.com/dp/B0885RKVMC
+,"USBasp programmer for ISP — KeeYees with 10→6-pin adapter. Cheapest option but ships WITHOUT the J1 jumper installed (status LEDs stay dark — flashing still works, you just can't see activity). Either drop a 0.1"" jumper cap on J1 yourself, or pick a better one: see build-guide.md ""Pick a programmer"" — DIYmall B08F9FZKP9 (jumper installed), Adafruit USBtinyISP, or DIAMEX USB-ISP V4 are sturdier picks.",1,,,,,amazon.com/dp/B0885RKVMC
 ,USB to TTL 5PIN Serial Converter (for HC-05 AT-mode config flashing),1,,,,,amazon.com/dp/B07D6LLX19

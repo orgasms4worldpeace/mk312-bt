@@ -126,22 +126,35 @@ The board uses an **ATmega16A** clocked from an external **8 MHz crystal**. Flas
 
 | File | What it is |
 |------|-----------|
-| `cr-custom-boot-messages/f005-HelloFriend.bin` | Patched frankenbutt-f005 with a "Hello Friend" boot screen — **recommended default**. |
-| `cr-custom-boot-messages/f005-ElectrodesReady.bin` | Same firmware, "Electrodes Ready" boot screen. |
-| `other-fw/f005.bin` | Unpatched frankenbutt-f005 (no custom boot message). |
-| `other-fw/t002_bootloader.bin` | t002 bootloader — flash first if you want field-updatable firmware over the LINK port. |
+| `cr-custom-boot-messages/f005-HelloFriend.bin` | **Recommended default — application firmware.** Patched frankenbutt-f005 with a "Hello Friend" boot screen. Flash this and the box runs. |
+| `cr-custom-boot-messages/f005-ElectrodesReady.bin` | Alternative application: same f005 build, "Electrodes Ready" boot screen. |
+| `other-fw/f005.bin` | Alternative application: unpatched frankenbutt-f005, no custom boot message. |
+| `other-fw/t002_bootloader.bin` | **Optional ET-312 bootloader.** Flash this *first* if you want to update the firmware over the LINK port later without dragging the USBasp out again. Then flash one of the f005 application firmwares on top. By itself the bootloader doesn't run the box — you still need the application. |
+| `other-fw/unpatched_312-16.upg` | **Source input for the patcher** — not flashable directly. Encrypted ET-312 v1.6 firmware blob from ErosTek. Feed into buttshock fw-utils when rebuilding from source. See [Build from source](#build-from-source-advanced) below. |
 
-All four already include the LCD character-map fix (left/right arrows instead of up/down) so you don't need to patch the source yourself. If you want to modify the firmware, the upstream project is **buttshock-et312-frankenbutt-f005** — the .bin files in this repo are pre-built from that source.
+All bundled `.bin` files include the LCD character-map fix (left/right arrows instead of up/down). If you just want a working box, flash `f005-HelloFriend.bin` and skip ahead. If you want field-updatable firmware, flash `t002_bootloader.bin` first and then `f005-HelloFriend.bin`.
 
 ### Pick a programmer
 
-| Programmer | Cost | Notes |
-|------------|------|-------|
-| **USBasp clone** — what the BOM lists ([B0885RKVMC](https://amazon.com/dp/B0885RKVMC), includes the 10→6-pin adapter the board needs); fallback alternative [HiLetgo B00AX4WQ00](https://amazon.com/dp/B00AX4WQ00) | $5–15 | Default cheap option. Quality varies — see gotchas below. |
-| **DIAMEX USBasp** ([diamex.de](https://www.diamex.de/dxshop/USB-ISP-Programmer-PROG-USB-V4)) | ~$25 | German-made, current firmware, no driver dance. Worth it if you'll flash more than one board. |
-| **Arduino UNO/Nano + ArduinoISP sketch** | $0 if you have one | Slower but works. Uses `-c avrisp` instead of `-c usbasp` — see Arduino-as-ISP section below. |
+Ranked from "just buy this" to "if you have one already":
 
-**USBasp clone gotchas.** Cheap clones often ship with: stale firmware (slow SPI — pass `-B 8` if you get sync errors); proprietary non-USBasp firmware (if avrdude can't see it but Windows enumerates it as "USBTiny" or similar, return it); or no 10→6-pin adapter (the MK-312BT board uses a 6-pin ISP header, not 10-pin — verify the listing includes the adapter or buy one separately).
+| Programmer | Cost | Why pick it |
+|------------|------|-------------|
+| **[Adafruit USBtinyISP v2.0](https://www.adafruit.com/product/46)** | ~$22 | Drop-in for the USBasp use case (use `-c usbtiny` instead of `-c usbasp`). Adafruit-quality build, current firmware, includes 6-pin and 10-pin ribbon cables, status LEDs work out of the box. **Best balance of reliability and price.** |
+| **[DIAMEX USB-ISP-Programmer V4](https://www.diamex.de/dxshop/USB-ISP-Programmer-PROG-USB-V4)** | ~$25 | German-made, current USBasp firmware, no driver dance. Best choice if you'll flash more than one board. Use `-c usbasp`. |
+| **[Pololu USB AVR Programmer v2.1](https://www.pololu.com/product/3172)** | ~$22 | Speaks STK500v2 (use `-c stk500v2`), exceptionally reliable, includes 6-pin cable and integrated USB-to-serial adapter — bonus, you can use it for the LINK port too. |
+| **DIYmall USBasp** ([Amazon B08F9FZKP9](https://www.amazon.com/dp/B08F9FZKP9)) | ~$10 | Cheapest option that explicitly ships with the **jumper cap installed** (lights the activity LEDs) and the **10→6-pin adapter included**. The defaults that the BOM pick (B0885RKVMC) is missing. |
+| **HiLetgo USBasp** ([Amazon B00AX4WQ00](https://www.amazon.com/HiLetgo-ATMEGA8-Programmer-USBasp-Cable/dp/B00AX4WQ00)) | ~$8 | Most popular cheap clone. Has power + write LEDs; verify the listing includes the 6-pin adapter (varies by seller revision). |
+| **Arduino UNO/Nano + ArduinoISP sketch** | $0 if you have one | Slower but uses what you already own. Uses `-c avrisp` — see [Arduino-as-ISP](#flash-with-arduino-as-isp) below. |
+| **[Atmel-ICE](https://www.microchip.com/en-us/development-tool/ATATMEL-ICE)** | $80–100 | Microchip's official tool. Overkill unless you're doing real AVR work. Use `-c atmelice_isp`. |
+
+> ⚠️ **The current BOM pick — KeeYees [B0885RKVMC](https://amazon.com/dp/B0885RKVMC) — works but has a real problem:** it ships **without the J1 jumper installed**, so the status LEDs stay dark and you can't tell if the USBasp is actually doing anything. The fix is either to drop a 0.1" jumper cap on J1 yourself ($0.50 in any electronics drawer) or to pick one of the better options above. For a single build the KeeYees is fine if you don't mind blind-flashing; for a kit you'll use again, the Adafruit USBtinyISP is the real recommendation.
+
+**Cheap-clone gotchas in general:**
+- **Stale firmware** → slow SPI. Add `-B 8` to the avrdude command if you get sync errors. Higher = slower.
+- **Proprietary non-USBasp firmware** → some ship with AT89-style firmware that avrdude can't talk to. If your OS sees "USBTiny" or similar instead of "USBasp," return it.
+- **Missing 10→6-pin adapter** → the MK-312BT's ISP header (JP1) is 6-pin, not the 10-pin standard the USBasp output uses. Verify the listing includes the adapter or buy one separately for ~$2.
+- **Missing or absent jumpers** → JP1/J1 controls LED activity on most clones; without it, no visible feedback. Dropping a jumper cap on yourself is fine if you're comfortable with that.
 
 ### Install avrdude
 
@@ -179,35 +192,89 @@ sudo usermod -aG plugdev $USER   # log out and back in for this to take effect
 3. Install [Zadig](https://zadig.akeo.ie/), select **USBasp** in the device dropdown, set the driver target to **libusb-win32**, click **Replace Driver**.
 4. avrdude can now talk to the USBasp.
 
-### Flash with USBasp
+### The three things you actually need to do
 
-Same commands on macOS, Linux, and Windows. Run them from the directory containing the .bin file (or use a full path).
+Everything else above is supporting detail. The actual flashing is three commands. If you understand what each flag means, you can adapt them to any programmer / chip / firmware file.
 
-**1. Test the connection** — the chip should reply with "AVR device initialized":
+#### Step 1 — Identify your programmer's avrdude name
+
+avrdude doesn't auto-detect what's plugged in; you have to tell it via the `-c` flag. Here's what to use:
+
+| Hardware you have | `-c` flag value |
+|-------------------|-----------------|
+| USBasp clone (the BOM pick, the HiLetgo, the DIAMEX, basically anything labeled "USBasp") | `usbasp` |
+| Arduino UNO/Nano running the ArduinoISP sketch | `avrisp` (and you'll also need `-P <port> -b 19200`) |
+| Atmel/Microchip Atmel-ICE | `atmelice_isp` |
+| Atmel AVRISP mkII | `avrispmkII` |
+
+Don't know what you've got? List every supported programmer:
 
 ```sh
-avrdude -c usbasp -p m16 -v
+avrdude -c help 2>&1 | head -40
 ```
 
-If it says "target doesn't answer," check ISP cable orientation (pin 1 to pin 1 — look at the silkscreen) and try slowing SCK with `-B 8`:
+For this guide we'll use `-c usbasp` since that's what the BOM lists.
 
-```sh
-avrdude -c usbasp -B 8 -p m16 -v
-```
+#### Step 2 — Set the fuses
 
-**2. Set the fuses** for the external 8 MHz crystal — do this once per chip:
+Fuses are tiny configuration bits stored in the chip that control hardware behavior — most importantly, where the chip gets its clock from. The MK-312BT board has an external 8 MHz crystal soldered on, but the ATmega16 ships configured for its slow internal RC oscillator. You have to switch it once per chip.
 
 ```sh
 avrdude -c usbasp -p m16 -U lfuse:w:0xFF:m -U hfuse:w:0xDC:m
 ```
 
-**3. Flash the firmware:**
+What each flag means:
+
+| Flag | Meaning |
+|------|---------|
+| `avrdude` | The flasher program itself |
+| `-c usbasp` | Use the USBasp programmer (from Step 1) |
+| `-p m16` | Target chip is an ATmega16. (`m16a` works too — the A is silicon revision, same fuse map) |
+| `-U lfuse:w:0xFF:m` | **U**pload to memory area `lfuse` (low fuse byte), action `w` (write), value `0xFF`, format `m` (immediate, the value is right there in the command) |
+| `-U hfuse:w:0xDC:m` | Same idea for the high fuse byte: write `0xDC` |
+
+**Why `0xFF` and `0xDC`?** Those values configure: external 8+ MHz crystal, JTAG disabled, EEPROM preserved across flashes, brownout detector at 4.3 V. Full bit-by-bit breakdown in the [Fuse byte reference](#fuse-byte-reference) below.
+
+> ⚠️ **Don't fat-finger the fuse values.** Wrong fuses can lock the chip out of ISP — recovering it requires a high-voltage parallel programmer. Copy/paste the command above; don't retype.
+
+avrdude will read the current fuses, write the new values, and read them back to verify. Look for `lfuse verified` and `hfuse verified`.
+
+#### Step 3 — Flash the firmware
 
 ```sh
 avrdude -c usbasp -p m16 -U flash:w:f005-HelloFriend.bin
 ```
 
+Same flags as before, with one new `-U` operation:
+
+| Flag | Meaning |
+|------|---------|
+| `-U flash:w:f005-HelloFriend.bin` | Memory area `flash` (program code), action `w` (write), source = the file `f005-HelloFriend.bin`. avrdude auto-detects the file format from the extension (`.bin` = raw binary, `.hex` = Intel HEX). |
+
+avrdude erases flash, writes the new firmware, then reads it back byte-for-byte to verify. Takes ~30 seconds on a USBasp. You'll see `verified` at the end if all good.
+
 Power-cycle the box and you should see the boot screen.
+
+#### Useful extra flags
+
+| Flag | When to add it |
+|------|----------------|
+| `-v` | Verbose. Shows what avrdude is doing — add it any time something's not working. |
+| `-B 8` | Slow down the SCK (clock) line. Cheap USBasp clones often need this if you get "target doesn't answer." Higher number = slower. Try `-B 32` if `-B 8` doesn't help. |
+| `-n` | Dry run / no-write. Reads but doesn't write. Useful for testing the connection before committing to a fuse change. |
+| `-e` | Erase chip first (avrdude does this automatically before `flash:w:`, so you rarely need it explicitly). |
+| `-P <port>` | Specify the serial port. Only needed for serial-based programmers like Arduino-as-ISP — USBasp uses libusb and doesn't need a port. |
+| `-b <baud>` | Baud rate. Same: only for serial-based programmers (Arduino-as-ISP needs `-b 19200`). |
+
+#### Test the connection before flashing
+
+Optional but useful — run avrdude in just-look-at-the-chip mode to confirm the wiring is right before you commit:
+
+```sh
+avrdude -c usbasp -p m16 -v
+```
+
+Expect `AVR device initialized and ready to accept instructions` followed by the device signature `0x1e9403` (ATmega16) or `0x1e9489` (ATmega16A). If you get "target doesn't answer," check ISP cable pin 1 orientation, that the board is powered, and try `-B 8` to slow SCK.
 
 ### First-time walkthrough (USBasp on macOS — same idea on Linux/Windows)
 
@@ -336,11 +403,9 @@ The `.bin` files in this repo are pre-built. To rebuild from scratch:
    This produces `m005.bin` ready for `avrdude -U flash:w:m005.bin`.
 5. The MK-312BT-specific patches (left/right arrows for the LCD character map) are already applied in the bundled `f005-*.bin` files in this repo. If you build from clean upstream you'll need to re-apply those, or you'll see garbled arrows on screen.
 
-### Internal oscillator fallback (don't)
+### Internal oscillator? Don't.
 
-If you really don't want to install the external 8 MHz crystal, you have to set the calibration byte for the internal oscillator. Read the chip's calibration byte first (`avrdude -t` then `dump calibration` — the fourth byte is the 8 MHz calibration value, or use Atmel Studio to read the oscillator calibration byte). Then program that byte into address `0x3fff` in your firmware. Calibration bytes differ per chip even within the same batch. The firmware reads that byte at startup to set `OSCCAL`. If it's wrong, expect timing, interrupt, and serial-communication failures.
-
-Just use an external crystal dammit.
+There's a workaround involving the chip's calibration byte and `OSCCAL` if you skip the external 8 MHz crystal. It's fragile per-chip, and gets you timing/interrupt/serial failures whenever it's slightly off. Forget this crap. Use the external crystal, period.
 
 ## MK312-BT Original Fab Notes
 
@@ -428,7 +493,7 @@ If you'd rather not buy a USB-TTL adapter, the repo includes a one-shot AVR firm
 3. Plug the HC-05 into the board's J9 socket.
 4. Hold the button on the HC-05 breakout, power up the MK-312BT, release after 2 seconds. HC-05's LED should blink slowly (~0.5 Hz) — that's command mode.
 5. Watch the LCD: it'll display progress and finally "HC-05 OK" (or similar).
-6. Power off, flash the real firmware (e.g. `f005-HelloFriend.bin`) back onto the AVR.
+6. Power off, flash the real firmware (`t002_bootloader.bin`, or one of the alternatives) back onto the AVR.
 7. If it stops on "Communicating with HC-05," your fuses are wrong — make sure the external 8 MHz crystal fuses are set per the [Firmware section](#firmware-flashing-the-avr). Don't try to make this work with the internal RC oscillator.
 
 ### Pairing

@@ -1,12 +1,12 @@
 # Historical artifacts
 
-**This is not what you want to build.** Go back to [the root README](../README.md) and follow the numbered directories.
+**Don't build from this folder.** Go back to [the root README](../README.md) and follow the numbered directories.
 
 This folder preserves earlier MK-312BT board revisions and their source artifacts. Kept around because:
 
-- Some builders are still working off v1.2 / v1.3 boards they ordered years ago
-- The Eagle source (`.brd` / `.sch`) lives here — v1.4 ships gerbers only, so if you want to **modify** the design, the v1.3 source is your starting point
-- The build photos in [`images/`](images/) are useful as a visual sanity check when assembling
+- Some builders still work from v1.2 / v1.3 boards they ordered years ago
+- The Eagle source (`.brd` / `.sch`) lives here — v1.4 ships gerbers only, so to **modify** the design, start from the v1.3 source
+- The build photos in [`images/`](images/) make a useful visual sanity check when assembling
 
 ## Contents
 
@@ -19,4 +19,4 @@ This folder preserves earlier MK-312BT board revisions and their source artifact
 
 ## Note on v1.4
 
-v1.4 is the current revision (see [`../1-order-boards/`](../1-order-boards/)). It only changes the **main board** — the v1.2 front panel design is still the right one to build.
+v1.4 is the current revision (see [`../1-order-boards/`](../1-order-boards/)). It changes only the **main board** — the v1.2 front panel design is still the right one to build.
