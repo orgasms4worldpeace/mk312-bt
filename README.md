@@ -29,6 +29,54 @@ For the comprehensive end-to-end walkthrough, see **[docs/build-guide.md](docs/b
 - [`docs/troubleshooting/`](docs/troubleshooting/) — original debug notes (annotated test-methodology PDF, F21 disassembly analysis) plus archived threads from the now-offline metafetish.club forum
 - [`historical/`](historical/) — v1.2 / v1.3 boards, original Eagle source, build photos. Kept for archaeology; **not what you want to build today**
 
+## Provenance & scope
+
+### What this is
+
+A 2026 reorganization of the dormant upstreams listed below into a single build-journey-oriented monorepo. The numbered top-level directories (`1-order-boards/` → `5-software/`) encode the build sequence so a newcomer can land on the repo and walk it linearly instead of hunting across half a dozen abandoned projects. Scope is **boards, BOM, firmware, case, and build instructions**. Control software is intentionally not bundled — it lives upstream where it's maintained.
+
+This repo is **not** a fork claiming originality, **not** the "official" anything (there is no official), and **not** a maintained software hub. It's a curation/rehoming effort with attribution preserved.
+
+### Hardware lineage
+
+```
+ErosTek ET-312B           commercial e-stim box (early 2000s, still sold)
+   └─ metafetish/mk312-bt    community DIY clone, repo deleted ~Dec 2020
+       └─ CrashOverride85/mk312-bt   preservation fork, current upstream for the box
+           └─ this repo                 2026 reorganization
+```
+
+The v1.4 board files have hazy provenance — DM'd to CrashOverride85 shortly after the metafetish repo was deleted, no original Eagle source. The design has nonetheless been successfully built by several people. Older v1.2 / v1.3 boards (with original Eagle source) are preserved in [`historical/`](historical/) for reference. Longer story in [`docs/build-guide.md`](docs/build-guide.md#provenance).
+
+### WiFi adapter lineage
+
+The optional WiFi adapter at [`4-wireless/wifi/`](4-wireless/wifi/) comes from [Rangarig/MK312WIFI](https://github.com/Rangarig/MK312WIFI) — a collaboration between **Rangarig** and **cLx**, with additional imports from [timduru's branch](https://github.com/timduru/MK312WIFI/commits/timdev/). It's pulled in as a `git subtree` (the only remaining bundled upstream after the 2026-04 cleanup), internally renamed for layout consistency (`MK312Wifi/` → `firmware/`, `MK312-wifi-pcb/` → `pcb/`) but otherwise unmodified. Upstream is dormant (last commit ~2020). The .NET reference client stays in its upstream-shipped location at [`4-wireless/wifi/DotNetClient/`](4-wireless/wifi/DotNetClient/).
+
+### Control software
+
+[`5-software/`](5-software/) is a **links-only index**. Earlier versions of this repo bundled `clxjaguar/mk312-gui` (and briefly the .NET client) as subtrees; both were unbundled in 2026-04 to keep scope on the hardware/firmware stack. The library that started it all — and the predecessor of every Python client listed in `5-software/` — is [kinkytofu/buttshock-py](https://github.com/kinkytofu/buttshock-py) (archived 2016), which first reverse-engineered the ET-312 serial protocol.
+
+### Forum archive
+
+The `metafetish.club` forum where most of the community debugging knowledge accumulated is now offline. Threads relevant to building / Error 20 / parts substitution / firmware are preserved as PDFs in [`docs/troubleshooting/`](docs/troubleshooting/).
+
+### Credit
+
+- **CrashOverride85** — preservation of the metafetish repo + ongoing upstream for the box
+- **Rangarig** and **cLx** — MK312WIFI design, schematics, ESP firmware
+- **timduru** — additional MK312WIFI code contributions
+- **kinkytofu** — original ET-312 serial protocol library (`buttshock-py`)
+- **clxjaguar** (cLx) — `mk312-gui` PyQt client, `mk312-raw-control`
+- **fenbyfluid** — `three-twelve-bee` web client
+- **boyinsea** — `ErosWeb` sub/dom remote-play client
+- **diglet48** — `restim` audio-input signal generator
+- **Rubberfate** — `mk312com` Python wrapper
+- **Carumbad** — Home Assistant + MQTT bridges
+- **The metafetish.club community** — board iteration + the decades of debug knowledge sitting in the archived threads
+- **ErosTek** — designers of the ET-312B that this clones
+
+License: whatever each upstream shipped with. No additional license is imposed by this reorganization — directories that came from upstream keep their upstream license; the new connective material (READMEs, build guide, BOM tooling) is offered freely.
+
 ## Getting help
 
 The active community lives in the `#boxes-pulse-based-diy` and `#312-chat` channels on [Joanne's E-Stim Community Discord](https://discord.gg/rY8C27S).
