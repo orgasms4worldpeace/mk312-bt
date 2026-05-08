@@ -495,7 +495,7 @@ Quick summary of what you'll do:
    AT+IPSCAN=1024,1,1024,512
    ```
 7. **Verify** by reading values back: `AT+NAME?`, `AT+UART?`, `AT+PSWD?`, `AT+IPSCAN?`.
-8. **Solder pin 32** of the HC-05 inner module to the breakout board (it's the STATE pin — drives the front-panel "Radio" LED). See [`HC05PINOUT.png`](../4-wireless/bluetooth/HC05PINOUT.png).
+8. **Check / solder pin 32** on the HC-05 inner module to the breakout board (the STATE pin — drives the front-panel "Radio" LED). The recommended **DSD Tech HC-05 (Amazon B01G9KSAF6)** ships with this connection already made — verify with a multimeter (continuity from inner-module pin 32 to the breakout's STATE/EN pad) and skip the solder step if it's already there. On generic ZS-040 clones you'll need to bridge it yourself with a fine wire. See [`HC05PINOUT.png`](../4-wireless/bluetooth/HC05PINOUT.png).
 9. **Plug into the MK-312BT** at the J9 "Radio Header" socket. Pair from your host with PIN `1234`.
 
 #### A note on IPSCAN
@@ -508,10 +508,16 @@ The community-default `AT+IPSCAN=1024,1,1024,1` makes the HC-05 nearly invisible
 
 If you'd rather not buy a USB-TTL adapter, the repo includes a one-shot AVR firmware that configures the HC-05 in-place:
 
-1. Solder pin 32 of the HC-05 inner module first (it's required for the auto-config to know the HC-05 is present).
+1. Verify pin 32 on the HC-05 inner module is connected to the breakout board (auto-config relies on the STATE line to detect the HC-05). DSD Tech B01G9KSAF6 modules have this pre-soldered; generic ZS-040 clones need a wire bridge — see [`HC05PINOUT.png`](../4-wireless/bluetooth/HC05PINOUT.png).
 2. Flash [`4-wireless/bluetooth/MK-312BT V1.2 HC-05 Initialization ATMEGA16.bin`](../4-wireless/bluetooth/) onto the ATmega16 using the same avrdude commands from the [Firmware section](#firmware-flashing-the-avr) above.
-3. Plug the HC-05 into the board's J9 socket.
-4. Hold the button on the HC-05 breakout, power up the MK-312BT, release after 2 seconds. HC-05's LED should blink slowly (~0.5 Hz) — that's command mode.
+3. Plug the HC-05 into the board's J9 socket — but **don't power up yet**.
+4. **Put the HC-05 in command mode BEFORE the AVR boots.** The HC-05 only checks its EN (KEY) pin at power-on, so timing matters:
+   - **Press and hold** the button on the HC-05 breakout (pulls EN high)
+   - **While still holding the button**, apply power to the MK-312BT
+   - The HC-05 enters command mode instantly at power-on. Its LED slow-blinks (~0.5 Hz once per ~2 s) to confirm.
+   - You can **release the button after ~2 seconds** — command mode persists until power is removed. The auto-config AVR firmware now sends its AT commands while the HC-05 is listening.
+
+   Holding the button *after* power-up doesn't put the HC-05 in command mode — the EN check only happens at boot. Get the timing right or the auto-config silently fails.
 5. Watch the LCD: it'll display progress and finally "HC-05 OK" (or similar).
 6. Power off, flash the real firmware (`t002_bootloader.bin`, or one of the alternatives) back onto the AVR.
 7. If it stops on "Communicating with HC-05," your fuses are wrong — make sure the external 8 MHz crystal fuses are set per the [Firmware section](#firmware-flashing-the-avr). Don't try to make this work with the internal RC oscillator.

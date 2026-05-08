@@ -81,7 +81,7 @@ Misc,,,,,,,
 ,18 Gauge Wire Black,300mm,,,,,amazon.com/s?k=18%20Gauge%20Wire%20Black
 ,18 Gauge Wire Red,300mm,,,,,amazon.com/s?k=18%20Gauge%20Wire%20Red
 - Wireless Module (pick ONE — bluetooth OR wifi),,,,,,,
-,Bluetooth Module HC-05 (works with bluetooth-classic clients on Win/Linux/Android — macOS support is poor due to deprecated SPP),1,,,,,http://amzn.to/2l0UEo
+,"Bluetooth Module HC-05 — DSD Tech Pass-through (B01G9KSAF6) RECOMMENDED: pin 32 STATE pre-soldered to breakout (drives front-panel Radio LED — the #1 fiddly step on generic clones), reliable AT-mode firmware. Works with Bluetooth-classic clients on Win/Linux/Android — macOS Monterey+ has poor SPP support, use WiFi adapter instead",1,,,,,amazon.com/dp/B01G9KSAF6
 ,(see WiFi Adapter section below for the wifi alternative),,,,,,
 ,,,,,,,
 - WiFi Adapter (optional alternative to HC-05 — pin-compatible drop-in),,,,,,,

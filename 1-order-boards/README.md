@@ -1,13 +1,14 @@
 # Step 1 — Order boards
 
-You need **two** boards to build a complete unit:
+You need **two** PCBs to build a working unit, and there's a third optional one most builders should order at the same time:
 
-| Board | File | Notes |
-|-------|------|-------|
-| Main board (v1.4) | [`gerbers/v1.4-main-board.zip`](gerbers/v1.4-main-board.zip) | Latest revision. See [v1.4 release notes](v1.4-release-notes.txt) for changes vs v1.3 |
-| Front panel (v1.2) | [`gerbers/v1.2-front-panel.zip`](gerbers/v1.2-front-panel.zip) | Front panel design unchanged — v1.2 is current |
+| Board | File | Required? | Notes |
+|---|---|---|---|
+| Main board (v1.4) | [`gerbers/v1.4-main-board.zip`](gerbers/v1.4-main-board.zip) | **Yes** | Latest revision. See [v1.4 release notes](v1.4-release-notes.txt) for changes vs v1.3 |
+| Front panel (v1.2) | [`gerbers/v1.2-front-panel.zip`](gerbers/v1.2-front-panel.zip) | **Yes** | Front panel design unchanged — v1.2 is current |
+| WiFi adapter (optional) | [`../4-wireless/wifi/pcb/jlcpcb-package/gerbers.zip`](../4-wireless/wifi/pcb/jlcpcb-package/gerbers.zip) | Optional but recommended | If you're already paying JLCPCB shipping for the main board + front panel, the marginal cost to add this is ~$5–10. See [combining orders](#combine-with-the-wifi-adapter-while-you-pay-shipping) below. |
 
-Order them as **two separate items in one cart** — the per-board settings differ.
+Order each as a **separate item in one JLCPCB cart** — the per-board settings differ, but they ship together.
 
 ## Recommended fab
 
@@ -28,6 +29,26 @@ Order them as **two separate items in one cart** — the per-board settings diff
 | Special instructions | V-score the panel as indicated | Place fab markings on **bottom** side |
 
 "Different Design" differs because the main board panel holds 2 panelized designs; the front panel is a single design.
+
+## Combine with the WiFi adapter while you pay shipping
+
+The MK-312-BT supports two wireless options — the original HC-05 Bluetooth module (no PCB needed) and a small WiFi adapter daughter-board that's pin-compatible with the HC-05 socket. The adapter board is its own JLCPCB order with **SMT assembly** (one part, the AMS1117-3.3 regulator), and you hand-solder six through-hole parts after.
+
+If you're already submitting an order for the main board + front panel, the WiFi adapter can ride along in the same cart. JLCPCB lets you submit multiple PCB jobs in one order and ship them together — you only pay shipping once.
+
+| Board | Order type | Setup |
+|---|---|---|
+| Main board (v1.4) | PCB only | Settings table above |
+| Front panel (v1.2) | PCB only | Settings table above |
+| WiFi adapter | **PCB + SMT assembly** (one part) | Full step-by-step at [`../4-wireless/wifi/pcb/jlcpcb-package/README.md`](../4-wireless/wifi/pcb/jlcpcb-package/README.md) |
+
+Cost reality check (5-board minimum at JLCPCB, mid-2026 pricing):
+- Main board × 5: ~$8–15 PCBs + ~$10–25 shipping
+- Front panel × 5: ~$8–15
+- WiFi adapter × 5 with SMT: ~$20–25 (PCBs + AMS1117-3.3 assembly)
+- **Combined order ships once** — adding the WiFi adapter to a same-day order saves a second shipping charge
+
+You don't have to commit to building WiFi units to order the boards — having spares means you can decide per unit whether to use the HC-05 (cheaper, simpler) or the WiFi adapter (better macOS / iOS support — see [`../4-wireless/README.md`](../4-wireless/README.md)).
 
 ## Schematics & layout
 

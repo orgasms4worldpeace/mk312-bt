@@ -34,16 +34,3 @@ Drop-in upload bundle for **JLCPCB SMT-only assembly**: gerbers, BOM, and CPL pr
 ## The serial header is the same for both
 
 Both modules use the same physical pinout (TX/RX/GND/VCC/STATE) on the MK-312BT mainboard. Swap between them without changing the box itself.
-
-## Open question — OSOYOO ESP8266 module as a third option?
-
-The [OSOYOO ESP8266 WiFi module](https://osoyoo.com/2020/12/20/osoyoo-esp8266-wi-fi-module/) advertises itself as a 6-pin module in HC-05 footprint with a built-in 5V→3.3V converter. If true, it would physically drop into the same socket as the HC-05 with no MK312WIFI PCB to fabricate.
-
-**Status: unverified — likely won't "just work."** The product page documents 5V tolerance and a 6-pin layout (VCC, GND, E_RX, E_TX, RST, KEY), but stays silent on the two questions that decide whether it functions as a transparent serial-over-WiFi bridge:
-
-- Does it ship with a transparent UART-over-TCP/UDP bridge mode out of the box, or only AT-command operation? Their tutorials reference AiThinker firmware, which is AT-controlled — the host sends AT commands rather than reading/writing serial bytes.
-- Can the baud rate be set to **19200** (what the MK-312BT speaks)?
-
-Even with "yes" to both, the existing client software ([clxjaguar/mk312-gui upstream](https://github.com/clxjaguar/mk312-gui) and the [.NET reference client](wifi/DotNetClient/) bundled here) speaks the MK312WIFI protocol (UDP `MK312-ICQ` discovery on port 8842, TCP control on 8843) — an OSOYOO module won't speak that without custom firmware. You'd need to fork the GUI's transport, write a small bridge, or flash MK312Wifi.ino onto the OSOYOO module (assuming GPIO0/1/2/3 are accessible — they may not be).
-
-**TL;DR:** physically a candidate; protocol-wise unproven and probably needs work. Stick with [`wifi/`](wifi/) (build the small PCB) unless you want to experiment on the firmware and client.
