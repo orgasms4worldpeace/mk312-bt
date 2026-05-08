@@ -148,6 +148,12 @@ AT+PSWD=1234
 AT+POLAR=1,1
 ```
 
+> ⚠️ **Use `=` (equals), not `-` (hyphen) after the AT command.** Easy mistake when copy-pasting or typing fast. `AT+NAME=MK-312BT` is correct; `AT+NAME-MK-312BT` returns `ERROR:(0)` because the HC-05 parser thinks you're calling a command literally named `AT+NAME-MK-312BT`. The hyphen and equals keys are adjacent on US keyboards.
+
+> ⚠️ **Don't put hyphens *inside* the name itself either** — many HC-05 clone firmwares accept only `[A-Za-z0-9]` for `AT+NAME=`. `AT+NAME=MK-312BT` returns `ERROR:(0)` on those firmwares even with the equals sign correct. Use `MK312BT` (no hyphen) instead — the Bluetooth advertising name is whatever you put here, it doesn't need to match the project's hyphenated convention. Same can be true if **macOS smart-dashes** silently converted your `-` into `–` (en-dash) somewhere in the paste path; turn it off in System Settings → Keyboard → Text Input → Edit… → uncheck "Use smart dashes" if you want to keep using a hyphen.
+
+> ⚠️ **`AT+NAME?` returns `ERROR:(0)` on some HC-05 firmware revisions** even when the name is set correctly. JY-MCU clones and certain ZS-040 batches let you *set* the name with `AT+NAME=...` but won't let you *read* it back via the query form. Other queries (`AT+UART?`, `AT+PSWD?`, `AT+IPSCAN?`) still work. To verify the name actually took, exit AT mode and look for "MK-312BT" in your host's Bluetooth scan list — that's the only ground truth.
+
 | Command | Purpose |
 |---|---|
 | `AT+NAME=MK-312BT` | Bluetooth advertising name |
@@ -174,13 +180,23 @@ All four values are in 0.625ms units. The window must be ≤ the interval. The w
 | `inq_interval, inq_window` | Discovery by new (unpaired) devices |
 | `page_interval, page_window` | Reconnection by already-paired devices |
 
-### Three sensible settings
+### The math
 
-| Setting | Idle draw | New-device discovery | Paired reconnect | Best for |
-|---|---|---|---|---|
-| `1024,512,1024,512` (HC-05 default) | ~43 mA | <5 s | <2 s | Switching regulator installed, or always wall-powered |
-| `1024,1,1024,512` (hybrid) | ~15–20 mA | 30 s – minutes | <2 s | Stock 7805, fast reconnect priority |
-| `1024,1,1024,1` (mk312 repo default) | ~5–8 mA | 30 s – minutes | 30 s+ | Stock 7805, battery-life priority |
+Each IPSCAN unit is **0.625 ms** (one Bluetooth Classic time slot). So:
+
+- `1024` = 640 ms scan interval
+- `512` = 320 ms scan window (50% duty cycle of a 640 ms interval)
+- `1` = 0.625 ms scan window (~0.1% duty cycle, basically off)
+
+`page_window` matters most for reconnect speed: the wider the window, the more likely the host's reconnect attempt overlaps with the HC-05 actually listening. Below ~10 ms window, most hosts time out before they hit a listen slot, and reconnect either takes 30+ seconds or fails outright.
+
+### Three sensible settings, ranked by host compatibility
+
+| Setting | Idle draw | New-device discovery | Paired reconnect | Windows | macOS Sequoia/Sonoma | Best for |
+|---|---|---|---|---|---|---|
+| `1024,512,1024,512` (HC-05 default) | ~43 mA | <5 s | <2 s | ✅ Snappy | ✅ Best chance — but see SPP caveat below | Switching regulator installed, or always wall-powered |
+| **`1024,1,1024,512` (hybrid — recommended)** | ~15–20 mA | 30 s – minutes | <2 s | ✅ Snappy | ✅ Snappy *when SPP works at all* | Stock 7805, fast reconnect priority. **Default pick for both Windows and macOS.** |
+| `1024,1,1024,1` (mk312 repo default) | ~5–8 mA | 30 s – minutes | 30 s+ | ⚠️ Works but feels broken | ❌ Often fails — macOS times out before the 0.625 ms page window aligns with macOS's page request | Stock 7805, battery-life priority. Avoid if macOS is involved. |
 
 ### Why the mk312 repo picks the most aggressive setting
 
@@ -262,6 +278,29 @@ picocom -b 19200 /dev/cu.MK-312BT
 
 Linux and Windows do not exhibit this cosmetic issue.
 
+### macOS Bluetooth Classic SPP reality check
+
+Even with everything configured perfectly, **Bluetooth Classic SPP support is genuinely flaky on macOS Sequoia/Sonoma at the OS level** — not anything you can fix with HC-05 settings. Symptoms include:
+
+- Pairing succeeds, but data sessions drop unexpectedly mid-use
+- Disconnects after ~30 seconds even when an app holds the port open
+- "MK-312BT" appears in the Bluetooth scan, refuses to bond, and has to be retried
+- Works once, fails the next session with no settings change
+
+Confirmed across [Apple Support Communities](https://discussions.apple.com/thread/255488094), [Charith De Silva's HC-05 + Monterey writeup](https://charithdesilva.com/using-an-hc-05-bluetooth-module-for-arduino-with-macos-monterey-2fe0b3e4b63e), and the [Espruino HC-05-on-Mac discussion](https://github.com/orgs/espruino/discussions/4713).
+
+**If macOS gives you grief no matter what IPSCAN value you try, the canonical advice is to use the WiFi adapter** at [`../wifi/`](../wifi/) instead. It exists in this repo specifically because BT Classic on modern macOS is unreliable in ways no HC-05 setting can fix. iOS doesn't speak BT Classic SPP at all and *requires* the WiFi adapter.
+
+### macOS pairing tip: try PIN 0000 if 1234 fails
+
+Several macOS sources note that **macOS attempts PIN `0000` by default** for Bluetooth Classic devices that don't display a PIN themselves. With our setup `AT+PSWD=1234`, macOS will prompt you to manually enter the PIN — usually fine, but if pairing silently fails or the PIN dialog never appears, **reconfigure the HC-05 to use PIN 0000** instead:
+
+```
+AT+PSWD=0000
+```
+
+Then re-pair from macOS. The mk312-bt convention is `1234`, but `0000` is functionally equivalent for the box and removes one source of macOS pairing weirdness.
+
 ---
 
 ## Reconfiguring later
@@ -297,3 +336,19 @@ AT+IPSCAN?
 ```
 
 **Exit picocom:** `Ctrl-A` then `Ctrl-X`.
+
+---
+
+## Sources
+
+Background reading and confirmed-working references for the macOS / Windows compatibility notes:
+
+- [Apple Support Communities — HC-05 Bluetooth module connection to iMac issues](https://discussions.apple.com/thread/255488094)
+- [Charith De Silva — Using an HC-05 with macOS Monterey](https://charithdesilva.com/using-an-hc-05-bluetooth-module-for-arduino-with-macos-monterey-2fe0b3e4b63e) — first-hand walkthrough of pairing fails and workarounds on Apple Silicon
+- [Espruino discussion — HC-05 Bluetooth on Mac](https://github.com/orgs/espruino/discussions/4713) — community thread on macOS SPP flakiness
+- [Wayne's Tinkering Page — HC-05 AT Commands](https://sites.google.com/site/wayneholder/hc-05-bluetooth-command-list) — most thorough AT command reference for ZS-040 boards
+- [HC-05 AT Command Set (canonical PDF)](https://s3-sa-east-1.amazonaws.com/robocore-lojavirtual/709/HC-05_ATCommandSet.pdf) — original ITEAD reference
+- [Instructables — How to Connect HC-05 to Windows 10/11 & Mac](https://www.instructables.com/How-to-Connect-HC-05-to-Windows-1011-Mac-Apple-Com/) — Windows pairing flow with screenshots
+- [cLx — MK-312BT page](http://clx.freeshell.org/mk312bt.html) — switching-regulator (mEZD71201A-G) replacement for the 7805 if you want full HC-05 idle without thermal pressure
+
+For the IPSCAN slot-time math (0.625 ms per unit, page-window-vs-host-timeout reasoning), the source is the Bluetooth Core Specification (Volume 2, Part B — page-scan / inquiry-scan). Not linked here because the spec is a 3000-page PDF; the practical takeaway is reflected in the table above.

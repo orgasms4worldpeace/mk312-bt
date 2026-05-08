@@ -11,3 +11,6 @@
 *~
 .idea/
 .vscode/
+
+# Local navigation aid — regenerated from per-dir READMEs by scripts/build-mega-readme.sh
+MEGA-README.md
