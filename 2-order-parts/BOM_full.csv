@@ -1,4 +1,4 @@
-Last modified: 2026-05-02,,,,,,,
+Last modified: 2026-05-08,,,,,,,
 Designator,Description,Quantity,Mouser Part #,Manufacturer Part #,Sourced?,Mouser URL,Amazon URL
 R55,RES 100R (LCD backlight series for Newhaven NHD-0216K1Z),1,660-MF1/4DCT52R1000F,MF1/4DCT52R1000F,X,mouser.com/c/?q=660-MF1%2F4DCT52R1000F,amazon.com/s?k=MF1%2F4DCT52R1000F
 "R53,R54,R59,R60",RES 390R,4,660-MF1/4DCT52R3900F,MF1/4DCT52R3900F,X,mouser.com/c/?q=660-MF1%2F4DCT52R3900F,amazon.com/s?k=MF1%2F4DCT52R3900F
@@ -17,7 +17,7 @@ R1A,RES 12K,1,660-MF1/4DCT52R1202F,MF1/4DCT52R1202F,X,mouser.com/c/?q=660-MF1%2F
 "D2,D3,D5",DIODE 1N4148,3,512-1N4148,1N4148,X,mouser.com/c/?q=512-1N4148,amazon.com/s?k=1N4148
 "C25,C27","CAP 1nF (0.1"" spacing)",2,80-C315C102K1G,C315C102K1G5TA,X,mouser.com/c/?q=80-C315C102K1G,amazon.com/s?k=C315C102K1G5TA
 "C20,C22,C23,C24,C30,C31,C33,C34,C35,C36,C43","CAP 1uF (0.1"" spacing)",11,80-C315C105K3R,C315C105K3R5TA,X,mouser.com/c/?q=80-C315C105K3R,amazon.com/s?k=C315C105K3R5TA
-"R35,R46",RES 200K,2,660-MF1/4DCT52R2003F,MF1/4DCT52R2003F,X,mouser.com/c/?q=660-MF1%2F4DCT52R2003F,amazon.com/s?k=MF1%2F4DCT52R2003F
+"R35,R46",RES 200K (qty bumped from 2 → 4 — value-critical for op-amp gain in F20 calibration; spares for mistake margin),4,660-MF1/4DCT52R2003F,MF1/4DCT52R2003F,X,mouser.com/c/?q=660-MF1%2F4DCT52R2003F,amazon.com/s?k=MF1%2F4DCT52R2003F
 "R11,R16,R17,R22,R24,R4",RES 20K,6,660-MF1/4DCT52R2002F,MF1/4DCT52R2002F,X,mouser.com/c/?q=660-MF1%2F4DCT52R2002F,amazon.com/s?k=MF1%2F4DCT52R2002F
 "J10,J11",PAK100/2500-24 - 2425-  3M WALL HEADER,2,517-N2524-6002RB,N2524-6002RB,X,mouser.com/c/?q=517-N2524-6002RB,amazon.com/s?k=N2524-6002RB
 "Q7,Q8",TRANS. 2N3904,2,512-2N3904BU,2N3904BU,X,mouser.com/c/?q=512-2N3904BU,amazon.com/s?k=2N3904BU
@@ -27,11 +27,11 @@ R6,RES 3.3K,1,660-MF1/4DCT52R3301F,MF1/4DCT52R3301F,X,mouser.com/c/?q=660-MF1%2F
 U3,CD4066N,1,595-CD4066BE,CD4066BE,X,mouser.com/c/?q=595-CD4066BE,amazon.com/s?k=CD4066BE
 U13,Replaces 7805CV - Switching Regulator,1,495-TSR-1-2450,TSR 1-2450,X,mouser.com/c/?q=495-TSR-1-2450,amazon.com/s?k=TSR%201-2450
 "U11,U12",VREG 7809TV,2,511-L7809CV,L7809CV,✓,mouser.com/c/?q=511-L7809CV,amazon.com/s?k=L7809CV
-XTAL1,8MHZ XTAL HC-49S,1,717-9B-8.000MEEJ-B,815-ABL-8-B2,X,mouser.com/c/?q=717-9B-8.000MEEJ-B,amazon.com/s?k=815-ABL-8-B2
+XTAL1,8MHZ XTAL HC-49S (qty bumped from 1 → 2 — silent killer for ATmega ISP programming if cracked/cold-soldered; cheap insurance),2,717-9B-8.000MEEJ-B,815-ABL-8-B2,X,mouser.com/c/?q=717-9B-8.000MEEJ-B,amazon.com/s?k=815-ABL-8-B2
 U1,ATMEGA 16P,1,556-ATMEGA16A-PU,ATMEGA16A-PU,X,mouser.com/c/?q=556-ATMEGA16A-PU,amazon.com/s?k=ATMEGA16A-PU
 LCD1,LCD HD44780LCD-1602,1,763-0216K1Z-NSW-BBW,NHD-0216K1Z-NSW-FBW-L,X,mouser.com/c/?q=763-0216K1Z-NSW-BBW,amazon.com/s?k=NHD-0216K1Z-NSW-FBW-L
-"Q3,Q6",MOSFET IRF9Z24,2,942-IRF9Z24NPBF,IRF9Z24NPBF,X,mouser.com/c/?q=942-IRF9Z24NPBF,amazon.com/s?k=IRF9Z24NPBF
-"Q1,Q2,Q4,Q5",MOSFET IRL520N,4,942-IRL520NPBF,IRL520NPBF,✓,mouser.com/c/?q=942-IRL520NPBF,amazon.com/s?k=IRL520NPBF
+"Q3,Q6",MOSFET IRF9Z24NPBF (Infineon — NOT Vishay PBF; qty bumped from 2 → 6 to enable Vt-matching the pair within 50 mV — see ../docs/troubleshooting/debug-notes/failure-20-analysis.md),6,942-IRF9Z24NPBF,IRF9Z24NPBF,X,mouser.com/c/?q=942-IRF9Z24NPBF,amazon.com/s?k=IRF9Z24NPBF
+"Q1,Q2,Q4,Q5",MOSFET IRL520N (qty bumped from 4 → 12 to enable Vt-matching the quartet within 20-30 mV — typical batch spread is 200-400 mV so 3× over-order is needed to find a tight cluster of 4; see ../docs/troubleshooting/debug-notes/failure-20-analysis.md for sort-and-pair procedure),12,942-IRL520NPBF,IRL520NPBF,✓,mouser.com/c/?q=942-IRL520NPBF,amazon.com/s?k=IRL520NPBF
 JP1,ISP 6 PIN,1,571-5-146254-3,5-146254-3,X,mouser.com/c/?q=571-5-146254-3,amazon.com/s?k=5-146254-3
 U14,LM2941,1,926-LM2941CT/NOPB,LM2941CT/NOPB,X,mouser.com/c/?q=926-LM2941CT%2FNOPB,amazon.com/s?k=LM2941CT%2FNOPB
 U2,LM324N,1,595-LM324N,LM324N,✓,mouser.com/c/?q=595-LM324N,amazon.com/s?k=LM324N
@@ -60,7 +60,7 @@ BAT1,Lead Acid Battery,1,547-PS-1220,PS-1220,X,mouser.com/c/?q=547-PS-1220,amazo
 BAT1 Lugs,Crimp Lubs for BAT1,2,534-8291,534-8291,X,mouser.com/c/?q=534-8291,amazon.com/s?k=534-8291
 Power Supply,"18V, 1A .5.5mm OD plug",1,709-GST18U18-P1J,GST18U18-P1J,X,mouser.com/c/?q=709-GST18U18-P1J,amazon.com/s?k=GST18U18-P1J
 20K Opt. Variant,RES 18K,2,660-MF1/4DCT52R1802F,MF1/4DCT52R1802F,X,mouser.com/c/?q=660-MF1%2F4DCT52R1802F,amazon.com/s?k=MF1%2F4DCT52R1802F
-R30,RES 0.27R 1W,1,660-MOSX1CT528RR27J,MOSX1CT528RR27J,X,mouser.com/c/?q=660-MOSX1CT528RR27J,amazon.com/s?k=MOSX1CT528RR27J
+R30,RES 0.27R 1W (current sense — qty bumped from 1 → 3; value-critical for F20 calibration scaling and easy to damage during desolder rework),3,660-MOSX1CT528RR27J,MOSX1CT528RR27J,X,mouser.com/c/?q=660-MOSX1CT528RR27J,amazon.com/s?k=MOSX1CT528RR27J
 "C4,C5,C6,C7",Aluminum Organic Polymer Capacitors 25V 1000uF RAD Low ESR (14 mOhm) - upgraded from 470-820uF spec for use with 0.27R at R30,4,80-A750MV108M1EAAE14,A750MV108M1EAAE014,X,mouser.com/c/?q=80-A750MV108M1EAAE14,amazon.com/s?k=A750MV108M1EAAE014
 "J2,J3,J4,J5,J6,J7",Phone Connectors 3.5mm PCB STEREO BLK 5P W/SWITCH,6,806-STX-3100-5N,STX-3100-5N,X,mouser.com/c/?q=806-STX-3100-5N,amazon.com/s?k=STX-3100-5N
 "TR1,TR2",Audio Transformers / Signal Transformers XFMR OUT 200CT-8 3.2,2,42TU200-RC,42TU200-RC,X,mouser.com/c/?q=42TU200-RC,amazon.com/s?k=42TU200-RC
@@ -103,7 +103,8 @@ J2 (WiFi PCB),2x4 FEMALE socket header 2.54mm pitch — ESP-01S module plugs in 
 ,DSD TECH USB to RS232 cable (FT232RL chip) — connects PC to MK-312 LINK port; works with mk312-gui / three-twelve-bee / ErosWeb on Win/Mac/Linux,1,,,,,amazon.com/dp/B07XXWVH69
 ,,,,,,,
 Build Tools,,,,,,,
-,"Component tester (multi-function — measures MOSFET threshold voltage Vt for matching IRL520 / IRF9Z24 to prevent Error 20; also tests resistors, caps, diodes, transistors)",1,,,,,amazon.com/dp/B0DDBPWYP8
+,"Component tester (LCR-P1 or LCR-T7 2-decimal Mega328 variant — REQUIRED for IRL520N / IRF9Z24N Vt matching to prevent Error 20. Plain 1-decimal Mega328 testers only resolve to ~50 mV which is useless for sorting at the 20-30 mV matching tolerance — see ../2-order-parts/README.md for procedure)",1,,,,,amazon.com/s?k=LCR-P1+component+tester
+,"Backup / sanity tester (Mega328 1-decimal — use for absolute Vt sanity check, dead-FET detection, resistor/cap/diode tests; NOT precise enough for matching)",1,,,,,amazon.com/dp/B0DDBPWYP8
 ,,,,,,,
 Firmware Flashing,,,,,,,
 ,"USBasp programmer for ISP — KeeYees with 10→6-pin adapter. Cheapest option but ships WITHOUT the J1 jumper installed (status LEDs stay dark — flashing still works, you just can't see activity). Either drop a 0.1"" jumper cap on J1 yourself, or pick a better one: see build-guide.md ""Pick a programmer"" — DIYmall B08F9FZKP9 (jumper installed), Adafruit USBtinyISP, or DIAMEX USB-ISP V4 are sturdier picks.",1,,,,,amazon.com/dp/B0885RKVMC
