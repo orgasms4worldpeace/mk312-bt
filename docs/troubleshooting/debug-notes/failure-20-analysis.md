@@ -22,6 +22,53 @@ current, or the current runs away, F20 fires.
 **The forum lore that pairs F20 (channel A) with F21 (channel B) is wrong** —
 F20 alone tests both channels; F21 is the wall-adapter voltage check.
 
+### How the calibration loop works
+
+```mermaid
+flowchart TD
+    accTitle: F20 calibration servo loop
+    accDescr: The firmware calibrates the output stage by ramping the DAC down step by step. Each step pulses the channel FETs, samples ADC0 across R30, and either advances if the current is low enough or decrements the DAC and tries again. After 64 unsuccessful attempts, F20 fires.
+
+    start(["Boot — start with channel A<br/>DAC seed = 100 (4.38 V)"])
+    pulse["Pulse PB2+PB3 ON briefly<br/>(channel A FETs Q1+Q2)"]
+    wait_adc["Wait, gates OFF<br/>Read ADC0 (voltage across R30)"]
+    threshold{"ADCL < 0x10?<br/>(R30 < 78 mV)"}
+    first_pulse{"Was this the<br/>first pulse?"}
+    open_circuit(["F20 — open circuit<br/>(transformer wrong,<br/>FET missing, bad solder)"])
+    next_channel{"Was this<br/>channel A?"}
+    advance_b["Switch to channel B<br/>Reset DAC, counter"]
+    pass(["Both channels passed —<br/>continue boot"])
+    counter{"Attempted<br/>64 times?"}
+    runaway(["F20 — runaway/imbalance<br/>(MOSFET Vt mismatch,<br/>wrong R35/R46, leaky FET)"])
+    decrement["DAC -= 16 mV<br/>counter += 1"]
+
+    start --> pulse
+    pulse --> wait_adc
+    wait_adc --> threshold
+    threshold -->|yes — quiet| first_pulse
+    threshold -->|no — too much current| counter
+    first_pulse -->|yes — too low immediately| open_circuit
+    first_pulse -->|no — settled| next_channel
+    next_channel -->|yes| advance_b
+    next_channel -->|no| pass
+    advance_b --> pulse
+    counter -->|yes| runaway
+    counter -->|no| decrement
+    decrement --> pulse
+
+    classDef start_stop fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    classDef action fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef decision fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    classDef fail fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d
+
+    class start,pass start_stop
+    class pulse,wait_adc,advance_b,decrement action
+    class threshold,first_pulse,next_channel,counter decision
+    class open_circuit,runaway fail
+```
+
+A working unit settles around step 42 of 64 — that's ~22 steps of headroom (~484 mV at the Q3 gate). Vt drift in Q3 eats this headroom; see [MOSFET matching procedure](#mosfet-matching-procedure) below for the math.
+
 ## Disassembly evidence
 
 ```

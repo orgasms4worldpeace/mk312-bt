@@ -274,77 +274,97 @@ Optional but useful — run avrdude in just-look-at-the-chip mode to confirm the
 avrdude -c usbasp -p m16 -v
 ```
 
-Expect `AVR device initialized and ready to accept instructions` followed by the device signature `0x1e9403` (ATmega16) or `0x1e9489` (ATmega16A). If you get "target doesn't answer," check ISP cable pin 1 orientation, that the board is powered, and try `-B 8` to slow SCK.
+Expect `AVR device initialized and ready to accept instructions` followed by the device signature `0x1e9403` (ATmega16) or `0x1e9489` (ATmega16A). If something goes wrong, see [Troubleshooting](#troubleshooting-flashing) below — don't start adding flags blindly.
 
 ### First-time walkthrough (USBasp on macOS — same idea on Linux/Windows)
 
-If you've never flashed an AVR before, here's the full sequence for your own machine, with what to expect at each step. Examples are macOS; the Linux and Windows equivalents are noted inline.
+> **For a normal build with reputable parts, the four commands below should just work.** No `-B 8`, no `-F`, no slow-SCK tricks, no driver gymnastics. Workarounds belong in the troubleshooting section, not the happy path.
 
-**1. Verify avrdude is installed.**
+**1. Plug the USBasp into your computer.** USB cable to your Mac/PC. ISP cable not yet connected to the board.
 
-```sh
-avrdude -? | head -2
-```
+**2. Connect the USBasp to the board's ISP header (JP1).** Use the 10→6-pin adapter that came with the USBasp. Pin 1 on both ends — a small triangle on the silkscreen, a red stripe on the ribbon cable. Match them.
 
-Should print `Usage: avrdude [options]` and a version line. If "command not found," go back and run `brew install avrdude` (macOS), `sudo apt install avrdude` (Linux), or install one of the Windows builds linked above.
+**3. Power the board** with its normal 18 V supply.
 
-**2. Plug in the USBasp** (USB cable to your Mac, ISP cable not yet connected to the board).
-
-**3. Confirm the OS sees the USBasp** — this rules out a dead cable / dead clone before you try avrdude.
-
-- **macOS**:
-  ```sh
-  system_profiler SPUSBDataType | grep -A 4 -i usbasp
-  ```
-  Expect something like `Product ID: 0x05dc`, `Vendor ID: 0x16c0`, `Manufacturer: www.fischl.de`. If you get nothing, the USBasp isn't being detected — try a different USB cable / port. If it's a USB-C-only Mac, you need a USB-A→C adapter; some cheap adapters don't pass enough current to power a USBasp.
-- **Linux**: `lsusb | grep -i usbasp` → `Bus 001 Device 005: ID 16c0:05dc Van Ooijen Technische Informatica`
-- **Windows**: Device Manager → look under **libusb-win32 devices** for "USBasp" (only appears after you've run Zadig per the Install step above).
-
-**4. Confirm avrdude can talk to the USBasp** even before connecting it to the board. With nothing plugged into the ISP cable yet:
+**4. Verify the chip:**
 
 ```sh
 avrdude -c usbasp -p m16 -v
 ```
 
-You'll see avrdude's banner, then either:
-- `avrdude: error: program enable: target doesn't answer.` → **good**. avrdude reached the USBasp; the USBasp couldn't reach a chip because nothing's connected. Move to step 5.
-- `avrdude: error: could not find USB device with vid=0x16c0 pid=0x5dc` → bad. avrdude can't see the USBasp. On macOS this almost always means avrdude is missing libusb — re-install: `brew reinstall avrdude`. On Linux, missing udev rule (see install section) or you forgot to log out/in after `usermod`. On Windows, Zadig wasn't run or you replaced the wrong driver.
+Expect `Device signature = 0x1e9403` (ATmega16) or `0x1e9489` (ATmega16A). That confirms the programmer reached the chip.
 
-**5. Connect the USBasp to the board.** The board's ISP header is **JP1**, a 6-pin connector near the ATmega. Use the 10→6-pin adapter that came with your USBasp.
-
-Pin 1 is marked on both ends — usually a small triangle / dot on the silkscreen and a red stripe on the ribbon cable. **Match pin 1 to pin 1**. Backwards orientation won't damage anything but it won't work.
-
-**6. Power the board** with its normal 18 V supply. The USBasp's VCC line is also live (5 V from USB), but the board's regulator dominates — no conflict in practice. (If your USBasp has a "VCC supply" jumper, you can set it OFF to be safe, but it's not required.)
-
-**7. Test the connection to the chip:**
-
-```sh
-avrdude -c usbasp -p m16 -v
-```
-
-Now you should see `avrdude: AVR device initialized and ready to accept instructions` followed by the device signature `0x1e9403` (ATmega16) or `0x1e9489` (ATmega16A). If you get "target doesn't answer":
-- Cable backwards (most common) — flip the 6-pin connector
-- Board not powered
-- Try `avrdude -c usbasp -B 8 -p m16 -v` to slow SCK (cheap clones often need this)
-
-**8. Set the fuses** (one-time, per chip):
+**5. Set the fuses** (once per chip):
 
 ```sh
 avrdude -c usbasp -p m16 -U lfuse:w:0xFF:m -U hfuse:w:0xDC:m
 ```
 
-avrdude reads the current fuses, writes the new values, reads them back to verify. You'll see `lfuse verified` and `hfuse verified`.
+Look for `lfuse verified` and `hfuse verified`.
 
-**9. Flash the firmware** — `cd` into the firmware folder first so the relative path resolves:
+**6. Flash the firmware:**
 
 ```sh
 cd /path/to/mk312-bt/3-build-and-flash/firmware/cr-custom-boot-messages
 avrdude -c usbasp -p m16 -U flash:w:f005-HelloFriend.bin
 ```
 
-You'll see writing/reading progress bars and `verified` at the end. The whole flash takes ~30 seconds on a USBasp.
+Progress bars, then `verified`. About 30 seconds on a USBasp.
 
-**10. Disconnect, power-cycle, smile.** Pull the ISP cable, unplug the 18 V supply, plug it back in. The LCD should show "Hello Friend" briefly, then the main menu. If you get "Error 20," see the [Error 20 section](#error-20-match-the-mosfets-before-you-solder) above.
+**7. Disconnect, power-cycle, smile.** Pull the ISP cable, unplug the 18 V supply, plug it back in. The LCD should show "Hello Friend" briefly, then the main menu. If you get **Error 20**, see the [Error 20 section](#error-20-match-the-mosfets-before-you-solder) above — that's a hardware problem, not a flashing problem.
+
+### Troubleshooting flashing
+
+Most builds don't need this section. If steps 4–6 above fail, work through these checks **in order** — diagnose first, apply the targeted fix.
+
+```mermaid
+flowchart TD
+    accTitle: AVR flashing troubleshooting decision tree
+    accDescr: Diagnostic flow for avrdude failures. First check whether the OS sees the programmer, then check whether the programmer can reach the chip, then check whether the signature is valid.
+
+    start(["avrdude failed"])
+    sees_prog{"OS sees the<br/>programmer?"}
+    fix_usb["Try different USB cable/port<br/>brew reinstall avrdude (macOS)<br/>Re-run Zadig (Windows)<br/>Re-check udev rule (Linux)"]
+    reaches_chip{"Programmer reaches<br/>chip?<br/>(Device signature reads)"}
+    fix_cable["Flip ISP cable orientation<br/>Check board is powered<br/>If still bad: -B 8 to slow SCK<br/>(only after the above)"]
+    valid_sig{"Signature is<br/>0x1e9403 or<br/>0x1e9489?"}
+    bad_prog["Signature like 0x1e0000 or 0x000000<br/>= programmer/cable fault.<br/>Try a different programmer.<br/>Cross-test with ATmega328P:<br/>avrdude -c usbasp -p m328p"]
+    proceed(["Proceed to step 5<br/>(set fuses)"])
+
+    start --> sees_prog
+    sees_prog -->|no| fix_usb
+    sees_prog -->|yes| reaches_chip
+    reaches_chip -->|no| fix_cable
+    reaches_chip -->|yes| valid_sig
+    valid_sig -->|no| bad_prog
+    valid_sig -->|yes| proceed
+
+    classDef bad fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d
+    classDef question fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    classDef good fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+
+    class fix_usb,fix_cable,bad_prog bad
+    class sees_prog,reaches_chip,valid_sig question
+    class start,proceed good
+```
+
+**Programmer not detected** — `could not find USB device with vid=0x16c0 pid=0x5dc`:
+
+| OS | Confirm what's plugged in | If missing |
+|---|---|---|
+| macOS | `system_profiler SPUSBDataType \| grep -A 4 -i usbasp` — expect VID `0x16c0`, PID `0x05dc` | Different USB cable / port. USB-C-only Mac? Try a powered USB-A → C adapter. `brew reinstall avrdude`. |
+| Linux | `lsusb \| grep -i usbasp` | Missing udev rule (see Install section). Did you log out/in after `usermod -aG plugdev $USER`? |
+| Windows | Device Manager → **libusb-win32 devices** → "USBasp" | Re-run Zadig, replace driver with libusb-win32 for USBasp specifically. |
+
+**Programmer detected, chip not** — `target doesn't answer`:
+
+1. Flip the 6-pin ISP connector — pin 1 mismatch is the most common cause. Backwards orientation won't damage anything, just won't work.
+2. Confirm the board is powered (its 18 V supply, plus check 5 V regulator output).
+3. *Only after* the above two: try `-B 8` to slow SCK. Some cheap USBasp clones with stale firmware need this. If `-B 8` doesn't help, try `-B 32`. If still failing, the clone itself is the problem — borrow a different programmer.
+
+**Signature reads as `0x1e0000` or all zeros:** the programmer or cable is faulty, not the target. This is **not** a slow-SCK problem and `-B 8` won't fix it. Cross-test by trying to read an unrelated chip (e.g., an Arduino's ATmega328P at `-p m328p`). Same partial signature on a different chip = programmer/cable issue. Get a different programmer.
+
+**Don't reach for `-F` (force).** That flag tells avrdude to ignore signature mismatches and write anyway. It only makes sense if you've already confirmed the chip is fine and the signature read is broken for unrelated reasons. If you're tempted to use `-F` to "just make it work," you're about to flash a chip that doesn't match the firmware build target.
 
 ### Flash with Arduino-as-ISP
 

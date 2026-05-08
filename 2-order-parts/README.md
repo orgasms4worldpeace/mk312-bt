@@ -1,127 +1,133 @@
 # Step 2 — Order parts
 
-Two BOM files, same parts, different jobs:
+Two BOM files, one purpose: get the right parts in the right quantities.
 
-| File | Use it for |
-|------|-----------|
-| [`BOM_Mouser.csv`](BOM_Mouser.csv) | **Direct import into Mouser's BOM Tool** — strict 4-column format (`Mouser Part Number`, `Quantity`, `Manufacturer Part Number`, `Customer Part Number`). Headers in row 1, no title row, no extra columns — Mouser's importer needs it exactly this way or it silently drops columns. |
-| [`BOM_full.csv`](BOM_full.csv) | Human-readable master with designators, descriptions, and both **Mouser** and **Amazon** search links per part. First row is a `Last modified:` date stamp. |
+| File | What it's for |
+|---|---|
+| [`BOM_Mouser.csv`](BOM_Mouser.csv) | Direct import into Mouser's BOM Tool. Strict 4-column format — don't edit. |
+| [`BOM_full.csv`](BOM_full.csv) | Human-readable master with descriptions, designators, and Mouser + Amazon search links. |
 
 ## How to use
 
 1. Sign in to [mouser.com](https://www.mouser.com/) and open the **BOM Tool**.
 2. Upload `BOM_Mouser.csv`.
-3. Review and add to cart. If Mouser is out of stock on a part, check `BOM_full.csv` for the part number and search alternatives.
-4. For anything Mouser doesn't carry (or that's cheaper elsewhere), use the Amazon links in `BOM_full.csv` — handy for screws, standoffs, headers, and the LCD.
+3. Review and add to cart.
+4. For anything Mouser doesn't carry (or anything cheaper on Amazon — screws, standoffs, headers, LCD), use the Amazon links in `BOM_full.csv`.
 
-## Read this before ordering
+## v1.4 part recommendations
 
-[`../1-order-boards/v1.4-release-notes.txt`](../1-order-boards/v1.4-release-notes.txt) lists v1.4 part changes and recommendations:
+[`../1-order-boards/v1.4-release-notes.txt`](../1-order-boards/v1.4-release-notes.txt) covers what changed from v1.3:
 
 - C6, C7 should be **low-ESR** electrolytics
-- For 42TU200 transformers and higher output, use 0.27 Ω at R30 and 680–820 µF at C6/C7
+- With 42TU200 transformers and higher output, use 0.27 Ω at R30 and 680–820 µF at C6/C7
 - R55 backlight: 100–220 Ω for New Haven LCDs
 - J2-J7 can be substituted with [STX-3100-5N](https://www.mouser.com/ProductDetail/Kycon/STX-3100-5N) (no plastic back cover)
 
-## Critical parts — these BOMs deliberately over-order
+## ⚠️ Critical parts — the BOM deliberately over-orders five things
 
-A few parts ship with **higher quantities than one board strictly needs**. This is intentional. Don't reduce them.
+These are intentional over-quantities for matching and spares. **Don't reduce them** when you place the order.
 
-| Part | Designators | Per-board need | BOM qty | Why over-ordered |
-|------|-------------|----------------|---------|------------------|
-| **IRL520N** | Q1, Q2, Q4, Q5 | 4 | 12 | The single biggest cause of Failure 20 is Vt mismatch within the IRL520 quartet. Typical batch spread from a Mouser reel is 200-400 mV; you need to sort and pick 4 within ≤20-30 mV. 3× over-order is the minimum to reliably find a tight quartet. |
-| **IRF9Z24NPBF** | Q3, Q6 | 2 | 6 | Q3/Q4 sit in the F20 calibration servo loop in linear-region operation — Vt mismatch eats calibration headroom. Match the pair within ≤50 mV. Also reject any with Vt > 3.3 V. |
-| **R35, R46** (200 kΩ) | R35, R46 | 2 | 4 | Op-amp bias network for the output stage. Wrong value (or a damaged trace) is the second-highest-yield F20 root cause after MOSFET mismatch. Spares cost pennies. |
-| **R30** (0.27 Ω 1 W) | R30 | 1 | 3 | Current-sense resistor — its value is what the firmware calibrates against. Easy to damage during desolder rework on a failing board, and value-critical to F20 scaling. |
-| **XTAL1** (8 MHz) | XTAL1 | 1 | 2 | Silent killer for ATmega ISP programming — a cracked or cold-soldered crystal makes the chip un-flashable and looks identical to a "dead chip" symptom. Cheap insurance. |
+| Part | Designators | Need per board | BOM qty | Why |
+|---|---|---|---|---|
+| **IRL520N** | Q1, Q2, Q4, Q5 | 4 | 12 | Sort by Vt and pick a quartet matched within ≤30 mV. Typical batch spread is 200–400 mV — you need 3× over-order to find a tight cluster of 4. |
+| **IRF9Z24NPBF** | Q3, Q6 | 2 | 6 | Sort and pick a pair matched within ≤50 mV, with absolute Vt 2.85–3.05 V. Reject any > 3.30 V. |
+| **R35, R46** (200 kΩ) | R35, R46 | 2 | 4 | Op-amp bias network — wrong value or a damaged trace is a top Failure 20 cause. Spares cost pennies. |
+| **R30** (0.27 Ω 1 W) | R30 | 1 | 3 | Current-sense resistor — value-critical for F20 calibration. Easy to damage during desolder rework. |
+| **XTAL1** (8 MHz) | XTAL1 | 1 | 2 | Cracked/cold-soldered crystal silently breaks ATmega ISP programming. Cheap insurance. |
 
-### Why the matching tolerances differ between IRL520N and IRF9Z24N
+The full reasoning — Vt-headroom math, the Vishay vs Infineon supplier trap, sort-and-pair logic for assigning specific FETs to specific board positions — lives in [`../docs/troubleshooting/debug-notes/failure-20-analysis.md`](../docs/troubleshooting/debug-notes/failure-20-analysis.md). Read it before populating boards if you want the full picture; the BOM quantities here are just enough to make that procedure possible.
 
-Both are TO-220 MOSFETs, but they play **completely different roles** in the F20 self-test, so the matching rules are different:
+## 🛠️ Step-by-step — matching the MOSFETs
 
-**IRF9Z24N (Q3, Q6) — in the calibration servo loop. Tighter is better.**
+Do this **before soldering**. Allow 30–45 minutes for 5 boards' worth of parts.
 
-The firmware's F20 test is a closed-loop DAC ramp: it nudges the DAC down 64 times in ~16 mV steps, looking for current through R30 to settle below ~78 mV. A working unit settles around step 42, leaving roughly **22 steps of headroom** (~484 mV at the Q3 gate). Every mV that Q3's Vt deviates from the working baseline (Infineon ~2.98 V) eats some of that headroom:
+### What you need
 
-| Q3 Vt offset from baseline | Steps consumed (of 22) | Result |
-|---|---|---|
-| 0 mV (Vt ≈ 2.98 V) | 0 | full headroom — bumerang's working reference |
-| +100 mV (Vt ≈ 3.08 V) | ~5 | comfortable |
-| +220 mV (Vt ≈ 3.20 V) | ~10 | half eaten — still passes |
-| +300 mV (Vt ≈ 3.28 V) | ~14 | marginal — only 8 steps for any other tolerance |
-| +600 mV (Vt ≈ 3.58 V — Vishay PBF) | ~27 | **exceeds headroom → F20 fails** |
+- **Component tester** — LCR-P1 or LCR-T7 (the 2-decimal Mega328 variants). Plain 1-decimal Mega328 testers don't have the resolution to sort within 30 mV.
+- **Fine-tip permanent marker** (sharpie) to label each FET with its measured Vt.
+- **Sorting tray** — egg carton, ice-cube tray, or a piece of paper with rows labeled by Vt range.
 
-So for Q3/Q6 the rule is **(a) absolute Vt matters more than match-tightness** and **(b)** the pair should match within ≤50 mV ideal / ≤100 mV acceptable.
+### The flow
 
-**Pick clusters by absolute Vt, in this priority order:**
+```mermaid
+flowchart TD
+    accTitle: MOSFET matching workflow
+    accDescr: Six-step procedure for sorting and matching MOSFETs by Vt before soldering. Test each FET, label it, sort into clusters, then pick matched sets per board.
 
-| Vt cluster | Verdict | Why |
-|---|---|---|
-| **2.85–3.05 V** | **Use first** | Within ±50 mV of bumerang's known-working baseline. Full calibration headroom. |
-| 3.05–3.20 V | Acceptable | ~3–10 calibration steps eaten. Still passes with comfortable margin. |
-| 3.20–3.30 V | **Marginal** | ~10–14 steps eaten. Only ~8 steps left for any other tolerance (R30 drift, op-amp offset, IRL520 mismatch). Use only if no lower-Vt parts available, and pair both Q3 and Q6 from the same range. |
-| **> 3.30 V** | **Reject** | Borderline failure. Vt of 3.58 V (Vishay PBF) is the documented forum-confirmed F20 failure point. |
+    start(["Power on tester<br/>(2-3 throwaway tests to warm up)"])
+    discharge["Short Gate↔Source on next FET<br/>(tweezers, 1-2 sec)"]
+    test["Insert in ZIF socket<br/>Press TEST<br/>Read Vt"]
+    label["Write Vt on FET with sharpie<br/>Drop into sorting tray"]
+    wait["Wait 30 sec"]
+    more{"More FETs?"}
+    sort["Group sorted FETs into matched sets:<br/>IRL520N quartets ≤30 mV<br/>IRF9Z24N pairs ≤50 mV"]
+    done(["Solder matched sets per board"])
 
-The reason **lower Vt within the in-spec range is better**: each mV of Vt above the working baseline is one mV of calibration headroom you've already spent before any other component tolerance gets to push you toward F20. There's no upside to picking a 3.25 V part when you have a 3.00 V part in the same order.
+    start --> discharge
+    discharge --> test
+    test --> label
+    label --> wait
+    wait --> more
+    more -->|yes| discharge
+    more -->|no| sort
+    sort --> done
 
-### No shortcut on supplier or batch — here's why
+    classDef action fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef decision fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    classDef terminal fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
 
-**Three things have to be right** in the part number for the chip to work:
+    class discharge,test,label,wait,sort action
+    class more decision
+    class start,done terminal
+```
 
-| Element | Required value | Wrong values |
-|---|---|---|
-| Suffix "N" | **Yes — `IRF9Z24N…`** | Without "N": older die, higher Vt |
-| RoHS marking | **`…PBF`** (Pb-free) | Non-PBF versions are EOL |
-| Manufacturer | **Infineon** (Mouser 942-IRF9Z24NPBF) | Vishay `IRF9Z24PBF` (no N) has Vt ~3.58 V — documented F20 failure (forum: bumerang #10). Chinese counterfeits have smaller dies. |
+### Per-FET procedure
 
-Only the Infineon `IRF9Z24NPBF` from a reputable distributor (Mouser, Digi-Key, Element14) is known to work.
+1. **Discharge the gate.** Touch the leftmost lead (Gate) to the rightmost lead (Source) on the TO-220 with tweezers for 1–2 seconds. Skipping this step is the #1 cause of run-to-run jitter.
+2. **Insert in the tester.** Hold the FET by the metal tab only — body heat on the leads shifts Vt by ~6 mV/°C, enough to corrupt the reading.
+3. **Press TEST.** Read the Vgs(th) value (e.g., `1.94 V`).
+4. **Label and sort.** Write the Vt on the FET package with the sharpie. Drop it in your sorting tray under its Vt range.
+5. **Wait ~30 seconds** before the next FET — thermal settling.
 
-**Within Infineon supply, you can't cherry-pick by batch or date code:**
+### Pick the matched sets
 
-1. Infineon's datasheet allows Vgs(th) of 2.0–4.0 V — a 2 V spec window. Lot-to-lot variation exists within that.
-2. Infineon doesn't publish per-lot Vt distribution data. Their public Product Qualification Report shows aggregate process distributions, not "lot 2024-Q3 averaged 2.95 V."
-3. Mouser/Digi-Key don't expose date codes pre-purchase, and won't filter orders by date code.
-4. No forum or community dataset correlates IRF9Z24N date codes with measured Vt at statistically useful sample sizes.
+After all FETs are tested and sorted:
 
-So there's no upstream selection knob — every IRF9Z24NPBF order is a random draw from the in-spec distribution. The **only working strategy** is order 3× what you need (BOM is set up for this), sort post-delivery, keep the low-Vt cluster.
+**IRL520N quartet — one per board (Q1, Q2, Q4, Q5):** pick four FETs within ≤30 mV of each other. Sort that quartet ascending, then pair the lowest two on channel A (Q1, Q2) and the next two on channel B (Q4, Q5).
 
-**IRL520N (Q1, Q2, Q4, Q5) — switches outside the servo loop. Looser tolerance, different concern.**
+Example with a clean quartet:
 
-These four FETs alternate switching to drive the transformer primary in opposite directions, generating the bipolar (Lilly) wave on the output. They aren't part of F20 calibration at all — F20 doesn't directly care about their Vt. What their Vt mismatch *does* affect is **pulse symmetry**: if Q1 and Q2 have different turn-on thresholds, the positive and negative halves of the bipolar pulse won't match in shape, which causes electromigration at metal electrodes over time and can feel asymmetric to the user.
+```
+Sorted Vt:    1.91   1.92   1.92   1.93     (20 mV spread — excellent)
+Channel A:    1.91   1.92                   → Q1, Q2
+Channel B:           1.92   1.93            → Q4, Q5
+```
 
-Practical target is ≤20 mV ideal / ≤50 mV acceptable per pair. **30 mV is a fine middle ground** — tight enough that pulse asymmetry stays well below human-perceptible thresholds and well below electromigration risk, loose enough that you can actually hit it with a 12-piece sample.
+**IRF9Z24N pair — one per board (Q3, Q6):** pick two FETs matched within ≤50 mV, **both in the 2.85–3.05 V cluster** if you can. The detailed Vt-acceptability tiers (Use first / Acceptable / Marginal / Reject) are in [`failure-20-analysis.md`](../docs/troubleshooting/debug-notes/failure-20-analysis.md).
 
-### Pick the right tester for the job
+### If your sample doesn't yield a tight quartet
 
-| Tester | Resolution | Use for |
-|---|---|---|
-| **LCR-P1** (or LCR-T7-style 2-decimal Mega328 variant) | 2 decimals (mV) | **Vt matching** — the only kind of tester that has the resolution to sort within ≤30 mV |
-| Plain Mega328 / DSC-TC4 (1 decimal) | 1 decimal (~50 mV) | Absolute Vt sanity, pinout check, "is this part dead?" — **not matching** |
+Two options:
 
-The LCR-P1 will show readings like `Vt = 1.94 V` instead of `Vt = 1.9 V`. That second decimal is what lets you distinguish a 1.91 from a 1.94 and build a tight quartet. The plain Mega328 will round both to "1.9" and you'll get a useless flat distribution.
+| Option | Tradeoff |
+|---|---|
+| Build with a wider quartet (50–80 mV) | Probably passes F20 but pulse symmetry is degraded. Output feels asymmetric and metal electrodes corrode faster (Lilly-wave electromigration). |
+| Order more IRL520Ns from the same Mouser reel and merge into the pool | Tightens the available cluster. Adds ~$10 and a week of shipping per board you couldn't match. |
 
-The LCR-P1 has its own quirks though — readings jitter ~30–100 mV run-to-run because of gate-charge memory in the FET, probe contact pressure variation, and the tester's own ramp-and-detect algorithm. **You have to control for those or your matching pool looks artificially noisy.**
+## Tester quirks worth knowing
 
-### Procedure — get stable LCR-P1 readings
+The LCR-P1 has 2-decimal precision but ~30–100 mV of run-to-run noise from gate-charge memory, probe contact variation, and the tester's own ramp-and-detect algorithm. The per-FET procedure above is what controls those.
 
-Per FET, in order:
+For a single FET you suspect of jittering more than expected:
 
-1. **Short S↔G with tweezers** (touch the leftmost lead to the rightmost lead on a TO-220 for 1–2 seconds). This drains residual gate charge from previous tests. Skipping this step is the #1 cause of run-to-run jitter.
-2. **Hold the FET only by the metal tab.** Body heat on the leads shifts Vt by ~6 mV/°C — fingers running 10°C above ambient skew readings 60 mV. Tweezers or pliers preferred.
-3. **Insert into the test socket consistently.** Same orientation every time; firm seating; don't reseat mid-reading.
-4. **Press TEST. Wait for the result. Read.**
-5. **Wait ~30 seconds before testing the same FET again** (thermal stabilization — the tester's small drain-current pulse warms the die slightly, and ambient handling has warmed the package).
-6. **Take 5 readings per FET. Drop the highest and lowest. Average the middle 3.** Use that mean for sorting.
-7. Write the Vt on the FET package with a sharpie before moving on, so you don't lose track.
+1. Take **5 readings** of the same FET, with full discharge + 30 sec wait between each.
+2. Drop the highest and lowest.
+3. Average the middle 3 → that's your sorting value.
 
-The LCR-P1 itself benefits from a "warm-up" — run 2–3 throwaway tests when you first power it on to let its ADC reference and firmware state stabilize before recording real data.
+If a single FET still spreads > 50 mV after that procedure, the tester or ZIF socket has a problem (worn contacts, dead battery, EMI nearby). Borrow a different unit before trusting the data.
 
-If the run-to-run spread on a single FET is still > 50 mV after this procedure, your tester or socket has a problem (worn ZIF contacts, dead battery, EMI). Borrow a different unit before trusting the data.
+## Substitutions
 
-Full sort-and-pair logic (which positions get which Vt cluster) is in [`../docs/troubleshooting/debug-notes/failure-20-analysis.md`](../docs/troubleshooting/debug-notes/failure-20-analysis.md) → "MOSFET matching procedure".
-
-## Substitutions / parts you couldn't find?
-
-The metafetish forum had useful threads on this — see [`../docs/troubleshooting/MK-312BT parts substitution - Estim - Metafetish.pdf`](../docs/troubleshooting/MK-312BT%20parts%20substitution%20-%20Estim%20-%20Metafetish.pdf).
+Parts you couldn't find? The metafetish forum archive has practical substitutions from people who actually built the box: [`../docs/troubleshooting/MK-312BT parts substitution - Estim - Metafetish.pdf`](../docs/troubleshooting/MK-312BT%20parts%20substitution%20-%20Estim%20-%20Metafetish.pdf).
 
 → Next: [Step 3 — Build and flash](../3-build-and-flash/)
