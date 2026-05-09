@@ -156,6 +156,64 @@ all the headroom — trips F20.
 | **IRL520N** | Q1, Q2 (channel A) and Q5, Q6 (channel B) | 1.6–2.0 V (typ ~1.8 V) | ≤ 20 mV / ≤ 50 mV within each pair | Switches, not in calibration loop. Vt asymmetry = pulse asymmetry → electromigration on metal electrodes (Lilly's wave is broken). |
 | **IRF9Z24N** (Infineon) | Q3, Q4 | 2.5–3.1 V (target ~2.98 V — bumerang's working baseline) | ≤ 50 mV / ≤ 100 mV within the Q3/Q4 pair | In the calibration servo. Each 22 mV of Vt offset eats one calibration step. Vt > 3.3 V leaves only ~8 steps headroom — marginal. |
 
+### Why the IRL tolerance is tighter than the IRF tolerance
+
+Counterintuitive at first — you'd expect the FET *inside* the calibration servo to need
+tighter matching than the FETs outside it. The opposite is true here, and the reason
+comes down to what each mismatch actually affects.
+
+#### IRL520N — bounded by output-pulse symmetry
+
+The MK-312 produces **biphasic pulses** by design: Q1 and Q2 alternate switching the
+transformer primary in opposite directions, producing equal-and-opposite positive and
+negative pulses on the secondary. Identical Vt across the pair → symmetric pulses.
+
+If Vt(Q1) ≠ Vt(Q2), both FETs receive the same 5 V gate drive but conduct slightly
+different currents (lower-Vt FET has more `Vgs − Vt` overdrive → lower Rds(on) →
+conducts more current per pulse). The positive half of the bipolar pulse ends up with
+a slightly different peak than the negative half. There's no firmware compensation —
+Q1 and Q2 are pure switches.
+
+**~20–30 mV is fine.** More mismatch isn't going to injure anyone — output currents
+and average DC offsets at typical use stay well below medical-device DC thresholds
+even at 100+ mV mismatch. What you'd actually notice with looser matching is
+**asymmetric sensation** — one direction of the pulse feeling different from the
+other, which most users find less pleasant or less effective.
+
+Rough scale of what mismatch translates to:
+
+| Vt mismatch | Current-per-pulse imbalance | Practical effect |
+| --- | --- | --- |
+| ≤ 20 mV | ~0.7% | Symmetric, indistinguishable from a perfectly-matched pair |
+| 30–50 mV | ~1–1.7% | Still symmetric in feel for most users |
+| 100 mV | ~3.5% | Edge of perceptibility — sensitive users may notice subtle channel asymmetry |
+| 200 mV+ | ~7%+ | Asymmetric feel becomes obvious; long-term electrode wear accelerates |
+
+So **≤ 20 mV ideal, ≤ 50 mV acceptable** is a comfort-and-symmetry target, not a
+safety target. Below ~20 mV the asymmetry from Vt mismatch is in the noise floor of
+the rest of the circuit (transformer winding tolerance, PCB trace differences,
+Rds(on) production variance) — tighter doesn't measurably help.
+
+#### IRF9Z24N — bounded by F20 calibration headroom
+
+Q3 and Q6 are tested **independently** by the firmware (channel A's calibration ramp
+runs on Q3, channel B's on Q6). They're never in a comparison loop with each other,
+so Q3↔Q6 mismatch has no direct effect on F20 outcome.
+
+What does matter: each one's **absolute Vt** must fit inside the firmware's 64-step
+DAC ramp window. Lower absolute Vt = more steps of headroom for any other component
+drift to push you toward F20 without crossing the threshold.
+
+So the rule reverses:
+
+- Absolute Vt cluster: **2.85–3.05 V** (within ±50 mV of bumerang's 2.98 V working
+  reference) — this is the constraint that matters.
+- Pair match-tightness: looser (≤ 50 mV ideal, ≤ 100 mV acceptable) because the
+  firmware compensates each channel independently.
+
+Matching Q3 to Q6 within ~50 mV gives symmetric feel between channels, but it's a
+UX consideration, not an F20 one.
+
 ### IRF9Z24 manufacturer trap (high-yield F20 root cause)
 
 Forum-confirmed (bumerang #10, #14 in `Another Failure 20…`, plus Gary #18,
