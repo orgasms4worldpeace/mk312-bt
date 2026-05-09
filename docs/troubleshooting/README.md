@@ -1,8 +1,9 @@
 # Troubleshooting
 
-Two kinds of material here:
+Three kinds of material here:
 1. **`debug-notes/`** — original, evidence-based debug documents written for this repo. Start here for live builds.
-2. **`metafetish.club archive`** — saved forum threads from before the canonical MK-312BT discussion site went offline.
+2. **`metafetish.club` archive** — saved forum threads from before the canonical MK-312BT discussion site went offline.
+3. **`mosfetkiller.de` archive** — translated German DIY-electronics forum thread covering MK-312-BT builds, with a key correction to the canonical fuse settings.
 
 ## Active debug notes (read these first)
 
@@ -28,6 +29,14 @@ The metafetish.club forum (the canonical MK-312BT discussion venue) went offline
 | [`Tri Phase Cable on MK312BT - Estim - Metafetish.pdf`](Tri%20Phase%20Cable%20on%20MK312BT%20-%20Estim%20-%20Metafetish.pdf) | Tri-phase output cable wiring |
 | [`Getting the Firmware for MK312 - Estim - Metafetish.pdf`](Getting%20the%20Firmware%20for%20MK312%20-%20Estim%20-%20Metafetish.pdf) | Where the AVR firmware comes from |
 | [`Is the MK-312 BT modern_ - Estim - Metafetish.pdf`](Is%20the%20MK-312%20BT%20modern_%20-%20Estim%20-%20Metafetish.pdf) | Background and context — whether this design is still worth building |
+
+## mosfetkiller.de archive
+
+A German-language DIY-electronics forum where several builders worked through MK-312-BT problems in 2021–2022. The thread surfaces a **non-trivial correction to the canonical fuse settings** that the metafetish archive doesn't cover.
+
+| File | When to read |
+|---|---|
+| [`mosfetkiller-mk312-thread-en.md`](mosfetkiller-mk312-thread-en.md) | **Read if your board flashes but boots into a row of solid white blocks on the LCD, or if RESET pin behaves wrong, or if Failure 20 persists despite verified MOSFETs.** Contains: HFUSE 0xDC → 0xD9 fix (boot-vector bug breaks application-only firmware), F20 fix via R32/R43 trim-pot tuning (alternative to MOSFET replacement), F21/F16 quick references. English translation with original German preserved. |
 
 ## Live community
 
