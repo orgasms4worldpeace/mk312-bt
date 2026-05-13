@@ -6,7 +6,7 @@ Comprehensive end-to-end walkthrough — board ordering, parts, assembly, firmwa
 
 The "original" content here came from the `metafetish/mk312-bt` repo at the point it was deleted (~27 Dec 2020), preserved by [CrashOverride85](https://github.com/CrashOverride85/mk312-bt). v1.4 files (gerbers, schematics, notes — no Eagle source) were DM'd to that maintainer shortly after the original was deleted; provenance of v1.4 itself is hazy but the design has been successfully built by several people. See the [v1.4 release notes](1-order-boards/v1.4-release-notes.txt) for changes vs v1.3 before ordering parts.
 
-The metafetish.club forum is now offline — surviving posts are archived in [`troubleshooting/`](troubleshooting/).
+The metafetish.club forum is now offline — surviving posts are archived in [`3-build-and-flash/troubleshooting/`](3-build-and-flash/troubleshooting/).
 
 The active community lives in the `#boxes-pulse-based-diy` and `#312-chat` channels on [Joanne's E-Stim Community Discord](https://discord.gg/rY8C27S).
 
@@ -71,7 +71,7 @@ Use four closely-matched IRL520s for one board, and likewise pair up the two IRF
 
 If R32 and R43 are matched and in range, the FETs aren't the issue — check FET orientation, transformer orientation, and that R35/R46 are 200 kΩ. If R32 and R43 are mismatched, the practical fix is to desolder the MOSFETs and drop in a matched set.
 
-Background reading: [`troubleshooting/MK-312BT Failure 20 - Estim - Metafetish.pdf`](troubleshooting/MK-312BT%20Failure%2020%20-%20Estim%20-%20Metafetish.pdf).
+Background reading: [`3-build-and-flash/troubleshooting/MK-312BT Failure 20 - Estim - Metafetish.pdf`](3-build-and-flash/troubleshooting/MK-312BT%20Failure%2020%20-%20Estim%20-%20Metafetish.pdf).
 
 ## Board Assembly Instructions - IMPORTANT
 
@@ -126,13 +126,11 @@ The board uses an **ATmega16A** clocked from an external **8 MHz crystal**. Flas
 
 | File | What it is |
 |------|-----------|
-| `cr-custom-boot-messages/f005-HelloFriend.bin` | **Recommended default — application firmware.** Patched frankenbutt-f005 with a "Hello Friend" boot screen. Flash this and the box runs. |
-| `cr-custom-boot-messages/f005-ElectrodesReady.bin` | Alternative application: same f005 build, "Electrodes Ready" boot screen. |
-| `other-fw/f005.bin` | Alternative application: unpatched frankenbutt-f005, no custom boot message. |
-| `other-fw/t002_bootloader.bin` | **Optional ET-312 bootloader.** Flash this *first* if you want to update the firmware over the LINK port later without dragging the USBasp out again. Then flash one of the f005 application firmwares on top. By itself the bootloader doesn't run the box — you still need the application. |
-| `other-fw/unpatched_312-16.upg` | **Source input for the patcher** — not flashable directly. Encrypted ET-312 v1.6 firmware blob from ErosTek. Feed into buttshock fw-utils when rebuilding from source. See [Build from source](#build-from-source-advanced) below. |
+| `cr-custom-boot-messages/f005-HelloFriend.bin` | **Recommended default.** Patched frankenbutt-f005 with a "Hello Friend" boot screen. Flash this and the box runs. |
+| `cr-custom-boot-messages/f005-ElectrodesReady.bin` | Alternative: same f005 build, "Electrodes Ready" boot screen. |
+| `other-fw/f005.bin` | Alternative: unpatched frankenbutt-f005, no custom boot message. |
 
-All bundled `.bin` files include the LCD character-map fix (left/right arrows instead of up/down). If you just want a working box, flash `f005-HelloFriend.bin` and skip ahead. If you want field-updatable firmware, flash `t002_bootloader.bin` first and then `f005-HelloFriend.bin`.
+All bundled `.bin` files include the LCD character-map fix (left/right arrows instead of up/down). If you just want a working box, flash `f005-HelloFriend.bin`.
 
 ### Pick a programmer
 
@@ -519,7 +517,7 @@ If you'd rather not buy a USB-TTL adapter, the repo includes a one-shot AVR firm
 
    Holding the button *after* power-up doesn't put the HC-05 in command mode — the EN check only happens at boot. Get the timing right or the auto-config silently fails.
 5. Watch the LCD: it'll display progress and finally "HC-05 OK" (or similar).
-6. Power off, flash the real firmware (`t002_bootloader.bin`, or one of the alternatives) back onto the AVR.
+6. Power off, flash the real application firmware (`f005-HelloFriend.bin` or another `f005-*.bin`) back onto the AVR.
 7. If it stops on "Communicating with HC-05," your fuses are wrong — make sure the external 8 MHz crystal fuses are set per the [Firmware section](#firmware-flashing-the-avr). Don't try to make this work with the internal RC oscillator.
 
 ### Pairing

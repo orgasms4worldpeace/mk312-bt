@@ -1,7 +1,5 @@
 # Failure 80 — EEPROM/config readback out of range
 
-_Generated 2026-05-04 from `3-build-and-flash/firmware/backup_flash.bin`._
-
 | Field | Value |
 | --- | --- |
 | Code (decimal) | **80** |

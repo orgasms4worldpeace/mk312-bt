@@ -54,8 +54,7 @@ You don't have to commit to building WiFi units to order the boards — having s
 
 For visual reference (don't send these to the fab):
 
-- [`schematics/v1.4 Board Layout.png`](schematics/v1.4%20Board%20Layout.png)
-- [`schematics/v1.4 Part Placement.png`](schematics/v1.4%20Part%20Placement.png)
+- [`schematics/v1.4 Part Placement.png`](schematics/v1.4%20Part%20Placement.png) — part placement on the main board
 - [`schematics/pages/`](schematics/pages/) — schematic pages 1-5
 
 ## Need the source files?

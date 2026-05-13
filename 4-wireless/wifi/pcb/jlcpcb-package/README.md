@@ -2,7 +2,7 @@
 
 A drop-in upload bundle for ordering the [MK312WIFI adapter PCB](../) from JLCPCB with **SMT-only assembly**: JLC pre-mounts the one SMD part (U1, the 3.3V regulator); you hand-solder the 6 through-hole parts.
 
-This is the **cheapest path** for this board (~$20-25 for 5 boards). See the [cost comparison in `4-wireless/README.md`](../../../README.md) — full PCBA-with-THT runs $65-100+ because of THT setup fees, and DIY-everything is $12-17 (you'd hand-solder one extra SOT-223).
+This is the **cheapest reasonable path** for this board: ~$20–25 for 5 boards. Full PCBA-with-THT runs $65–100+ because of THT setup fees; DIY-everything is $12–17 if you're willing to hand-solder the SOT-223 regulator too.
 
 ## Files in this package
 

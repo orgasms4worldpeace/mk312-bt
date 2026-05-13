@@ -1,7 +1,5 @@
 # Failure 15 — divide-by-zero (firmware sanity)
 
-_Generated 2026-05-04 from `3-build-and-flash/firmware/backup_flash.bin`._
-
 | Field | Value |
 | --- | --- |
 | Code (decimal) | **15** |

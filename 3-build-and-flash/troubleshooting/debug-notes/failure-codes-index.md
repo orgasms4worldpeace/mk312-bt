@@ -1,10 +1,5 @@
 # MK-312BT firmware failure codes — complete index
 
-_Generated 2026-05-04 from `3-build-and-flash/firmware/backup_flash.bin`. Every
-`(rjmp|jmp) 0x1676` in the firmware was traced to its preceding
-`ldi r26, 0xNN`. The error_handler at `0x1676` prints `"Failure NN /
-Shut Off Power"` and halts; `r26` at jmp time is the displayed code._
-
 | Code | Branch | Meaning | Class | Most likely cause |
 | ---: | --- | --- | --- | --- |
 | **10** | `0x0bba` | DAC write value ≥ 224 | Firmware/state | EEPROM corruption or pot/ribbon glitch |

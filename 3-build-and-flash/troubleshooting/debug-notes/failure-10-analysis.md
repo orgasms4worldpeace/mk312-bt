@@ -1,8 +1,5 @@
 # Failure 10 — DAC write value out-of-range (≥ 224)
 
-_Generated 2026-05-04 from `3-build-and-flash/firmware/backup_flash.bin`
-(disassembly via `avr-objdump -m avr5`)._
-
 | Field | Value |
 | --- | --- |
 | Code (decimal) | **10** |

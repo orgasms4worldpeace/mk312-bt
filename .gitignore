@@ -17,5 +17,10 @@
 # working-copy material that shouldn't ship on GitHub.
 .dev/
 
+# Upstream ErosTek-derived firmware blobs — kept locally for development /
+# rebuilding, but not redistributed via this repo.
+3-build-and-flash/firmware/other-fw/t002_bootloader.bin
+3-build-and-flash/firmware/other-fw/unpatched_312-16.upg
+
 # Local navigation aid — regenerated from per-dir READMEs by .dev/scripts/build-mega-readme.sh
 MEGA-README.md

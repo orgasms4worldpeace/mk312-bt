@@ -1,201 +1,182 @@
-# MK312 Wifi Bridge
+# MK312 WiFi adapter
 
-This Project is a replacement for the bluetooth module used on the MK312BT and is based on the ESP8266-01S. This was created at first because the bluetooth interface could not be accessed in a convenient way on a VR headset, but also because of a general lack of reliability of the link. As usual no guarantees can be given, and also if you use this to injure yourself, no responsibility can be taken. This project is a collaboration between Rangarig and cLx. Some code has been imported back from [timdev](https://github.com/timduru/MK312WIFI/commits/timdev/) branch.
+A drop-in replacement for the HC-05 Bluetooth module on the MK-312BT, based on the **ESP8266-01S**. Pin-compatible with the same Radio Header socket — the box doesn't need any change.
 
-## Contents
-| Directory | Contains
-|-----------|-------------------------------------------------------------------------|
-| firmware/ | Firmware to flash onto the ESP (ino source + .bin files). Originally `MK312Wifi/` upstream |
-| pcb/      | KiCad schematics + board source, fab gerbers, and a JLCPCB upload bundle. Originally `MK312-wifi-pcb/` upstream |
-| media/    | Photos referenced by this README                                        |
+This is a collaboration between **Rangarig** and **cLx**, with additional code imported from [timduru's branch](https://github.com/timduru/MK312WIFI/commits/timdev/). Upstream lives at [Rangarig/MK312WIFI](https://github.com/Rangarig/MK312WIFI) and is pulled into this repo as a `git subtree`.
 
-| DotNetClient/ | Example C# implementation (Visual Studio Code) — useful as a Unity/VR starting point. Kept in its upstream-shipped location alongside the firmware + PCB it pairs with. |
+> No guarantees are given. If you use this hardware to injure yourself, no responsibility is taken.
 
-## General
-This WiFi interface is pin to pin compatible to the bluetooth interface, and designed to be an easier way to make custom implementations of the communication with the MK312 powerbox.
-Included is an example C# implementation, that can be used in a unity project. Most existing implementations should be really easy to adapt to this WiFi version.
+## Why use the WiFi adapter instead of the HC-05?
 
-To make things configuration free the firmware replies to specific broadcast UDP packet, so the software can automatically determine the IP address of the interface.
-A single TCP port is used for the actual communication with the device. At any time, only one client can be connected. You can also use the web interface for simple control.
+- Better range and reliability than Bluetooth Classic
+- Works on **macOS Monterey+** and **iOS** (where HC-05 / Bluetooth Classic SPP is broken/unsupported)
+- Easier integration with VR headsets, network apps, scripting from any language
 
-You can see a connection by the radio LED lighting up and then flashing as communication is in progress.
+The serial header on the MK-312BT is identical for both — swap modules without changing the box.
+
+## What's in this directory
+
+| Path | Contents |
+|------|----------|
+| [`firmware/`](firmware/) | Arduino `.ino` source plus pre-built `.bin` files for the ESP8266 |
+| [`pcb/`](pcb/) | KiCad schematic + board source and fab gerbers for the adapter PCB |
+| [`pcb/jlcpcb-package/`](pcb/jlcpcb-package/) | Ready-to-upload bundle for ordering 5 boards from JLCPCB with SMT assembly (~$20–25) — see its [README](pcb/jlcpcb-package/README.md) |
+| [`media/`](media/) | Photos and schematics referenced by this README |
 
 ## Hardware
-Feel free to use the provided PCB layout for the connections. In case you want to build your own:
-Keep in mind that the VCC from the box is 5 volts, so you will need to convert that to 3.3V or you will burn your ESP module.
-The signal level from the box is already at 3.3 volts (as there is already a resistor bridge) so we don't really need to do anything else.
 
-![MK312 WiFi adapter schematics](media/schematics.png)
+Use the provided PCB layout, or wire your own. **The MK-312BT supplies 5 V** on the Radio Header, so you need a 3.3 V regulator (the AMS1117-3.3 on the adapter PCB) — direct 5 V will kill the ESP. The signal-level resistor bridge is already on the box side, so no extra level-shifting is needed.
 
-Connections are:
+![MK312 WiFi adapter schematic](media/schematics.png)
 
-| ESP Pin Name | In-between            | MK312 |
-|--------------|-----------------------|-------|
-| GND          |                       | GND   |
-| VCC          | 3.3V regulator        | VCC   |
-| CHIP_EN      |                       |       |
-| GPIO0        |                       | TX    |
-| GPIO2        |                       | RX    |
-| GPIO1        | NPN transistor        | STATE |
-| GPIO3        | AP mode switch to GND |       |
+| ESP pin | In between | MK-312BT |
+|---------|------------|----------|
+| GND | — | GND |
+| VCC | 3.3 V regulator (AMS1117-3.3) | VCC (5 V) |
+| CHIP_EN | — | — |
+| GPIO0 | — | TX |
+| GPIO2 | — | RX |
+| GPIO1 | NPN transistor | STATE |
+| GPIO3 | AP-mode switch to GND | — |
 
-The hardware serial port outputs a lot of garbage in the bootloader, that can confuse the MK312, so a software implementation is used that might make the used pin seem a bit odd.
+The hardware UART outputs bootloader garbage that confuses the MK-312BT, so the firmware uses a software-serial implementation on the pins listed above.
 
-## Firmware
-Upon first powerup, the device will go into an Access Point mode (the MK312 display will show "WifiAP"), and you can connect to with your cellphone to configure the connection to your local wifi network. Once a WiFi connection is established, the device will display the IP obtained IP address on the LCD display. In consequent powerups the device will reconnect to the same wifi network. If you wish to change the network to use, press the config wifi button. The WifiAP mode is also automatically called if the configured network is not found after power up.
+## BOM (per adapter)
 
-![MK312BT with WiFi interface after power-on](media/mk312.jpg)
+| Qty | Component |
+|-----|-----------|
+| 1 | ESP8266-01S module |
+| 1 | AMS1117-3.3 regulator |
+| 2 | 100 nF (104) ceramic disc capacitors |
+| 1 | 2N2222 NPN transistor |
+| 1 | Tactile switch 6×6 mm |
+| 1 | 5-pin pin header, **right-angle** |
+| 1 | 2×4 socket header, angled |
 
-The firmware will negotiate a key with the box, and then use that key continuously internally.
-You can send a UDP broadcast to port 8842 containing the string "MK312-ICQ" to have the device return its IP address.
-You can then create a TCP connection to that IP Address on port 8843.
+If you're ordering the PCB from JLCPCB, the [`pcb/jlcpcb-package/`](pcb/jlcpcb-package/) bundle has JLC pre-mount the AMS1117 for you — you hand-solder the six through-hole parts (~5–10 min per board).
 
-### Normal encrypted mode:
-you can then proceed just like you would with a serial connection, and send the 0x00 to recieve 0x07 and then do the key negotation
-### Unencrypted mode:
-if you wish to skip encryption, instead of the normal key negotiation command you need to send `0x2f4242`. This is an invalid checksum, but the command will be recognized by the device.
-It will reply with `0x69`. From there on you do not need to use any encryption.
+![Built adapter](media/building.jpg)
 
-From here on communication is no different from the serial communication:
-https://docs.buttplug.io/docs/stpihkal/protocols/erostek-et312b/
+## Flashing the ESP firmware
 
-Serial software implementations should not notice the difference. Once connection is lost, the software should be able to reestablish the connection normaly.
+The ESP8266-01 runs on 3.3 V — **set your USB-serial adapter to 3.3 V mode** or the chip will die.
 
-## Building
+![USB-serial wiring](media/flashing_schematics.png) ![USB-serial connected](media/flashing.jpg)
 
-Please note that not all components need to be fitted to the front of the device. There are hints on PCB to what goes where.
+ESP-01 top view (row 1 = closer to the board edge):
 
-![Ready to build?](media/building.jpg)
+| Row 1 | Pins | Row 2 |
+|-------|------|-------|
+| TX | o&nbsp;&nbsp;o | GND |
+| EN | o&nbsp;&nbsp;o | — |
+| RST | o&nbsp;&nbsp;o | PRG |
+| 3.3V | o&nbsp;&nbsp;o | RX |
 
-|Qty| Component                 |
-|---|---------------------------|
-| 1 | ESP8266-01S module        |
-| 1 | AMS1117-3.3 regulator     |
-| 2 | 100nF (104) capacitors    |
-| 1 | 2N2222 transistor         |
-| 1 | Tactile switch 6x6 mm     |
-| 1 | 5 pins pin header, angled |
-| 1 | 2x4 pins socket, angled   |
+To enter programming mode, hold IO0/PRG at GND and briefly pulse RST to GND (or wire RTS from the USB-serial adapter to do it automatically — usually unnecessary).
 
+### Option A — flash the provided `.bin` files
 
-## Flashing the firmware
+```sh
+esptool --chip esp8266 --port /dev/ttyUSB0 --baud 115200 \
+        write_flash 0x0 MK312Wifi.ino.bin
 
-Please keep in mind that the ESP8266-01 runs on 3.3 volts. So your serial adapter should be set in **3.3 VOLTS MODE** or the ESP will die.
-The ESP8266-01 can be programmed connected like this:
-
-![Simple possible way to flash with a USB-serial adapter](media/flashing_schematics.png)
-
-![USB-serial adapter connected to ESP-01 module](media/flashing.jpg)
-
-|Row 1|Pins|Row 2|
-|-----|----|-----|
-|  TX |o  o| GND |
-|  EN |o  o|     |
-| RST |o  o| PRG |
-|3.3V |o  o| RX  |
-
-(ESP module top view, row 1 is closer to its board edge)
-
-To put the ESP into programming mode, keep IO0/PRG connected to ground. You can make RST touch GND briefly to force a reset (it is possible to use the RTS output of the USB serial adapter to do this automatically, but most of the time, this is not needed).
-
-Once the ESP is programmed and attached to the board you can put it into the MK312 bluetooth slot, please make sure its facing the right way.
-
-Once the ESP Powers up, it will immediately try to negotiate with the MK312. If that fails, it will show an error message on the message LED:
-
-| Number of blinks | Cause                                |
-|------------------|--------------------------------------|
-| 1                | Invalid checksum                     |
-| 2                | Handshake failed at step 1           |
-| 3                | Handshake failed at step 2           |
-| 4                | Handshake failed at step 3           |
-| 5                | Unexpected reply from device         |
-| 10               | Unexpected reply from poke operation |
-| 11               | Unexpected reply from peek operation |
-
-Once negotiations are successful, the WIFI module will power up. On first startup it will go into AP mode.
-Look for a network called 'MK312CONFIG-AP' and connect to it with your cellpone. Then set up the WIFI Parameters.
-The module will then connect to WIFI, and display its IP adress on the MK312's display.
-At this point it is ready to be connected to. The network settings are saved to be used automatically the next time the box is switched on.
-
-### Flashing the provided bin files:
-```
-$ esptool --chip esp8266 --port /dev/ttyUSB0 --baud 115200 write_flash 0x0 MK312Wifi.ino.bin
-esptool.py v3.0
-Serial port /dev/ttyUSB0
-Connecting....
-Chip is ESP8266EX
-Features: WiFi
-Crystal is 26MHz
-Uploading stub...
-Running stub...
-Stub running...
-Configuring flash size...
-Compressed 363184 bytes to 258186...
-Wrote 363184 bytes (258186 compressed) at 0x00000000 in 22.9 seconds (effective 126.8 kbit/s)...
-Hash of data verified.
+esptool --chip esp8266 --port /dev/ttyUSB0 --baud 115200 \
+        write_flash 0xEB000 MK312Wifi.mklittlefs.bin
 ```
 
-Then the same for the webserver files, the difference is the destination address:
+The second file holds the HTML/CSS/JS for the web UI on LittleFS at `0xEB000`.
 
-```
-$ esptool --chip esp8266 --port /dev/ttyUSB0 --baud 115200 write_flash 0xEB000 MK312Wifi.mklittlefs.bin
-```
+If you have Arduino installed, `esptool` is also available at `~/.arduino15/packages/esp8266/hardware/esp8266/3.1.2/tools/esptool/esptool.py`.
 
-(If you have installed the Arduino software, esptool can also be called with `python3 ~/.arduino15/packages/esp8266/hardware/esp8266/3.1.2/tools/esptool/esptool.py`)
+### Option B — build from source with the Arduino IDE
 
-### Compiling and flashing from the source code with the Arduino software:
-Setting up the Arduino software: (it might work with newer versions, these are just the versions we developed things on)
-Install Arudino: https://www.arduino.cc/en/software (Version 1.8.19)
-Install Boardmanager: http://arduino.esp8266.com/stable/package_esp8266com_index.json (Version 3.0.2) [Generic ESP8266 module]
-(under 'file/preferences' add the path to "Additional Boards Manager URLs:", then close the dialog with okay, and select the board on "Tools / boardmanager")
-Install WifiManager: https://github.com/tzapu/WifiManager (version 2.0.5-beta)
-(Download the file, and add it to your libraries with Sketch/Include Library/Add. Zip library)
+Tested versions:
 
-Then close the application, reopen it and load the ino file.
+- Arduino IDE 1.8.19
+- ESP8266 boards package 3.0.2 — add `http://arduino.esp8266.com/stable/package_esp8266com_index.json` under **File → Preferences → Additional Boards Manager URLs**, then install **Generic ESP8266 module** in Tools → Board Manager
+- WifiManager library 2.0.5-beta — install from [tzapu/WifiManager](https://github.com/tzapu/WifiManager) via **Sketch → Include Library → Add .ZIP Library**
+- LittleFS upload plugin — install [arduino-esp8266littlefs-plugin](https://github.com/earlephilhower/arduino-esp8266littlefs-plugin/releases) into the Arduino tools folder. The `data/` directory contents need to be uploaded to LittleFS for the web UI to work.
 
-HTTP and websocket servers feature need files under data/ to be uploaded on the ESP module. You can add [this tool](https://github.com/earlephilhower/arduino-esp8266littlefs-plugin/releases) in the Arduino interface.
+Open the `.ino`, compile, flash.
 
-Once all is setup correctly, you should be able to compile the accompanied .ino and flash it to the device.
+## First boot
 
-## Usage
+Plug the adapter into the HC-05 socket facing the correct way and power on the MK-312BT.
 
-### Using software implemented for it:
-There is no configuration necessary. The software will determine the IP via UDP broadcast and then connect to it.
+The firmware negotiates a key with the box. If negotiation fails, the message LED blinks an error code:
 
-List of implementations follows:
-  - See the example C# application
-  - https://github.com/clxjaguar/mk312-gui (PyQt GUI supporting cable link and unencrypted or legacy network links)
+| Blinks | Cause |
+|--------|-------|
+| 1 | Invalid checksum |
+| 2 | Handshake failed at step 1 |
+| 3 | Handshake failed at step 2 |
+| 4 | Handshake failed at step 3 |
+| 5 | Unexpected reply from device |
+| 10 | Unexpected reply from poke operation |
+| 11 | Unexpected reply from peek operation |
 
-### Using legacy cable or bluetooth software:
-There is software able to make a virtual serial port, which any software using serial port use.
-#### Linux:
-In linux you can use socat to establish a connection to the device, and offer a comport for the legacy software to connect to.
-The syntax is as follows (replace [] with the corresponding values):
+After successful handshake, the adapter enters AP mode. The MK-312BT LCD shows `WifiAP`.
 
-`socat -v pty,link=/home/[user]/tcptty0,raw tcp:[IP Address shown on display]:8843`
+![MK-312BT with WiFi adapter after power-on](media/mk312.jpg)
 
-Then, you can then connect to `/home/[user]/tcptty0` from your software.
+1. Connect your phone to the WiFi network `MK312CONFIG-AP`
+2. WifiManager's captive portal opens — pick your home WiFi and enter the password
+3. The adapter connects to your network and shows its IP address on the MK-312BT LCD
+4. The network settings are persisted — subsequent boots reconnect automatically
 
-#### Windows:
-VSPE (Virtual Serial Port Emulator) is known to work pretty well.
-https://www.youtube.com/watch?v=7g6v_m208LQ
+To change networks later: press the AP-mode button on the adapter, or boot with the configured network unavailable (it falls back to AP mode automatically).
 
-### Using the web and websocket interface:
-There is a websocket server running on port 81, for simple control. Message format is `<command>=<argument>`. A HTTP webserver on port 80 is also serving html/css/js page using it, but also responding to GET requests `/EXEC?cmd=<command>&val=<argument>` or `/RAW?cmd=<address>&val=<byte>`.
+## Network protocol
 
-Implemented commands are:
+### Discovery
 
-| Command     | Argument                                    |
-|-------------|---------------------------------------------|
-| Mode        | 0x76 to 0x8e for the differents modes       |
-| DisableADC  | 1 to override pots, 0 to reenable them      |
-| EnableADC   | 1 to restore pots, 0 to override them       |
-| LevelA      | 0 to 255 (DisableADC=1 is needed before)    |
-| LevelB      | 0 to 255 (same)                             |
-| startRamp   | No argument needed for this command         |
-| CutLevels   | 1 to set both channels levels to zero       |
-| MultiAdjust | 0 to 100 (scaled in the current mode range) |
+Send a UDP broadcast to port **8842** containing `MK312-ICQ`. The adapter replies with its IP address.
 
-## Bonus picture of a MK312 with the v1.1 WiFi bridge interface in the grass
+### Control
 
-![MK312BT with WiFi interface in the grass](media/mk312_grass.jpg)
+Open a TCP connection to the adapter on port **8843**. **One client at a time.**
+
+From here it speaks the same protocol as the LINK serial port. Full reference: [docs.buttplug.io — Erostek ET-312B protocol](https://docs.buttplug.io/docs/stpihkal/protocols/erostek-et312b/).
+
+- **Encrypted mode** (default): send `0x00`, receive `0x07`, then do the standard key negotiation.
+- **Unencrypted mode** (optional): instead of normal key negotiation, send `0x2f4242`. This is an invalid checksum but the firmware recognizes it as a request for unencrypted mode. The reply is `0x69`. No encryption needed from there.
+
+Existing serial-protocol clients should adapt with minimal changes; the encryption is the only difference.
+
+## Web interface
+
+Connect a browser to the adapter's IP on **port 80**. Simple HTML page using a **websocket server on port 81** for control. Message format: `<command>=<argument>`.
+
+HTTP also exposes:
+
+- `GET /EXEC?cmd=<command>&val=<argument>`
+- `GET /RAW?cmd=<address>&val=<byte>`
+
+Commands:
+
+| Command | Argument |
+|---------|----------|
+| `Mode` | `0x76`–`0x8e` for the different modes |
+| `DisableADC` | `1` to override pots, `0` to re-enable |
+| `EnableADC` | `1` to restore pots, `0` to override |
+| `LevelA` | `0`–`255` (requires `DisableADC=1`) |
+| `LevelB` | `0`–`255` (same) |
+| `startRamp` | (no argument) |
+| `CutLevels` | `1` to set both channels to zero |
+| `MultiAdjust` | `0`–`100` (scaled in the current mode range) |
+
+## Using legacy serial clients
+
+Software written for a real serial port (HC-05, RS-232 cable) can talk to the adapter through a virtual COM port:
+
+- **Linux:** `socat -v pty,link=/home/$USER/tcptty0,raw tcp:<adapter-ip>:8843` — then connect your client to `/home/$USER/tcptty0`
+- **Windows:** [VSPE](https://www.youtube.com/watch?v=7g6v_m208LQ) (Virtual Serial Port Emulator) is known to work
+
+## Native clients
+
+- See the example C# implementation that ships alongside this README upstream
+- [clxjaguar/mk312-gui](https://github.com/clxjaguar/mk312-gui) — PyQt GUI with native support for cable, unencrypted, and legacy network links
+
+## Bonus
+
+![MK-312BT with WiFi adapter in the grass](media/mk312_grass.jpg)

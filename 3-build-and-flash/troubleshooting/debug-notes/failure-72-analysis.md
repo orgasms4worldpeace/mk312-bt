@@ -1,7 +1,5 @@
 # Failure 72 — state variable RAM[0x01F1] overflow
 
-_Generated 2026-05-04 from `3-build-and-flash/firmware/backup_flash.bin`._
-
 | Field | Value |
 | --- | --- |
 | Code (decimal) | **72** |
