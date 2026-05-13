@@ -60,6 +60,6 @@ For visual reference (don't send these to the fab):
 
 ## Need the source files?
 
-v1.4 ships gerbers only. To modify the design, grab the v1.3 Eagle source from [`../historical/eagle-source/`](../historical/eagle-source/).
+v1.4 ships gerbers only — no Eagle source was ever released for v1.4. To modify the design you'd need to either reverse the gerbers in KiCad/Eagle, or work from the older v1.3 Eagle source preserved upstream at [`CrashOverride85/mk312-bt`](https://github.com/CrashOverride85/mk312-bt) (note: v1.3 has known issues that v1.4 fixes — porting changes is non-trivial).
 
 → Next: [Step 2 — Order parts](../2-order-parts/)

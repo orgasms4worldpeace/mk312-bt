@@ -21,13 +21,12 @@ The top-level layout follows the build path. Work through the numbered directori
 | 4 | [`4-wireless/`](4-wireless/) | Pick **bluetooth** (HC-05) or **wifi** (ESP8266) — both pin-compatible |
 | 5 | [`5-software/`](5-software/) | Pick a control client — links-only index of PyQt, web, and Python options |
 
-For the end-to-end walkthrough, see **[docs/build-guide.md](docs/build-guide.md)**.
+For the end-to-end walkthrough, see **[build-guide.md](build-guide.md)**.
 
 ## Reference
 
-- [`docs/build-guide.md`](docs/build-guide.md) — full assembly + flashing walkthrough
-- [`docs/troubleshooting/`](docs/troubleshooting/) — original debug notes (annotated test-methodology PDF, F21 disassembly analysis) plus archived threads from the now-offline metafetish.club forum
-- [`historical/`](historical/) — v1.2 / v1.3 boards, original Eagle source, build photos. Archaeology only; **don't build these today**
+- [`build-guide.md`](build-guide.md) — full assembly + flashing walkthrough
+- [`3-build-and-flash/troubleshooting/`](3-build-and-flash/troubleshooting/) — original debug notes (annotated test-methodology PDF, F21 disassembly analysis) plus archived threads from the now-offline metafetish.club forum
 
 ## Provenance & scope
 
@@ -46,7 +45,7 @@ ErosTek ET-312B           commercial e-stim box (early 2000s, still sold)
            └─ this repo                 2026 reorganization
 ```
 
-The v1.4 board files have hazy provenance — DM'd to CrashOverride85 shortly after the metafetish repo was deleted, with no original Eagle source. Several people have nonetheless built the design successfully. The older v1.2 / v1.3 boards (with original Eagle source) live in [`historical/`](historical/) for reference. Longer story in [`docs/build-guide.md`](docs/build-guide.md#provenance).
+The v1.4 board files have hazy provenance — DM'd to CrashOverride85 shortly after the metafetish repo was deleted, with no original Eagle source. Several people have nonetheless built the design successfully. The older v1.2 / v1.3 boards (with original Eagle source) are kept locally as archaeology and aren't bundled here. Longer story in [`build-guide.md`](build-guide.md#provenance).
 
 ### WiFi adapter lineage
 
@@ -58,7 +57,7 @@ The optional WiFi adapter at [`4-wireless/wifi/`](4-wireless/wifi/) comes from [
 
 ### Forum archive
 
-The `metafetish.club` forum, where most community debugging knowledge accumulated, is now offline. Threads on building, Error 20, parts substitution, and firmware live as PDFs in [`docs/troubleshooting/`](docs/troubleshooting/).
+The `metafetish.club` forum, where most community debugging knowledge accumulated, is now offline. Threads on building, Error 20, parts substitution, and firmware live as PDFs in [`3-build-and-flash/troubleshooting/`](3-build-and-flash/troubleshooting/).
 
 ### Credit
 

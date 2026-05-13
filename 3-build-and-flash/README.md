@@ -4,7 +4,7 @@ Boards arrived, parts arrived — now you put it together.
 
 ## Where the actual walkthrough lives
 
-**[`../docs/build-guide.md`](../docs/build-guide.md)** — assembly checklist, the [Error 20 prevention/diagnosis](../docs/build-guide.md#error-20-match-the-mosfets-before-you-solder) section, full [firmware flashing walkthrough](../docs/build-guide.md#firmware-flashing-the-avr) for macOS/Linux/Windows (programmer choice, avrdude install, fuse settings, what every flag means), and the [HC-05 configuration](../docs/build-guide.md#bluetooth-hc-05-configuration) section.
+**[`../build-guide.md`](../build-guide.md)** — assembly checklist, the [Error 20 prevention/diagnosis](../build-guide.md#error-20-match-the-mosfets-before-you-solder) section, full [firmware flashing walkthrough](../build-guide.md#firmware-flashing-the-avr) for macOS/Linux/Windows (programmer choice, avrdude install, fuse settings, what every flag means), and the [HC-05 configuration](../build-guide.md#bluetooth-hc-05-configuration) section.
 
 ## What's in this directory
 
@@ -28,8 +28,8 @@ For the case:
 
 ## If something goes wrong
 
-- **Error 20 on first boot** → almost always mismatched MOSFETs. See [Error 20 in the build guide](../docs/build-guide.md#error-20-match-the-mosfets-before-you-solder) — covers the R32/R43 voltage diagnostic and the pre-build MOSFET matching procedure.
+- **Error 20 on first boot** → almost always mismatched MOSFETs. See [Error 20 in the build guide](../build-guide.md#error-20-match-the-mosfets-before-you-solder) — covers the R32/R43 voltage diagnostic and the pre-build MOSFET matching procedure.
 - **Backlight on but blank screen** → adjust the LCD contrast pot.
-- **Anything else** → [`../docs/troubleshooting/`](../docs/troubleshooting/) for the archived metafetish forum threads (Error 20, parts substitution, transformer questions, oscilloscope traces).
+- **Anything else** → [`troubleshooting/`](troubleshooting/) for the archived metafetish forum threads (Error 20, parts substitution, transformer questions, oscilloscope traces).
 
 → Next: [Step 4 — Wireless control](../4-wireless/)

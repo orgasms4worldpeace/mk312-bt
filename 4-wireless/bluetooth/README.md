@@ -31,4 +31,4 @@ If you'd rather skip the reading: pair as `MK-312BT` with PIN `1234`, but config
 - **iOS doesn't speak SPP at all** — WiFi adapter is your only option.
 - **HC-05 idle draw is ~43 mA on default settings**, which makes the stock 7805 linear regulator run warm. Either swap to a switching regulator (mEZD71201A-G drop-in) or set `AT+IPSCAN=1024,1,1024,512` to drop idle to ~15 mA. See the IPSCAN section in `hc05-setup.md`.
 
-→ Back to [Step 4 — Wireless](../README.md) | Up to [build guide → Bluetooth](../../docs/build-guide.md#bluetooth-hc-05-configuration)
+→ Back to [Step 4 — Wireless](../README.md) | Up to [build guide → Bluetooth](../../build-guide.md#bluetooth-hc-05-configuration)

@@ -15,7 +15,7 @@ All bundled `.bin` files work with the MK-312BT's LCD out of the box.
 
 ## How to flash
 
-See **[`docs/build-guide.md` → Firmware: flashing the AVR](../../docs/build-guide.md#firmware-flashing-the-avr)** for the full Win/Mac/Linux walkthrough — programmer choice, avrdude install per platform, fuse settings, and exact commands for both USBasp and Arduino-as-ISP.
+See **[`build-guide.md` → Firmware: flashing the AVR](../../build-guide.md#firmware-flashing-the-avr)** for the full Win/Mac/Linux walkthrough — programmer choice, avrdude install per platform, fuse settings, and exact commands for both USBasp and Arduino-as-ISP.
 
 Quick reference (USBasp, all platforms):
 

@@ -12,5 +12,10 @@
 .idea/
 .vscode/
 
-# Local navigation aid — regenerated from per-dir READMEs by scripts/build-mega-readme.sh
+# Local dev workspace — AI agent notes, build/generator scripts, historical
+# archive (v1.2/v1.3 boards with Eagle source), roadmap, and any other
+# working-copy material that shouldn't ship on GitHub.
+.dev/
+
+# Local navigation aid — regenerated from per-dir READMEs by .dev/scripts/build-mega-readme.sh
 MEGA-README.md

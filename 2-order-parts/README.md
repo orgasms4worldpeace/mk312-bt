@@ -35,7 +35,7 @@ These are intentional over-quantities for matching and spares. **Don't reduce th
 | **R30** (0.27 Ω 1 W) | R30 | 1 | 3 | Current-sense resistor — value-critical for F20 calibration. Easy to damage during desolder rework. |
 | **XTAL1** (8 MHz) | XTAL1 | 1 | 2 | Cracked/cold-soldered crystal silently breaks ATmega ISP programming. Cheap insurance. |
 
-The full reasoning — Vt-headroom math, the Vishay vs Infineon supplier trap, sort-and-pair logic for assigning specific FETs to specific board positions — lives in [`../docs/troubleshooting/debug-notes/failure-20-analysis.md`](../docs/troubleshooting/debug-notes/failure-20-analysis.md). Read it before populating boards if you want the full picture; the BOM quantities here are just enough to make that procedure possible.
+The full reasoning — Vt-headroom math, the Vishay vs Infineon supplier trap, sort-and-pair logic for assigning specific FETs to specific board positions — lives in [`../3-build-and-flash/troubleshooting/debug-notes/failure-20-analysis.md`](../3-build-and-flash/troubleshooting/debug-notes/failure-20-analysis.md). Read it before populating boards if you want the full picture; the BOM quantities here are just enough to make that procedure possible.
 
 ## 🛠️ Step-by-step — matching the MOSFETs
 
@@ -103,7 +103,7 @@ Channel A:    1.91   1.92                   → Q1, Q2
 Channel B:           1.92   1.93            → Q4, Q5
 ```
 
-**IRF9Z24N pair — one per board (Q3, Q6):** pick two FETs matched within ≤50 mV, **both in the 2.85–3.05 V cluster** if you can. The detailed Vt-acceptability tiers (Use first / Acceptable / Marginal / Reject) are in [`failure-20-analysis.md`](../docs/troubleshooting/debug-notes/failure-20-analysis.md).
+**IRF9Z24N pair — one per board (Q3, Q6):** pick two FETs matched within ≤50 mV, **both in the 2.85–3.05 V cluster** if you can. The detailed Vt-acceptability tiers (Use first / Acceptable / Marginal / Reject) are in [`failure-20-analysis.md`](../3-build-and-flash/troubleshooting/debug-notes/failure-20-analysis.md).
 
 ### If your sample doesn't yield a tight quartet
 
@@ -128,6 +128,6 @@ If a single FET still spreads > 50 mV after that procedure, the tester or ZIF so
 
 ## Substitutions
 
-Parts you couldn't find? The metafetish forum archive has practical substitutions from people who actually built the box: [`../docs/troubleshooting/MK-312BT parts substitution - Estim - Metafetish.pdf`](../docs/troubleshooting/MK-312BT%20parts%20substitution%20-%20Estim%20-%20Metafetish.pdf).
+Parts you couldn't find? The metafetish forum archive has practical substitutions from people who actually built the box: [`../3-build-and-flash/troubleshooting/MK-312BT parts substitution - Estim - Metafetish.pdf`](../3-build-and-flash/troubleshooting/MK-312BT%20parts%20substitution%20-%20Estim%20-%20Metafetish.pdf).
 
 → Next: [Step 3 — Build and flash](../3-build-and-flash/)

@@ -30,8 +30,8 @@ U13,Replaces 7805CV - Switching Regulator,1,495-TSR-1-2450,TSR 1-2450,X,mouser.c
 XTAL1,8MHZ XTAL HC-49S (qty bumped from 1 → 2 — silent killer for ATmega ISP programming if cracked/cold-soldered; cheap insurance),2,717-9B-8.000MEEJ-B,815-ABL-8-B2,X,mouser.com/c/?q=717-9B-8.000MEEJ-B,amazon.com/s?k=815-ABL-8-B2
 U1,ATMEGA 16P,1,556-ATMEGA16A-PU,ATMEGA16A-PU,X,mouser.com/c/?q=556-ATMEGA16A-PU,amazon.com/s?k=ATMEGA16A-PU
 LCD1,LCD HD44780LCD-1602,1,763-0216K1Z-NSW-BBW,NHD-0216K1Z-NSW-FBW-L,X,mouser.com/c/?q=763-0216K1Z-NSW-BBW,amazon.com/s?k=NHD-0216K1Z-NSW-FBW-L
-"Q3,Q6",MOSFET IRF9Z24NPBF (Infineon — NOT Vishay PBF; qty bumped from 2 → 6 to enable Vt-matching the pair within 50 mV — see ../docs/troubleshooting/debug-notes/failure-20-analysis.md),6,942-IRF9Z24NPBF,IRF9Z24NPBF,X,mouser.com/c/?q=942-IRF9Z24NPBF,amazon.com/s?k=IRF9Z24NPBF
-"Q1,Q2,Q4,Q5",MOSFET IRL520N (qty bumped from 4 → 12 to enable Vt-matching the quartet within 20-30 mV — typical batch spread is 200-400 mV so 3× over-order is needed to find a tight cluster of 4; see ../docs/troubleshooting/debug-notes/failure-20-analysis.md for sort-and-pair procedure),12,942-IRL520NPBF,IRL520NPBF,✓,mouser.com/c/?q=942-IRL520NPBF,amazon.com/s?k=IRL520NPBF
+"Q3,Q6",MOSFET IRF9Z24NPBF (Infineon — NOT Vishay PBF; qty bumped from 2 → 6 to enable Vt-matching the pair within 50 mV — see ../3-build-and-flash/troubleshooting/debug-notes/failure-20-analysis.md),6,942-IRF9Z24NPBF,IRF9Z24NPBF,X,mouser.com/c/?q=942-IRF9Z24NPBF,amazon.com/s?k=IRF9Z24NPBF
+"Q1,Q2,Q4,Q5",MOSFET IRL520N (qty bumped from 4 → 12 to enable Vt-matching the quartet within 20-30 mV — typical batch spread is 200-400 mV so 3× over-order is needed to find a tight cluster of 4; see ../3-build-and-flash/troubleshooting/debug-notes/failure-20-analysis.md for sort-and-pair procedure),12,942-IRL520NPBF,IRL520NPBF,✓,mouser.com/c/?q=942-IRL520NPBF,amazon.com/s?k=IRL520NPBF
 JP1,ISP 6 PIN,1,571-5-146254-3,5-146254-3,X,mouser.com/c/?q=571-5-146254-3,amazon.com/s?k=5-146254-3
 U14,LM2941,1,926-LM2941CT/NOPB,LM2941CT/NOPB,X,mouser.com/c/?q=926-LM2941CT%2FNOPB,amazon.com/s?k=LM2941CT%2FNOPB
 U2,LM324N,1,595-LM324N,LM324N,✓,mouser.com/c/?q=595-LM324N,amazon.com/s?k=LM324N
@@ -58,6 +58,7 @@ LCD HEADER,LCD Header,1,710-61301611121,61301611121,X,mouser.com/c/?q=710-613016
 Knob,Potentiometer Knob,3,450-BA761,BA761,X,mouser.com/c/?q=450-BA761,amazon.com/s?k=BA761
 BAT1,Lead Acid Battery,1,547-PS-1220,PS-1220,X,mouser.com/c/?q=547-PS-1220,amazon.com/s?k=PS-1220
 BAT1 Lugs,Crimp Lubs for BAT1,2,534-8291,534-8291,X,mouser.com/c/?q=534-8291,amazon.com/s?k=534-8291
+"J1A,J1B","PCB male quick-disconnect tab 0.187""/F1 vertical (battery + and −; mates with the 8291 crimps on the battery wire)",2,534-1285,1285,X,mouser.com/c/?q=534-1285,amazon.com/s?k=Keystone+1285
 Power Supply,"18V, 1A .5.5mm OD plug",1,709-GST18U18-P1J,GST18U18-P1J,X,mouser.com/c/?q=709-GST18U18-P1J,amazon.com/s?k=GST18U18-P1J
 20K Opt. Variant,RES 18K,2,660-MF1/4DCT52R1802F,MF1/4DCT52R1802F,X,mouser.com/c/?q=660-MF1%2F4DCT52R1802F,amazon.com/s?k=MF1%2F4DCT52R1802F
 R30,RES 0.27R 1W (current sense — qty bumped from 1 → 3; value-critical for F20 calibration scaling and easy to damage during desolder rework),3,660-MOSX1CT528RR27J,MOSX1CT528RR27J,X,mouser.com/c/?q=660-MOSX1CT528RR27J,amazon.com/s?k=MOSX1CT528RR27J

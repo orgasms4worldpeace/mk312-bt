@@ -1,10 +1,10 @@
 # MK-312BT build guide
 
-Comprehensive end-to-end walkthrough — board ordering, parts, assembly, firmware, and HC-05 bluetooth configuration. For the at-a-glance journey, see the [root README](../README.md).
+Comprehensive end-to-end walkthrough — board ordering, parts, assembly, firmware, and HC-05 bluetooth configuration. For the at-a-glance journey, see the [root README](README.md).
 
 ## Provenance
 
-The "original" content here came from the `metafetish/mk312-bt` repo at the point it was deleted (~27 Dec 2020), preserved by [CrashOverride85](https://github.com/CrashOverride85/mk312-bt). v1.4 files (gerbers, schematics, notes — no Eagle source) were DM'd to that maintainer shortly after the original was deleted; provenance of v1.4 itself is hazy but the design has been successfully built by several people. See the [v1.4 release notes](../1-order-boards/v1.4-release-notes.txt) for changes vs v1.3 before ordering parts.
+The "original" content here came from the `metafetish/mk312-bt` repo at the point it was deleted (~27 Dec 2020), preserved by [CrashOverride85](https://github.com/CrashOverride85/mk312-bt). v1.4 files (gerbers, schematics, notes — no Eagle source) were DM'd to that maintainer shortly after the original was deleted; provenance of v1.4 itself is hazy but the design has been successfully built by several people. See the [v1.4 release notes](1-order-boards/v1.4-release-notes.txt) for changes vs v1.3 before ordering parts.
 
 The metafetish.club forum is now offline — surviving posts are archived in [`troubleshooting/`](troubleshooting/).
 
@@ -27,8 +27,8 @@ Preferred board house is https://jlcpcb.com
 
 You'll need 2 gerber zip files (click links to download):
 
-- [v1.2 Front Panel](../1-order-boards/gerbers/v1.2-front-panel.zip) — the front panel design hasn't changed since v1.2
-- [v1.4 Main Board](../1-order-boards/gerbers/v1.4-main-board.zip) — current main board revision
+- [v1.2 Front Panel](1-order-boards/gerbers/v1.2-front-panel.zip) — the front panel design hasn't changed since v1.2
+- [v1.4 Main Board](1-order-boards/gerbers/v1.4-main-board.zip) — current main board revision
 
 **NOTE:** Order Front Panel and Main Board as seperate items (but they
 can be in the same cart), due to difference in "Different Design"
@@ -120,7 +120,7 @@ Background reading: [`troubleshooting/MK-312BT Failure 20 - Estim - Metafetish.p
 
 ## Firmware: flashing the AVR
 
-The board uses an **ATmega16A** clocked from an external **8 MHz crystal**. Flashing has three steps regardless of platform: connect a programmer to the 6-pin ISP header (JP1), set fuses so the chip uses the crystal, then write the firmware. The firmware itself is a raw `.bin` file that you can pull straight out of [`3-build-and-flash/firmware/`](../3-build-and-flash/firmware/).
+The board uses an **ATmega16A** clocked from an external **8 MHz crystal**. Flashing has three steps regardless of platform: connect a programmer to the 6-pin ISP header (JP1), set fuses so the chip uses the crystal, then write the firmware. The firmware itself is a raw `.bin` file that you can pull straight out of [`3-build-and-flash/firmware/`](3-build-and-flash/firmware/).
 
 ### Pick a firmware
 
@@ -461,20 +461,20 @@ history sake. Ordering instructions above cover most of this.)
 
 ## Bluetooth (HC-05) configuration
 
-The HC-05 module ships with default settings (name "HC-05", PIN 1234, baud 9600) — it needs to be reconfigured before it'll talk to the MK-312BT. Skip this entire section if you're using the WiFi adapter instead — see [`4-wireless/wifi/`](../4-wireless/wifi/).
+The HC-05 module ships with default settings (name "HC-05", PIN 1234, baud 9600) — it needs to be reconfigured before it'll talk to the MK-312BT. Skip this entire section if you're using the WiFi adapter instead — see [`4-wireless/wifi/`](4-wireless/wifi/).
 
-> **macOS users:** HC-05 / Bluetooth Classic SPP is unreliable on macOS Monterey+ (Apple deprecated SPP support). Pairing works but data drops out. Use the [WiFi adapter](../4-wireless/wifi/) instead.
+> **macOS users:** HC-05 / Bluetooth Classic SPP is unreliable on macOS Monterey+ (Apple deprecated SPP support). Pairing works but data drops out. Use the [WiFi adapter](4-wireless/wifi/) instead.
 
 ### Two ways to configure it
 
 | Method | Effort | When to pick |
 |--------|--------|--------------|
 | **Manual via USB-TTL serial adapter** ⭐ | Plug HC-05 into laptop, send AT commands. ~5 minutes. | Recommended. You already need a USB-TTL adapter for the LINK port anyway (BOM lists `amazon.com/dp/B07D6LLX19`). |
-| **Auto-config via one-shot AVR firmware** | Flash a special firmware that AT-configures the HC-05 in-place from the AVR side, then flash the real firmware back. | Only useful if you're building several boards or have no USB-TTL adapter. Firmware: [`4-wireless/bluetooth/MK-312BT V1.2 HC-05 Initialization ATMEGA16.bin`](../4-wireless/bluetooth/) (BASIC source `.bas` also included). |
+| **Auto-config via one-shot AVR firmware** | Flash a special firmware that AT-configures the HC-05 in-place from the AVR side, then flash the real firmware back. | Only useful if you're building several boards or have no USB-TTL adapter. Firmware: [`4-wireless/bluetooth/MK-312BT V1.2 HC-05 Initialization ATMEGA16.bin`](4-wireless/bluetooth/) (BASIC source `.bas` also included). |
 
 ### Manual config (recommended path)
 
-**👉 See [`4-wireless/bluetooth/hc05-setup.md`](../4-wireless/bluetooth/hc05-setup.md) for the complete walkthrough** — it covers the three quirks that quietly break first-time setups (no local echo, CR+LF requirement, fixed 38400 baud in command mode), per-platform terminal setup (picocom on macOS/Linux, Arduino IDE Serial Monitor or Termite on Windows), the IPSCAN power-vs-responsiveness tradeoff with a comparison table, and the macOS "Disconnected" cosmetic quirk.
+**👉 See [`4-wireless/bluetooth/hc05-setup.md`](4-wireless/bluetooth/hc05-setup.md) for the complete walkthrough** — it covers the three quirks that quietly break first-time setups (no local echo, CR+LF requirement, fixed 38400 baud in command mode), per-platform terminal setup (picocom on macOS/Linux, Arduino IDE Serial Monitor or Termite on Windows), the IPSCAN power-vs-responsiveness tradeoff with a comparison table, and the macOS "Disconnected" cosmetic quirk.
 
 Quick summary of what you'll do:
 
@@ -495,7 +495,7 @@ Quick summary of what you'll do:
    AT+IPSCAN=1024,1,1024,512
    ```
 7. **Verify** by reading values back: `AT+NAME?`, `AT+UART?`, `AT+PSWD?`, `AT+IPSCAN?`.
-8. **Check / solder pin 32** on the HC-05 inner module to the breakout board (the STATE pin — drives the front-panel "Radio" LED). The recommended **DSD Tech HC-05 (Amazon B01G9KSAF6)** ships with this connection already made — verify with a multimeter (continuity from inner-module pin 32 to the breakout's STATE/EN pad) and skip the solder step if it's already there. On generic ZS-040 clones you'll need to bridge it yourself with a fine wire. See [`HC05PINOUT.png`](../4-wireless/bluetooth/HC05PINOUT.png).
+8. **Check / solder pin 32** on the HC-05 inner module to the breakout board (the STATE pin — drives the front-panel "Radio" LED). The recommended **DSD Tech HC-05 (Amazon B01G9KSAF6)** ships with this connection already made — verify with a multimeter (continuity from inner-module pin 32 to the breakout's STATE/EN pad) and skip the solder step if it's already there. On generic ZS-040 clones you'll need to bridge it yourself with a fine wire. See [`HC05PINOUT.png`](4-wireless/bluetooth/HC05PINOUT.png).
 9. **Plug into the MK-312BT** at the J9 "Radio Header" socket. Pair from your host with PIN `1234`.
 
 #### A note on IPSCAN
@@ -508,8 +508,8 @@ The community-default `AT+IPSCAN=1024,1,1024,1` makes the HC-05 nearly invisible
 
 If you'd rather not buy a USB-TTL adapter, the repo includes a one-shot AVR firmware that configures the HC-05 in-place:
 
-1. Verify pin 32 on the HC-05 inner module is connected to the breakout board (auto-config relies on the STATE line to detect the HC-05). DSD Tech B01G9KSAF6 modules have this pre-soldered; generic ZS-040 clones need a wire bridge — see [`HC05PINOUT.png`](../4-wireless/bluetooth/HC05PINOUT.png).
-2. Flash [`4-wireless/bluetooth/MK-312BT V1.2 HC-05 Initialization ATMEGA16.bin`](../4-wireless/bluetooth/) onto the ATmega16 using the same avrdude commands from the [Firmware section](#firmware-flashing-the-avr) above.
+1. Verify pin 32 on the HC-05 inner module is connected to the breakout board (auto-config relies on the STATE line to detect the HC-05). DSD Tech B01G9KSAF6 modules have this pre-soldered; generic ZS-040 clones need a wire bridge — see [`HC05PINOUT.png`](4-wireless/bluetooth/HC05PINOUT.png).
+2. Flash [`4-wireless/bluetooth/MK-312BT V1.2 HC-05 Initialization ATMEGA16.bin`](4-wireless/bluetooth/) onto the ATmega16 using the same avrdude commands from the [Firmware section](#firmware-flashing-the-avr) above.
 3. Plug the HC-05 into the board's J9 socket — but **don't power up yet**.
 4. **Put the HC-05 in command mode BEFORE the AVR boots.** The HC-05 only checks its EN (KEY) pin at power-on, so timing matters:
    - **Press and hold** the button on the HC-05 breakout (pulls EN high)
@@ -538,7 +538,7 @@ Then point your control client (e.g., [`mk312-gui`](https://github.com/clxjaguar
 
 ## 3D Printable Case
 
-STL files for a 3D printable case are in [`../3-build-and-flash/case/`](../3-build-and-flash/case/). For hardware, this case requires:
+STL files for a 3D printable case are in [`3-build-and-flash/case/`](3-build-and-flash/case/). For hardware, this case requires:
 
 - 4 M2.5x20 screws
 - up to 3 M2.5x5 screws

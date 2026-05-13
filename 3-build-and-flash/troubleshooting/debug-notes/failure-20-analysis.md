@@ -274,7 +274,7 @@ built and F20 trips, the R32 vs R43 DC voltage difference is the smoking
 gun — believe the multimeter, not your soldering pride. Desolder the
 mismatched channel's quartet and IRF9Z24, retest Vt, swap in a matched set.
 
-Build-guide section `docs/build-guide.md` → "Error 20" covers prevention.
+Build-guide section `build-guide.md` → "Error 20" covers prevention.
 Background reading: forum threads in
-`docs/troubleshooting/MK-312BT Failure 20 - Estim - Metafetish.pdf` and
-`docs/troubleshooting/Another Failure 20 with measurements and some test mode_ - Estim - Metafetish.pdf`.
+`3-build-and-flash/troubleshooting/MK-312BT Failure 20 - Estim - Metafetish.pdf` and
+`3-build-and-flash/troubleshooting/Another Failure 20 with measurements and some test mode_ - Estim - Metafetish.pdf`.
