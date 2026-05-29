@@ -1,6 +1,6 @@
-Mouser Part Number,Quantity,Manufacturer Part Number,Customer Part Number
-717-9B-8.000MEEJ-B,1,815-ABL-8-B2,XTAL1 (spare)
-942-IRF9Z24NPBF,4,IRF9Z24NPBF,"Q3,Q6 pool remainder (main BOM orders 6 total — install 2 closest-matched pair, these 4 are surplus after matching)"
-942-IRL520NPBF,8,IRL520NPBF,"Q1,Q2,Q4,Q5 pool remainder (main BOM orders 12 total — install 4 closest-matched set, these 8 are surplus after matching)"
-660-MF1/4DCT52R2003F,2,MF1/4DCT52R2003F,"R35,R46 spares"
-660-MOSX1CT528RR27J,2,MOSX1CT528RR27J,R30 spares
+Mouser Part Number,Quantity,Manufacturer Part Number,Customer Part Number,Description
+717-9B-8.000MEEJ-B,1,815-ABL-8-B2,XTAL1 (spare),8MHz XTAL HC-49S (spare)
+942-IRF9Z24NPBF,4,IRF9Z24NPBF,"Q3,Q6 pool remainder (main BOM orders 6 total — install 2 closest-matched pair, these 4 are surplus after matching)","MOSFET P-ch 60V 8A IRF9Z24N"
+942-IRL520NPBF,8,IRL520NPBF,"Q1,Q2,Q4,Q5 pool remainder (main BOM orders 12 total — install 4 closest-matched set, these 8 are surplus after matching)","MOSFET N-ch 100V 10A IRL520N"
+660-MF1/4DCT52R2003F,2,MF1/4DCT52R2003F,"R35,R46 spares",RES 200K
+660-MOSX1CT528RR27J,2,MOSX1CT528RR27J,R30 spares,RES 0.27R 1W Metal Oxide
