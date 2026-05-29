@@ -1,4 +1,4 @@
-Last modified: 2026-05-08,,,,,,,
+Last modified: 2026-05-29,,,,,,,
 Designator,Description,Quantity,Mouser Part #,Manufacturer Part #,Sourced?,Mouser URL,Amazon URL
 R55,RES 100R (LCD backlight series for Newhaven NHD-0216K1Z),1,660-MF1/4DCT52R1000F,MF1/4DCT52R1000F,X,mouser.com/c/?q=660-MF1%2F4DCT52R1000F,amazon.com/s?k=MF1%2F4DCT52R1000F
 "R53,R54,R59,R60",RES 390R,4,660-MF1/4DCT52R3900F,MF1/4DCT52R3900F,X,mouser.com/c/?q=660-MF1%2F4DCT52R3900F,amazon.com/s?k=MF1%2F4DCT52R3900F
@@ -17,7 +17,7 @@ R1A,RES 12K,1,660-MF1/4DCT52R1202F,MF1/4DCT52R1202F,X,mouser.com/c/?q=660-MF1%2F
 "D2,D3,D5",DIODE 1N4148,3,512-1N4148,1N4148,X,mouser.com/c/?q=512-1N4148,amazon.com/s?k=1N4148
 "C25,C27","CAP 1nF (0.1"" spacing)",2,80-C315C102K1G,C315C102K1G5TA,X,mouser.com/c/?q=80-C315C102K1G,amazon.com/s?k=C315C102K1G5TA
 "C20,C22,C23,C24,C30,C31,C33,C34,C35,C36,C43","CAP 1uF (0.1"" spacing)",11,80-C315C105K3R,C315C105K3R5TA,X,mouser.com/c/?q=80-C315C105K3R,amazon.com/s?k=C315C105K3R5TA
-"R35,R46",RES 200K (qty bumped from 2 → 4 — value-critical for op-amp gain in F20 calibration; spares for mistake margin),4,660-MF1/4DCT52R2003F,MF1/4DCT52R2003F,X,mouser.com/c/?q=660-MF1%2F4DCT52R2003F,amazon.com/s?k=MF1%2F4DCT52R2003F
+"R35,R46",RES 200K,2,660-MF1/4DCT52R2003F,MF1/4DCT52R2003F,X,mouser.com/c/?q=660-MF1%2F4DCT52R2003F,amazon.com/s?k=MF1%2F4DCT52R2003F
 "R11,R16,R17,R22,R24,R4",RES 20K,6,660-MF1/4DCT52R2002F,MF1/4DCT52R2002F,X,mouser.com/c/?q=660-MF1%2F4DCT52R2002F,amazon.com/s?k=MF1%2F4DCT52R2002F
 "J10,J11",PAK100/2500-24 - 2425-  3M WALL HEADER,2,517-N2524-6002RB,N2524-6002RB,X,mouser.com/c/?q=517-N2524-6002RB,amazon.com/s?k=N2524-6002RB
 "Q7,Q8",TRANS. 2N3904,2,512-2N3904BU,2N3904BU,X,mouser.com/c/?q=512-2N3904BU,amazon.com/s?k=2N3904BU
@@ -27,11 +27,11 @@ R6,RES 3.3K,1,660-MF1/4DCT52R3301F,MF1/4DCT52R3301F,X,mouser.com/c/?q=660-MF1%2F
 U3,CD4066N,1,595-CD4066BE,CD4066BE,X,mouser.com/c/?q=595-CD4066BE,amazon.com/s?k=CD4066BE
 U13,Replaces 7805CV - Switching Regulator,1,495-TSR-1-2450,TSR 1-2450,X,mouser.com/c/?q=495-TSR-1-2450,amazon.com/s?k=TSR%201-2450
 "U11,U12",VREG 7809TV,2,511-L7809CV,L7809CV,✓,mouser.com/c/?q=511-L7809CV,amazon.com/s?k=L7809CV
-XTAL1,8MHZ XTAL HC-49S (qty bumped from 1 → 2 — silent killer for ATmega ISP programming if cracked/cold-soldered; cheap insurance),2,717-9B-8.000MEEJ-B,815-ABL-8-B2,X,mouser.com/c/?q=717-9B-8.000MEEJ-B,amazon.com/s?k=815-ABL-8-B2
+XTAL1,8MHZ XTAL HC-49S,1,717-9B-8.000MEEJ-B,815-ABL-8-B2,X,mouser.com/c/?q=717-9B-8.000MEEJ-B,amazon.com/s?k=815-ABL-8-B2
 U1,ATMEGA 16P,1,556-ATMEGA16A-PU,ATMEGA16A-PU,X,mouser.com/c/?q=556-ATMEGA16A-PU,amazon.com/s?k=ATMEGA16A-PU
 LCD1,LCD HD44780LCD-1602,1,763-0216K1Z-NSW-BBW,NHD-0216K1Z-NSW-FBW-L,X,mouser.com/c/?q=763-0216K1Z-NSW-BBW,amazon.com/s?k=NHD-0216K1Z-NSW-FBW-L
-"Q3,Q6",MOSFET IRF9Z24NPBF (Infineon — NOT Vishay PBF; qty bumped from 2 → 6 to enable Vt-matching the pair within 50 mV — see ../3-build-and-flash/troubleshooting/debug-notes/failure-20-analysis.md),6,942-IRF9Z24NPBF,IRF9Z24NPBF,X,mouser.com/c/?q=942-IRF9Z24NPBF,amazon.com/s?k=IRF9Z24NPBF
-"Q1,Q2,Q4,Q5",MOSFET IRL520N (qty bumped from 4 → 12 to enable Vt-matching the quartet within 20-30 mV — typical batch spread is 200-400 mV so 3× over-order is needed to find a tight cluster of 4; see ../3-build-and-flash/troubleshooting/debug-notes/failure-20-analysis.md for sort-and-pair procedure),12,942-IRL520NPBF,IRL520NPBF,✓,mouser.com/c/?q=942-IRL520NPBF,amazon.com/s?k=IRL520NPBF
+"Q3,Q6","MOSFET IRF9Z24N P-ch 60V 8A — Vt-matching pool: order 6 total, install 2 closest-matched pair",6,942-IRF9Z24NPBF,IRF9Z24NPBF,X,mouser.com/c/?q=942-IRF9Z24NPBF,amazon.com/s?k=IRF9Z24NPBF
+"Q1,Q2,Q4,Q5","MOSFET IRL520N N-ch 100V 10A — Vt-matching pool: order 12 total, install 4 closest-matched set",12,942-IRL520NPBF,IRL520NPBF,X,mouser.com/c/?q=942-IRL520NPBF,amazon.com/s?k=IRL520NPBF
 JP1,ISP 6 PIN,1,571-5-146254-3,5-146254-3,X,mouser.com/c/?q=571-5-146254-3,amazon.com/s?k=5-146254-3
 U14,LM2941,1,926-LM2941CT/NOPB,LM2941CT/NOPB,X,mouser.com/c/?q=926-LM2941CT%2FNOPB,amazon.com/s?k=LM2941CT%2FNOPB
 U2,LM324N,1,595-LM324N,LM324N,✓,mouser.com/c/?q=595-LM324N,amazon.com/s?k=LM324N
@@ -42,7 +42,7 @@ LED4,Kingbright 5mm Green diffused (POWER) - GaP Vf 2.2V typ - works as-is with 
 U9,MAX232,1,700-MAX232CPE,MAX232CPE,X,mouser.com/c/?q=700-MAX232CPE,amazon.com/s?k=MAX232CPE
 "SOCKET FOR U2,U3",DIL 14 IC SOCKET,2,517-4814-3004-CP,4814-3004-CP,X,mouser.com/c/?q=517-4814-3004-CP,amazon.com/s?k=4814-3004-CP
 SOCKET FOR U9,DIL 16 IC SOCKET,1,517-4816-3004-CP,4816-3004-CP,X,mouser.com/c/?q=517-4816-3004-CP,amazon.com/s?k=4816-3004-CP
-SOCKET FOR U1,DIL 40 IC SOCKET,1,575-11041640410010,110-41-640-41-001000,X,mouser.com/c/?q=575-11041640410010,amazon.com/s?k=110-41-640-41-001000
+SOCKET FOR U1,DIL 40 IC SOCKET — square-hole dual-wipe (3M 4800 series stamped),1,517-4840-6004-CP,4840-6004-CP,X,mouser.com/c/?q=517-4840-6004-CP,amazon.com/s?k=4840-6004-CP
 "SOCKET FOR U10,U4,U8(A/B)",DIL 8 IC SOCKET,4,571-1-2199298-2,1-2199298-2,X,mouser.com/c/?q=571-1-2199298-2,amazon.com/s?k=1-2199298-2
 "JP6,JP7",2x1 SIP HEADER 0.1,2,571-5-146285-2,5-146285-2,X,mouser.com/c/?q=571-5-146285-2,amazon.com/s?k=5-146285-2
 "VR1, VR2",ALPS 9mm 10K Pot,2,688-RK09L1140A2U,RK09L1140A2U,X,mouser.com/c/?q=688-RK09L1140A2U,amazon.com/s?k=RK09L1140A2U
@@ -56,12 +56,11 @@ Gray button covers,Button Cover,2,611-BTND610F,BTND610F,X,mouser.com/c/?q=611-BT
 White button covers,Button Cover,2,611-BTND600F,BTN D6 00 F,X,mouser.com/c/?q=611-BTND600F,amazon.com/s?k=BTN%20D6%2000%20F
 LCD HEADER,LCD Header,1,710-61301611121,61301611121,X,mouser.com/c/?q=710-61301611121,amazon.com/s?k=61301611121
 Knob,Potentiometer Knob,3,450-BA761,BA761,X,mouser.com/c/?q=450-BA761,amazon.com/s?k=BA761
-BAT1,Lead Acid Battery,1,547-PS-1220,PS-1220,X,mouser.com/c/?q=547-PS-1220,amazon.com/s?k=PS-1220
-BAT1 Lugs,Crimp Lubs for BAT1,2,534-8291,534-8291,X,mouser.com/c/?q=534-8291,amazon.com/s?k=534-8291
+BAT1 Lugs,Crimp Lugs for BAT1,4,534-8291,534-8291,X,mouser.com/c/?q=534-8291,amazon.com/s?k=534-8291
 "J1A,J1B","PCB male quick-disconnect tab 0.187""/F1 vertical (battery + and −; mates with the 8291 crimps on the battery wire)",2,534-1285,1285,X,mouser.com/c/?q=534-1285,amazon.com/s?k=Keystone+1285
 Power Supply,"18V, 1A .5.5mm OD plug",1,709-GST18U18-P1J,GST18U18-P1J,X,mouser.com/c/?q=709-GST18U18-P1J,amazon.com/s?k=GST18U18-P1J
 20K Opt. Variant,RES 18K,2,660-MF1/4DCT52R1802F,MF1/4DCT52R1802F,X,mouser.com/c/?q=660-MF1%2F4DCT52R1802F,amazon.com/s?k=MF1%2F4DCT52R1802F
-R30,RES 0.27R 1W (current sense — qty bumped from 1 → 3; value-critical for F20 calibration scaling and easy to damage during desolder rework),3,660-MOSX1CT528RR27J,MOSX1CT528RR27J,X,mouser.com/c/?q=660-MOSX1CT528RR27J,amazon.com/s?k=MOSX1CT528RR27J
+R30,RES 0.27R 1W,1,660-MOSX1CT528RR27J,MOSX1CT528RR27J,X,mouser.com/c/?q=660-MOSX1CT528RR27J,amazon.com/s?k=MOSX1CT528RR27J
 "C4,C5,C6,C7",Aluminum Organic Polymer Capacitors 25V 1000uF RAD Low ESR (14 mOhm) - upgraded from 470-820uF spec for use with 0.27R at R30,4,80-A750MV108M1EAAE14,A750MV108M1EAAE014,X,mouser.com/c/?q=80-A750MV108M1EAAE14,amazon.com/s?k=A750MV108M1EAAE014
 "J2,J3,J4,J5,J6,J7",Phone Connectors 3.5mm PCB STEREO BLK 5P W/SWITCH,6,806-STX-3100-5N,STX-3100-5N,X,mouser.com/c/?q=806-STX-3100-5N,amazon.com/s?k=STX-3100-5N
 "TR1,TR2",Audio Transformers / Signal Transformers XFMR OUT 200CT-8 3.2,2,42TU200-RC,42TU200-RC,X,mouser.com/c/?q=42TU200-RC,amazon.com/s?k=42TU200-RC
@@ -83,22 +82,7 @@ Misc,,,,,,,
 ,18 Gauge Wire Red,300mm,,,,,amazon.com/s?k=18%20Gauge%20Wire%20Red
 - Wireless Module (pick ONE — bluetooth OR wifi),,,,,,,
 ,"Bluetooth Module HC-05 — DSD Tech Pass-through (B01G9KSAF6) RECOMMENDED: pin 32 STATE pre-soldered to breakout (drives front-panel Radio LED — the #1 fiddly step on generic clones), reliable AT-mode firmware. Works with Bluetooth-classic clients on Win/Linux/Android — macOS Monterey+ has poor SPP support, use WiFi adapter instead",1,,,,,amazon.com/dp/B01G9KSAF6
-,(see WiFi Adapter section below for the wifi alternative),,,,,,
-,,,,,,,
-- WiFi Adapter (optional alternative to HC-05 — pin-compatible drop-in),,,,,,,
-,Build path: send 4-wireless/wifi/pcb/jlcpcb-package/ to JLCPCB with SMT-only PCB Assembly enabled. JLC factory-assembles U1 (only SMD part); you hand-solder the 6 THT parts below after boards arrive (~5 min each).,,,,,,
-,Total cost target: ~$20-25 for 5 boards delivered. Bare ESP-01S module is sourced separately (AliExpress; not stocked at Mouser).,,,,,,
-,,,,,,,
-,SMD (factory-soldered by JLCPCB SMT line — JLC sources from their library using LCSC C6186):,,,,,,
-U1 (WiFi PCB),AMS1117-3.3 LDO 3.3V regulator SOT-223 — factory-assembled by JLC PCBA,1,750-AMS1117-3.3,AMS1117-3.3,X,mouser.com/c/?q=750-AMS1117-3.3,amazon.com/s?k=AMS1117-3.3
-,,,,,,,
-,THT (you solder these by hand — leaded through-hole, fall-off-easy):,,,,,
-"C1,C2 (WiFi PCB)",100nF disc ceramic 50V (WiFi adapter — same part as main board cap group),2,80-C320C104K5R,C320C104K5R5TA,X,mouser.com/c/?q=80-C320C104K5R,amazon.com/s?k=C320C104K5R5TA
-Q1 (WiFi PCB),PN2222A NPN TO-92 (WiFi adapter — STATE-LED level shifter),1,512-PN2222ABU,PN2222ABU,X,mouser.com/c/?q=512-PN2222ABU,amazon.com/s?k=PN2222ABU
-SW1 (WiFi PCB),6mm tactile switch THT 4-pin (WiFi adapter — AP-mode reset button),1,653-B3F-1000,B3F-1000,X,mouser.com/c/?q=653-B3F-1000,amazon.com/s?k=B3F-1000
-J1 (WiFi PCB),1x6 male pin header RIGHT-ANGLE 2.54mm pitch — plugs into MK-312 HC-05 socket on mainboard,1,571-826629-6,826629-6,X,mouser.com/c/?q=571-826629-6,amazon.com/s?k=826629-6
-J2 (WiFi PCB),2x4 FEMALE socket header 2.54mm pitch — ESP-01S module plugs in here,1,200-PPPC042LFBN-RC,PPPC042LFBN-RC,X,mouser.com/c/?q=200-PPPC042LFBN-RC,amazon.com/s?k=PPPC042LFBN-RC
-,ESP-01S WiFi module (NOT stocked at Mouser — buy from AliExpress / Amazon ~$2 each),1,,ESP-01S,X,,amazon.com/s?k=ESP-01S
+,(see BOM_full_WiFi.csv for the wifi adapter alternative),,,,,,
 ,,,,,,,
 - PC Link Cable (optional — required only for clients that talk to the LINK port instead of bluetooth/wifi adapter),,,,,,,
 ,DSD TECH USB to RS232 cable (FT232RL chip) — connects PC to MK-312 LINK port; works with mk312-gui / three-twelve-bee / ErosWeb on Win/Mac/Linux,1,,,,,amazon.com/dp/B07XXWVH69

@@ -1,0 +1,9 @@
+Last modified: 2026-05-29,,,,,,,
+Designator,Description,Quantity,Mouser Part #,Manufacturer Part #,Sourced?,Mouser URL,Amazon URL
+,,NOTE: This is the WiFi adapter PCB BOM. The AMS1117-3.3 LDO regulator is an SMD SOT-223 part. If ordering via JLCPCB PCBA (recommended) it is factory-assembled — DO NOT order from Mouser. Only the 5 through-hole parts (C1 C2 Q1 SW1 J1 J2) need to be hand-soldered by the builder.,,,,,,
+U1 (WiFi PCB),"AMS1117-3.3 LDO 3.3V regulator SOT-223 — SMD factory-assembled by JLCPCB PCBA (LCSC C6186) — DO NOT ORDER from Mouser if using JLC SMT assembly service",1,750-AMS1117-3.3,AMS1117-3.3,,mouser.com/c/?q=750-AMS1117-3.3,amazon.com/s?k=AMS1117-3.3
+"C1,C2 (WiFi PCB)","CAP 0.1uF (0.1"" spacing) 50V",2,80-C320C104K5R,C320C104K5R5TA,X,mouser.com/c/?q=80-C320C104K5R,amazon.com/s?k=C320C104K5R5TA
+Q1 (WiFi PCB),TRANS. PN2222A NPN,1,512-PN2222ABU,PN2222ABU,X,mouser.com/c/?q=512-PN2222ABU,amazon.com/s?k=PN2222ABU
+SW1 (WiFi PCB),Omron B3F-1000 SPST tactile switch,1,653-B3F-1000,B3F-1000,X,mouser.com/c/?q=653-B3F-1000,amazon.com/s?k=B3F-1000
+J1 (WiFi PCB),TE 826629-6 6-pin connector,1,571-826629-6,826629-6,X,mouser.com/c/?q=571-826629-6,amazon.com/s?k=826629-6
+J2 (WiFi PCB),Samtec PPPC042LFBN-RC 4-pin socket,1,200-PPPC042LFBN-RC,PPPC042LFBN-RC,X,mouser.com/c/?q=200-PPPC042LFBN-RC,amazon.com/s?k=PPPC042LFBN-RC
