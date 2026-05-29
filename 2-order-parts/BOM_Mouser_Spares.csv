@@ -2,5 +2,5 @@ Mouser Part Number,Quantity,Manufacturer Part Number,Customer Part Number,Descri
 717-9B-8.000MEEJ-B,1,815-ABL-8-B2,XTAL1 (spare),8MHz XTAL HC-49S (spare)
 942-IRF9Z24NPBF,4,IRF9Z24NPBF,"Q3,Q6 pool remainder (main BOM orders 6 total — install 2 closest-matched pair, these 4 are surplus after matching)","MOSFET P-ch 60V 8A IRF9Z24N"
 942-IRL520NPBF,8,IRL520NPBF,"Q1,Q2,Q4,Q5 pool remainder (install 2 closest-matched per channel: Q1+Q2 ch.A, Q4+Q5 ch.B — 8 surplus after selecting best 4)","MOSFET N-ch 100V 10A IRL520N"
-660-MF1/4DCT52R2003F,2,MF1/4DCT52R2003F,"R35,R46 spares",RES 200K
+71-CMF55200K00FHEB,2,CMF55200K00FHEB,"R35,R46 spares",RES 200K
 660-MOSX1CT528RR27J,2,MOSX1CT528RR27J,R30 spares,RES 0.27R 1W Metal Oxide

@@ -4,5 +4,5 @@ Designator,Description,Quantity,Mouser Part #,Manufacturer Part #,Sourced?,Mouse
 XTAL1 (spare),8MHZ XTAL HC-49S,1,717-9B-8.000MEEJ-B,815-ABL-8-B2,X,mouser.com/c/?q=717-9B-8.000MEEJ-B,amazon.com/s?k=815-ABL-8-B2
 "Q3,Q6 pool remainder","MOSFET IRF9Z24N P-ch 60V 8A — pool remainder after Vt matching: full pool of 6 ordered via main BOM, these 4 are surplus after selecting the closest-matched pair",4,942-IRF9Z24NPBF,IRF9Z24NPBF,X,mouser.com/c/?q=942-IRF9Z24NPBF,amazon.com/s?k=IRF9Z24NPBF
 "Q1,Q2,Q4,Q5 pool remainder","MOSFET IRL520N N-ch 100V 10A — surplus after selecting 2 closest-matched per channel (Q1+Q2 ch.A, Q4+Q5 ch.B) from pool of 12",8,942-IRL520NPBF,IRL520NPBF,X,mouser.com/c/?q=942-IRL520NPBF,amazon.com/s?k=IRL520NPBF
-"R35,R46 spares",RES 200K 1/4W metal film,2,660-MF1/4DCT52R2003F,MF1/4DCT52R2003F,X,mouser.com/c/?q=660-MF1%2F4DCT52R2003F,amazon.com/s?k=MF1%2F4DCT52R2003F
+"R35,R46 spares",RES 200K CMF55 1/4W metal film,2,71-CMF55200K00FHEB,CMF55200K00FHEB,X,mouser.com/c/?q=71-CMF55200K00FHEB,amazon.com/s?k=CMF55200K00FHEB
 R30 spares,RES 0.27R 1W metal oxide,2,660-MOSX1CT528RR27J,MOSX1CT528RR27J,X,mouser.com/c/?q=660-MOSX1CT528RR27J,amazon.com/s?k=MOSX1CT528RR27J
