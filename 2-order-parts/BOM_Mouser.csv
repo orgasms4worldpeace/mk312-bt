@@ -30,7 +30,7 @@ Mouser Part Number,Quantity,Manufacturer Part Number,Customer Part Number,Descri
 556-ATMEGA16A-PU,1,ATMEGA16A-PU,U1,ATmega16A MCU PDIP-40
 763-0216K1Z-NSW-BBW,1,NHD-0216K1Z-NSW-FBW-L,LCD1,LCD 16x2 HD44780
 942-IRF9Z24NPBF,6,IRF9Z24NPBF,"Q3,Q6 (Vt-matching pool: order 6, install 2 closest-matched pair)","MOSFET P-ch 60V 8A IRF9Z24N"
-942-IRL520NPBF,12,IRL520NPBF,"Q1,Q2,Q4,Q5 (Vt-matching pool: order 12, install 4 closest-matched set)","MOSFET N-ch 100V 10A IRL520N"
+942-IRL520NPBF,12,IRL520NPBF,"Q1,Q2,Q4,Q5 (Vt pool: order 12 — measure all; install 2 closest-matched per channel: Q1+Q2 for ch.A, Q4+Q5 for ch.B)","MOSFET N-ch 100V 10A IRL520N"
 571-5-146254-3,1,5-146254-3,JP1,ISP 6-pin Header
 926-LM2941CT/NOPB,1,LM2941CT/NOPB,U14,LM2941 Adj. Linear Reg.
 595-LM324N,1,LM324N,U2,LM324 Quad Op-Amp
@@ -43,7 +43,7 @@ Mouser Part Number,Quantity,Manufacturer Part Number,Customer Part Number,Descri
 517-4816-3004-CP,1,4816-3004-CP,SOCKET FOR U9,DIP-16 Socket (dual-wipe)
 517-4840-6004-CP,1,4840-6004-CP,SOCKET FOR U1,DIP-40 Socket (dual-wipe square-hole)
 571-1-2199298-2,4,1-2199298-2,"SOCKET FOR U10,U4,U8(A/B)",DIP-8 Socket (dual-wipe)
-571-5-146285-2,2,5-146285-2,"JP6,JP7",2x1 SIP Header 0.1"
+571-5-146285-2,2,5-146285-2,"JP6,JP7",2x1 SIP Header 0.1in
 688-RK09L1140A2U,2,RK09L1140A2U,"VR1, VR2",ALPS 9mm 10K Pot
 688-RK09L1240A12,1,RK09L1240A12,VR3,ALPS 9mm 10K Dual-Gang Pot
 3362P-1-103LF,1,3362P-1-103LF,VR4,Bourns 3362P 10K Trimmer
@@ -56,7 +56,7 @@ Mouser Part Number,Quantity,Manufacturer Part Number,Customer Part Number,Descri
 710-61301611121,1,61301611121,LCD HEADER,16-pin LCD Header
 450-BA761,3,BA761,Knob,Potentiometer Knob
 534-8291,4,534-8291,BAT1 Lugs,Keystone Female Crimp Lug
-534-1285,2,1285,"J1A,J1B",Keystone PCB Male Tab 0.187"
+534-1285,2,1285,"J1A,J1B",Keystone PCB Male Tab 0.187in
 709-GST18U18-P1J,1,GST18U18-P1J,Power Supply,18V 1A Power Supply
 660-MF1/4DCT52R1802F,2,MF1/4DCT52R1802F,20K Opt. Variant,RES 18K (optional variant)
 660-MOSX1CT528RR27J,1,MOSX1CT528RR27J,R30,RES 0.27R 1W Metal Oxide

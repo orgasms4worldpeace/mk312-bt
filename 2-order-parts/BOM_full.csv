@@ -31,7 +31,7 @@ XTAL1,8MHZ XTAL HC-49S,1,717-9B-8.000MEEJ-B,815-ABL-8-B2,X,mouser.com/c/?q=717-9
 U1,ATMEGA 16P,1,556-ATMEGA16A-PU,ATMEGA16A-PU,X,mouser.com/c/?q=556-ATMEGA16A-PU,amazon.com/s?k=ATMEGA16A-PU
 LCD1,LCD HD44780LCD-1602,1,763-0216K1Z-NSW-BBW,NHD-0216K1Z-NSW-FBW-L,X,mouser.com/c/?q=763-0216K1Z-NSW-BBW,amazon.com/s?k=NHD-0216K1Z-NSW-FBW-L
 "Q3,Q6","MOSFET IRF9Z24N P-ch 60V 8A — Vt-matching pool: order 6 total, install 2 closest-matched pair",6,942-IRF9Z24NPBF,IRF9Z24NPBF,X,mouser.com/c/?q=942-IRF9Z24NPBF,amazon.com/s?k=IRF9Z24NPBF
-"Q1,Q2,Q4,Q5","MOSFET IRL520N N-ch 100V 10A — Vt-matching pool: order 12 total, install 4 closest-matched set",12,942-IRL520NPBF,IRL520NPBF,X,mouser.com/c/?q=942-IRL520NPBF,amazon.com/s?k=IRL520NPBF
+"Q1,Q2,Q4,Q5","MOSFET IRL520N N-ch 100V 10A — Vt pool: order 12, measure all, install 2 closest-matched per channel (Q1+Q2 ch.A, Q4+Q5 ch.B)",12,942-IRL520NPBF,IRL520NPBF,X,mouser.com/c/?q=942-IRL520NPBF,amazon.com/s?k=IRL520NPBF
 JP1,ISP 6 PIN,1,571-5-146254-3,5-146254-3,X,mouser.com/c/?q=571-5-146254-3,amazon.com/s?k=5-146254-3
 U14,LM2941,1,926-LM2941CT/NOPB,LM2941CT/NOPB,X,mouser.com/c/?q=926-LM2941CT%2FNOPB,amazon.com/s?k=LM2941CT%2FNOPB
 U2,LM324N,1,595-LM324N,LM324N,✓,mouser.com/c/?q=595-LM324N,amazon.com/s?k=LM324N
